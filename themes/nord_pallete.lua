@@ -72,6 +72,9 @@ awful.spawn.easy_async_with_shell(
 -- ------- Wallpaper ---------
 theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/Nord.png"
 
+-- --------- rofi ------------
+theme.rofi_plus_sign = "nord"
+
 -- ---- profile picture ------
 theme.pfp = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "icons/user/profile.jpg")
 

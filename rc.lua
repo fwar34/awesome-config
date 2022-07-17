@@ -20,13 +20,6 @@ local get_dpi = require("beautiful").xresources.get_dpi
 
 local helpers = require("client.helpers")
 
---Rofi Launcher
-local rofi_command =
-    "env /usr/bin/rofi -dpi " ..
-    get_dpi() ..
-        " -width " ..
-            with_dpi(400) .. " -show drun -theme " .. gears.filesystem.get_configuration_dir() .. "configs/rofi-drun.rasi"
-
 -- =========================================================
 -- ================= USER CONFIGURATION ====================
 -- =========================================================
@@ -38,6 +31,13 @@ local color_scheme = {
 }
 local colors = color_scheme[2]
 
+--Rofi Launcher
+local rofi_command =
+    "env /usr/bin/rofi -dpi " ..
+    get_dpi() ..
+        " -width " ..
+            with_dpi(400) .. " -show drun -theme " .. gears.filesystem.get_configuration_dir() .. "configs/rofi-drun-" .. colors .. ".rasi"
+
 -- Default apps global variable
 apps = {
     editor = "code",
@@ -45,7 +45,7 @@ apps = {
     power_manager = "xfce4-power-manager-settings",
     terminal = "alacritty",
     launcher = rofi_command,
-    lock = gears.filesystem.get_configuration_dir() .. "configs/lock",
+    lock = gears.filesystem.get_configuration_dir() .. "configs/lock-" .. colors,
     screenshot = "flameshot gui",
     filebrowser = "dolphin",
     colorpicker = "gpick -p",

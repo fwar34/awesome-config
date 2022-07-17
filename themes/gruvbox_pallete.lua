@@ -73,6 +73,8 @@ awful.spawn.easy_async_with_shell(
 -- ------- Wallpaper ---------
 theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/gruvbox/gruvbox01.png"
 
+theme.rofi_plus_sign = "gruvbox"
+
 -- ---- profile picture ------
 theme.pfp = gears.filesystem.get_configuration_dir() .. "icons/user/profile.jpg"
 

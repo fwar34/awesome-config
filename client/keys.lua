@@ -365,7 +365,7 @@ keys.globalkeys =
         {},
         "XF86MonBrightnessUp",
         function()
-            awful.spawn("light -A 10", false)
+            awful.spawn("brightnessctl set +10", false)
             awesome.emit_signal("widget::brightness")
             awesome.emit_signal("module::brightness_osd:show", true)
         end,
@@ -375,7 +375,7 @@ keys.globalkeys =
         {},
         "XF86MonBrightnessDown",
         function()
-            awful.spawn("light -U 10", false)
+            awful.spawn("brightnessctl set -10", false)
             awesome.emit_signal("widget::brightness")
             awesome.emit_signal("module::brightness_osd:show", true)
         end,

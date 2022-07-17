@@ -61,7 +61,7 @@ local rofi_command =
   "env /usr/bin/rofi -dpi " ..
   get_dpi() ..
     " -width " ..
-      dpi(400) .. " -show drun -theme " .. gears.filesystem.get_configuration_dir() .. "/configs/rofi.rasi"
+      dpi(400) .. " -show drun -theme " .. gears.filesystem.get_configuration_dir() .. "/configs/rofi-" .. beautiful.rofi_plus_sign .. ".rasi"
 local add_button = mat_icon_button(mat_icon(icons.plus, dpi(24)))
 add_button:buttons(
     gears.table.join(
