@@ -108,6 +108,13 @@ keys.clientbuttons =
             c:raise()
         end
     ),
+    awful.button(
+        {},
+        1,
+        function()
+            awesome.emit_signal("dashboard::close", awful.screen.focused())
+        end
+    ),
     awful.button({modkey}, 1, awful.mouse.client.move),
     awful.button({modkey}, 3, awful.mouse.client.resize),
     awful.button(
@@ -241,6 +248,13 @@ keys.globalbuttons =
         function()
             naughty.destroy_all_notifications()
         end
+    ),
+    awful.button(
+        {},
+        1,
+        function()
+            awesome.emit_signal("dashboard::close", awful.screen.focused())
+        end
     )
 )
 
@@ -274,7 +288,7 @@ keys.globalkeys =
         {modkey},
         "l",
         function()
-            awful.spawn(apps.lock)
+            awful.util.spawn_with_shell(apps.lock)
         end,
         {description = "Lock the screen", group = "launcher"}
     ),
@@ -377,6 +391,17 @@ keys.globalkeys =
             awesome.emit_signal("module::volume_osd:show", true)
         end,
         {description = "volume down", group = "hotkeys"}
+    ),
+    -- ALSA volume control
+    awful.key(
+        {},
+        "XF86AudioRaiseVolume",
+        function()
+            awful.spawn("amixer -D pulse sset Master 5%+", false)
+            awesome.emit_signal("widget::volume")
+            awesome.emit_signal("module::volume_osd:show", true)
+        end,
+        {description = "volume up", group = "hotkeys"}
     ),
     awful.key(
         {},

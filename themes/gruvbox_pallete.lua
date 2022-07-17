@@ -71,8 +71,7 @@ awful.spawn.easy_async_with_shell(
 )
 
 -- ------- Wallpaper ---------
-theme.music = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "wallpapers/music.png")
-theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/gruvbox/gruvbox1.png"
+theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/gruvbox/gruvbox01.png"
 
 -- ---- profile picture ------
 theme.pfp = gears.filesystem.get_configuration_dir() .. "icons/user/profile.jpg"
@@ -82,14 +81,14 @@ theme.wibar_height = dpi(36)
 
 -- --------- gaps ------------
 theme.useless_gap = dpi(4)
-theme.gap_single_client = false
+theme.gap_single_client = true
 
 -- --------- Fonts -----------
-theme.title_fonts = "Roboto Mono Nerd Fonts Bold 11"
+theme.title_fonts = "Roboto Bold 11"
 theme.normal_fonts = "Roboto 11"
-theme.monospace = "Roboto Mono Nerd Fonts 10"
-theme.monospace_bold = "Roboto Mono Nerd Fonts Bold 10"
-theme.icon_fonts = "Material Icons Round 14"
+theme.monospace = "Roboto 10"
+theme.monospace_bold = "Roboto Bold 10"
+theme.icon_fonts = "Material Icons Round"
 
 -- -- clickable container ----
 theme.mouse_enter = theme.bg1
@@ -102,14 +101,13 @@ theme.accent_normal = theme.bg1
 
 -- -------- accent titlebar-----------
 theme.accent_normal_c = theme.red
-theme.accent_mouse_enter = theme.red .. "a0"
-theme.accent_mouse_press = theme.red .. "80"
-theme.accent_normal_alt = theme.green
-theme.accent_mouse_enter_alt = theme.green .. "a0"
-theme.accent_mouse_press_alt = theme.green
-theme.accent_normal_alt_alt = theme.yellow
-theme.accent_mouse_enter_alt_alt = theme.yellow .. "a0"
-theme.accent_mouse_press_alt_alt = theme.yellow .. "80"
+theme.accent_normal_max = theme.green
+theme.accent_normal_min = theme.yellow
+theme.accent_normal_float = theme.blue
+theme.close_icon = ""
+theme.maximize_icon = ""
+theme.minimize_icon = ""
+theme.float_icon = ""
 
 -- ------ foreground ---------
 theme.fg_normal = theme.fg1
@@ -129,12 +127,6 @@ theme.titlebar_color = theme.bg0_h
 theme.border_width = dpi(2)
 theme.border_accent = theme.bg1
 -- theme.corner_radius = dpi(8)
-theme.close_icon = ""
- --icons.close
-theme.maximize_icon = ""
- --icons.maximize
-theme.minimize_icon = ""
- --icons.minus
 
 -- -------- widgets ----------
 theme.widget_box_radius = dpi(12)
@@ -155,7 +147,7 @@ theme.dashboard_margin_color = theme.bg1
 
 -- ------ System Tray --------
 theme.systray_icon_spacing = dpi(8)
-theme.bg_systray = theme.bg0_h
+theme.bg_systray = theme.bg_normal
 
 -- --------- Menu ------------
 theme.menu_font = "Roboto 9"
@@ -185,7 +177,7 @@ theme.taglist_bg_empty = theme.bg0_h
 theme.taglist_bg_occupied = theme.bg0_h
 theme.taglist_bg_urgent = theme.bg0_h
 theme.taglist_bg_focus = theme.bg0_h
-theme.taglist_font = theme.title_fonts
+theme.taglist_font = theme.icon_fonts .. "12"
 theme.taglist_spacing = dpi(6)
 theme.taglist_fg_focus = theme.yellow
 theme.taglist_fg_occupied = theme.fg1
@@ -213,8 +205,9 @@ theme.toggle_button_inactive = theme.bg1
 theme.toggle_button_active = theme.blue
 
 -- --------- music -----------
+theme.music = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "wallpapers/music.png")
 theme.playerctl_ignore = "firefox"
-theme.playerctl_player = {"mpv", "vlc", "%any"}
+theme.playerctl_player = {"music", "vlc", "%any"}
 
 -- ------- date/time ---------
 theme.date_time_color = theme.yellow
@@ -222,8 +215,9 @@ theme.date_time_color = theme.yellow
 -- ------- calender ----------
 theme.cal_header_bg = theme.transparent
 theme.cal_week_bg = theme.transparent
+theme.cal_focus_bg = theme.accent_normal
 theme.cal_header_fg = theme.blue
-theme.cal_focus_fg = theme.fg0
+theme.cal_focus_fg = theme.blue
 theme.cal_week_fg = theme.fg1
 
 -- ----- Hotkey popup --------
