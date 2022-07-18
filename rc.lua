@@ -80,7 +80,7 @@ helpers.check_if_running(
 )
 
 local run_on_start_up = {
-    -- apps.lock,
+    apps.lock, -- startup screen lock
     "nm-applet --indicator", -- network applet
     "blueman-applet", --bluetooth applet
     "xfce4-power-manager", -- Power manager

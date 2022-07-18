@@ -12,11 +12,11 @@ Awesome wm dotfiles
 $ sudo pacman -S base-devel git
 $ git clone https://aur.archlinux.org/yay.git ~/Downloads/yay
 $ cd ~/Downloads/yay
-$ makepkg -si
+$ makepkg -sir
 ```
 ### window manager
 ```bash
-$ yay -S awesome-git
+$ yay -S awesome-git --removemake --noconfirm
 ```
 ### picom
 ```bash
@@ -37,13 +37,14 @@ $ sudo pacman -S nm-connection-editor networkmanager network-manager-applet blue
 ```
 ### Media
 ```bash
-$ sudo pacman -S ffmpeg mpv mpd mpc mpdris2 python-mutagen ncmpcpp playerctl
+$ sudo pacman -S ffmpeg mpv mpd mpc python-mutagen ncmpcpp playerctl
+$ yay -S mpdris2 --noconfirm --removemake
 ```
 ### packages
 ```bash
-$ yay -S i3lock-color caffeine-ng lxappearance-gtk3
-$ sudo pacman -S alacritty flameshot papirus-icon-theme ufw redshift rofi mtpfs gvfs-mtp
-$ sudo pacman -S gnome-system-monitor xfce4-power-manager nemo polkit-gnome gtk3
+$ yay -S i3lock-color caffeine-ng lxappearance-gtk3 --noconfirm --removemake
+$ sudo pacman -S alacritty flameshot papirus-icon-theme redshift rofi nemo
+$ sudo pacman -S gnome-system-monitor xfce4-power-manager polkit-gnome gnome-keyring
 ```
 ### Pipewire
 ```bash
@@ -51,10 +52,9 @@ $ sudo pacman -S pipewire pipewire-pulse pipewire-alsa pipewire-jack pipewire-ze
 ```
 ### Systemd
 ```bash
-$ sudo systemctl --user enable --now mpd
+$ sudo systemctl enable mpd
 $ sudo systemctl enable --now bluetooth
 $ sudo systemctl enable --now NetworkManager
-$ sudo systemctl --user enable pipewire-pulse
 ```
 ### install config
 ```bash
