@@ -43,7 +43,7 @@ $ yay -S mpdris2 --noconfirm --removemake
 ### packages
 ```bash
 $ yay -S i3lock-color caffeine-ng lxappearance-gtk3 --noconfirm --removemake
-$ sudo pacman -S alacritty flameshot papirus-icon-theme redshift rofi nemo
+$ sudo pacman -S alacritty flameshot papirus-icon-theme redshift rofi nemo jq
 $ sudo pacman -S gnome-system-monitor xfce4-power-manager polkit-gnome gnome-keyring
 ```
 ### Pipewire
