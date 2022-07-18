@@ -17,11 +17,6 @@ local update_headphone_state = function()
 end
 update_headphone_state()
 
-awful.spawn.easy_async("pactl get-default-sink", function(stdout)
-	awful.spawn.easy_async_with_shell('echo "' .. stdout .. '" > ' .. widget_dir .. "default_sink", function(stdout) end)
-end)
-local default_sink = helpers.first_line(widget_dir .. "default_sink")
-
 local widget = wibox.widget {
 	widget,
 	shape = function(cr, width, height)
@@ -41,7 +36,7 @@ end
 update_widget()
 
 local power_on_cmd = [[
-    pactl set-sink-port ]] .. default_sink .. [[ analog-output-headphones
+    pactl set-sink-port 0 analog-output-headphones
 	echo "true" > ]] .. widget_dir .. [[headphone_state
 	# Create an AwesomeWM Notification
 	awesome-client "
@@ -56,7 +51,7 @@ local power_on_cmd = [[
 ]]
 
 local power_off_cmd = [[
-    pactl set-sink-port ]] .. default_sink .. [[ analog-output-lineout
+    pactl set-sink-port 0 analog-output-lineout
 	echo "false" > ]] .. widget_dir .. [[headphone_state
 	# Create an AwesomeWM Notification
 	awesome-client "
