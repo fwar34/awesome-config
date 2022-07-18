@@ -29,7 +29,7 @@ local color_scheme = {
     "nord", --1
     "gruvbox" --2
 }
-local colors = color_scheme[2]
+local colors = color_scheme[1]
 
 --Rofi Launcher
 local rofi_command =
@@ -80,7 +80,7 @@ helpers.check_if_running(
 )
 
 local run_on_start_up = {
-    apps.lock,
+    -- apps.lock,
     "nm-applet --indicator", -- network applet
     "blueman-applet", --bluetooth applet
     "xfce4-power-manager", -- Power manager

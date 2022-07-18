@@ -6,15 +6,17 @@ local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.flaticons")
 local helpers = require("client.helpers")
+local config_dir = gears.filesystem.get_configuration_dir()
+local widget_dir = config_dir .. "configs/cache/"
 
 local icon =
-	wibox.widget {
+wibox.widget {
 	image = icons.volume,
 	widget = wibox.widget.imagebox
 }
 
 local action_level =
-	wibox.widget {
+wibox.widget {
 	{
 		icon,
 		widget = helpers.ccontainer
@@ -25,20 +27,20 @@ local action_level =
 }
 
 local slider =
-	wibox.widget {
+wibox.widget {
 	nil,
 	{
 		id = "volume_slider",
 		bar_shape = gears.shape.rounded_rect,
 		bar_height = dpi(2),
 		bar_color = "#ffffff20",
-		bar_active_color = beautiful.accent_normal_c.. "80",
+		bar_active_color = beautiful.accent_normal_c .. "80",
 		handle_color = beautiful.accent_normal_c,
 		handle_shape = gears.shape.circle,
 		handle_width = dpi(15),
 		handle_border_color = "#00000012",
 		handle_border_width = dpi(1),
-		maximum = 100,
+		maximum = 150,
 		widget = wibox.widget.slider
 	},
 	nil,
@@ -55,12 +57,12 @@ volume_slider:connect_signal(
 		local volume_level = volume_slider:get_value()
 		if volume_level == 0 then
 			icon.image = icons.volumex
-		elseif volume_level < 50 and volume_level > 0 then
+		elseif volume_level < 75 and volume_level > 0 then
 			icon.image = icons.volume1
-		elseif volume_level > 50 then
+		elseif volume_level > 75 then
 			icon.image = icons.volume2
 		end
-		spawn("amixer -D pulse sset Master " .. volume_level .. "%", false)
+		spawn("pactl -- set-sink-volume 0 " .. volume_level .. "%", false)
 		-- Update volume osd
 		awesome.emit_signal("module::volume_osd", volume_level)
 	end
@@ -73,8 +75,8 @@ volume_slider:buttons(
 			4,
 			nil,
 			function()
-				if volume_slider:get_value() > 100 then
-					volume_slider:set_value(100)
+				if volume_slider:get_value() > 150 then
+					volume_slider:set_value(150)
 					return
 				end
 				volume_slider:set_value(volume_slider:get_value() + 5)
@@ -95,15 +97,13 @@ volume_slider:buttons(
 	)
 )
 
-local temp_value = 0
+
 local update_slider = function()
 	awful.spawn.easy_async_with_shell(
-		[[bash -c "amixer -D pulse sget Master"]],
+		[[bash -c "pactl get-sink-volume 0"]],
 		function(stdout)
 			local volume = string.match(stdout, "(%d?%d?%d)%%")
-			temp_value = tonumber(volume)
-
-			volume_slider:set_value(temp_value)
+			volume_slider:set_value(tonumber(volume))
 		end
 	)
 end
@@ -114,10 +114,10 @@ update_slider()
 local action_jump = function()
 	local sli_value = volume_slider:get_value()
 	if sli_value > 0 then
-		temp_value = sli_value
+		awful.util.spawn_with_shell('echo "' .. sli_value .. '" > ' .. widget_dir .. 'sli_value')
 		volume_slider:set_value(0)
 	else
-		volume_slider:set_value(temp_value or 1)
+		volume_slider:set_value(tonumber(helpers.first_line(widget_dir .. "sli_value")))
 	end
 end
 
@@ -159,7 +159,7 @@ awesome.connect_signal(
 )
 
 local volume_setting =
-	wibox.widget {
+wibox.widget {
 	{
 		{
 			action_level,

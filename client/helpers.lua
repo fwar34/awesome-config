@@ -422,4 +422,44 @@ function helpers.remote_watch(command, interval, output_file, callback)
     }
 end
 
+-- {{{ Timer maker
+
+helpers.timer_table = {}
+
+function helpers.newtimer(name, timeout, fun, nostart, stoppable)
+    if not name or #name == 0 then return end
+    name = (stoppable and name) or timeout
+    if not helpers.timer_table[name] then
+        helpers.timer_table[name] = gears.timer({ timeout = timeout })
+        helpers.timer_table[name]:start()
+    end
+    helpers.timer_table[name]:connect_signal("timeout", fun)
+    if not nostart then
+        helpers.timer_table[name]:emit_signal("timeout")
+    end
+    return stoppable and helpers.timer_table[name]
+end
+
+-- }}}
+
+function helpers.lines_match(regexp, path)
+    local lines = {}
+    for line in io.lines(path) do
+        if string.match(line, regexp) then
+            lines[#lines + 1] = line
+        end
+    end
+    return lines
+end
+
+-- get first line of a file
+function helpers.first_line(path)
+    local file, first = io.open(path, "rb"), nil
+    if file then
+        first = file:read("*l")
+        file:close()
+    end
+    return first
+end
+
 return helpers

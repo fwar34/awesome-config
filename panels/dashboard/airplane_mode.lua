@@ -8,7 +8,7 @@ local helpers = require("client.helpers")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. "panels/dashboard/"
+local widget_dir = config_dir .. "configs/cache/"
 
 --- Bluetooth Widget
 --- ~~~~~~~~~~~~~~~~

@@ -1,50 +1,48 @@
 local wibox = require("wibox")
 local awful = require("awful")
-local watch = awful.widget.watch
 local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("client.helpers")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
+local config_dir = gears.filesystem.get_configuration_dir()
+local widget_dir = config_dir .. "configs/cache/"
 
-local headphone_state = false
+local stringtoboolean = { ["true"] = true, ["false"] = false }
+local headphone_state
 
-local widgeth = mat_icon(icons.headphone, dpi(22))
-local widgetv =mat_icon(icons.volume, dpi(22))
+local update_headphone_state = function()
+	headphone_state = stringtoboolean[helpers.first_line(widget_dir .. "headphone_state")]
+end
+update_headphone_state()
 
-local widget = wibox.widget{
-    widgetv,
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, dpi(12))
-    end,
-    widget = wibox.container.background,
-    bg = beautiful.toggle_button_inactive
+awful.spawn.easy_async("pactl get-default-sink", function(stdout)
+	awful.spawn.easy_async_with_shell('echo "' .. stdout .. '" > ' .. widget_dir .. "default_sink", function(stdout) end)
+end)
+local default_sink = helpers.first_line(widget_dir .. "default_sink")
+
+local widget = wibox.widget {
+	widget,
+	shape = function(cr, width, height)
+		gears.shape.rounded_rect(cr, width, height, dpi(12))
+	end,
+	widget = wibox.container.background,
+	bg = beautiful.toggle_button_inactive
 }
 helpers.add_hover_cursor(widget, "hand1")
-
 local update_widget = function()
 	if headphone_state then
-		widget.widget = widgeth
+		widget.widget = mat_icon(icons.headphone, dpi(22))
 	else
-		widget.widget = widgetv
+		widget.widget = mat_icon(icons.volume, dpi(22))
 	end
 end
-
-local check_sound_state = function()
-	awful.spawn.easy_async_with_shell("pacmd list-sinks | grep 'active port:' | awk '{print $3}'", function(stdout)
-		if stdout:match("<analog-output-lineout>") then
-			headphone_state = false
-        elseif stdout:match("<analog-output-headphones>") then
-			headphone_state = true
-		end
-		update_widget()
-	end)
-end
-check_sound_state()
+update_widget()
 
 local power_on_cmd = [[
-    pactl set-sink-port alsa_output.pci-0000_00_1f.3.analog-stereo analog-output-headphones
+    pactl set-sink-port ]] .. default_sink .. [[ analog-output-headphones
+	echo "true" > ]] .. widget_dir .. [[headphone_state
 	# Create an AwesomeWM Notification
 	awesome-client "
 	naughty = require('naughty')
@@ -58,7 +56,8 @@ local power_on_cmd = [[
 ]]
 
 local power_off_cmd = [[
-    pactl set-sink-port alsa_output.pci-0000_00_1f.3.analog-stereo analog-output-lineout
+    pactl set-sink-port ]] .. default_sink .. [[ analog-output-lineout
+	echo "false" > ]] .. widget_dir .. [[headphone_state
 	# Create an AwesomeWM Notification
 	awesome-client "
 	naughty = require('naughty')
@@ -73,13 +72,13 @@ local power_off_cmd = [[
 
 local toggle_action = function()
 	if headphone_state then
-		awful.spawn.easy_async_with_shell(power_off_cmd, function(stdout)
-			headphone_state = false
+		awful.spawn.easy_async_with_shell(power_off_cmd, function()
+			update_headphone_state()
 			update_widget()
 		end)
 	else
-		awful.spawn.easy_async_with_shell(power_on_cmd, function(stdout)
-			headphone_state = true
+		awful.spawn.easy_async_with_shell(power_on_cmd, function()
+			update_headphone_state()
 			update_widget()
 		end)
 	end

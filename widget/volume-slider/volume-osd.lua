@@ -6,11 +6,11 @@ local dpi = beautiful.xresources.apply_dpi
 local icons = require('icons.flaticons')
 
 local icon = wibox.widget {
-		image = icons.volume,
-		resize = true,
-		widget = wibox.widget.imagebox,
-		forced_height = dpi(45),
-		forced_width = dpi(35)
+	image = icons.volume,
+	resize = true,
+	widget = wibox.widget.imagebox,
+	forced_height = dpi(45),
+	forced_width = dpi(35)
 }
 
 local osd_header = wibox.widget {
@@ -36,13 +36,13 @@ local slider_osd = wibox.widget {
 		bar_shape = gears.shape.rounded_rect,
 		bar_height = dpi(2),
 		bar_color = '#ffffff20',
-		bar_active_color = beautiful.accent_normal_c.. "80",
+		bar_active_color = beautiful.accent_normal_c .. "80",
 		handle_color = beautiful.accent_normal_c,
 		handle_shape = gears.shape.circle,
 		handle_width = dpi(15),
 		handle_border_color = '#00000012',
 		handle_border_width = dpi(1),
-		maximum = 100,
+		maximum = 150,
 		widget = wibox.widget.slider
 	},
 	nil,
@@ -58,12 +58,13 @@ vol_osd_slider:connect_signal(
 		local volume_level = vol_osd_slider:get_value()
 		if volume_level == 0 then
 			icon.image = icons.volumex
-		elseif volume_level < 50 and volume_level > 0 then
+		elseif volume_level < 75 and volume_level > 0 then
 			icon.image = icons.volume1
-		elseif volume_level > 50 then
+		elseif volume_level > 75 then
 			icon.image = icons.volume2
 		end
-		awful.spawn('amixer -D pulse sset Master ' .. volume_level .. '%', false)
+
+		awful.spawn('pactl -- set-sink-volume 0 ' .. volume_level .. '%', false)
 
 		-- Update textbox widget text
 		osd_value.text = volume_level .. '%'
@@ -72,19 +73,16 @@ vol_osd_slider:connect_signal(
 		awesome.emit_signal('widget::volume:update', volume_level)
 
 		if awful.screen.focused().show_vol_osd then
-			awesome.emit_signal(
-				'module::volume_osd:show', 
-				true
-			)
+			awesome.emit_signal('module::volume_osd:show', true)
 		end
 	end
 )
 
 vol_osd_slider:connect_signal(
-		'button::press',
-		function()
-			awful.screen.focused().show_vol_osd = true
-		end
+	'button::press',
+	function()
+		awful.screen.focused().show_vol_osd = true
+	end
 )
 
 vol_osd_slider:connect_signal(
@@ -120,11 +118,11 @@ screen.connect_signal(
 	function(s)
 		local s = s or {}
 		s.show_vol_osd = false
-		
+
 		-- Create the box
 		s.volume_osd_overlay = awful.popup {
 			widget = {
-			  -- Removing this block will cause an error...
+				-- Removing this block will cause an error...
 			},
 			ontop = true,
 			visible = false,
@@ -138,10 +136,10 @@ screen.connect_signal(
 			shape = gears.shape.rectangle,
 			bg = beautiful.transparent,
 			preferred_anchors = 'middle',
-			preferred_positions = {'left', 'right', 'top', 'bottom'}
+			preferred_positions = { 'left', 'right', 'top', 'bottom' }
 		}
 
-		s.volume_osd_overlay : setup {
+		s.volume_osd_overlay:setup {
 			{
 				{
 					{
@@ -166,7 +164,7 @@ screen.connect_signal(
 
 		-- Reset timer on mouse hover
 		s.volume_osd_overlay:connect_signal(
-			'mouse::enter', 
+			'mouse::enter',
 			function()
 				awful.screen.focused().show_vol_osd = true
 				awesome.emit_signal('module::volume_osd:rerun')
@@ -176,7 +174,7 @@ screen.connect_signal(
 )
 
 local hide_osd = gears.timer {
-	timeout = 2,
+	timeout   = 2,
 	autostart = true,
 	callback  = function()
 		local focused = awful.screen.focused()
@@ -198,7 +196,7 @@ awesome.connect_signal(
 
 local placement_placer = function()
 	local focused = awful.screen.focused()
-		
+
 	local right_panel = focused.right_panel
 	local left_panel = focused.left_panel
 	local volume_osd = focused.volume_osd_overlay
@@ -208,7 +206,7 @@ local placement_placer = function()
 			awful.placement.bottom_left(
 				volume_osd,
 				{
-					margins = { 
+					margins = {
 						left = osd_margin,
 						right = 0,
 						top = 0,
@@ -226,7 +224,7 @@ local placement_placer = function()
 			awful.placement.bottom_left(
 				volume_osd,
 				{
-					margins = { 
+					margins = {
 						left = osd_margin,
 						right = 0,
 						top = 0,
@@ -242,7 +240,7 @@ local placement_placer = function()
 	awful.placement.bottom_right(
 		volume_osd,
 		{
-			margins = { 
+			margins = {
 				left = 0,
 				right = osd_margin,
 				top = 0,
@@ -254,14 +252,14 @@ local placement_placer = function()
 end
 
 awesome.connect_signal(
-	'module::volume_osd:show', 
+	'module::volume_osd:show',
 	function(bool)
 		placement_placer()
 		awful.screen.focused().volume_osd_overlay.visible = bool
 		if bool then
 			awesome.emit_signal('module::volume_osd:rerun')
 			awesome.emit_signal(
-				'module::brightness_osd:show', 
+				'module::brightness_osd:show',
 				false
 			)
 		else

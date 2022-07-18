@@ -386,7 +386,7 @@ keys.globalkeys =
         {},
         "XF86AudioLowerVolume",
         function()
-            awful.spawn("amixer -D pulse sset Master 5%-", false)
+            awful.spawn("pactl -- set-sink-volume 0 -5%", false)
             awesome.emit_signal("widget::volume")
             awesome.emit_signal("module::volume_osd:show", true)
         end,
@@ -397,9 +397,17 @@ keys.globalkeys =
         {},
         "XF86AudioRaiseVolume",
         function()
-            awful.spawn("amixer -D pulse sset Master 5%+", false)
-            awesome.emit_signal("widget::volume")
-            awesome.emit_signal("module::volume_osd:show", true)
+            awful.spawn.easy_async_with_shell("pactl -- get-sink-volume 0",function (stdout)
+                if tonumber(string.match(stdout, "(%d?%d?%d)%%")) >= 150  then
+                    awful.spawn("pactl -- set-sink-volume 0 150%", false)
+                    awesome.emit_signal("widget::volume")
+                    awesome.emit_signal("module::volume_osd:show", true)
+                else
+                    awful.spawn("pactl -- set-sink-volume 0 +5%", false)
+                    awesome.emit_signal("widget::volume")
+                    awesome.emit_signal("module::volume_osd:show", true)
+                end
+            end)
         end,
         {description = "volume up", group = "hotkeys"}
     ),
@@ -407,16 +415,8 @@ keys.globalkeys =
         {},
         "XF86AudioMute",
         function()
-            awful.spawn("amixer -D pulse set Master 1+ toggle", false)
+            awful.spawn("amixer -q set Master toggle", false)
             awesome.emit_signal("volume_change")
-        end,
-        {description = "toggle mute", group = "hotkeys"}
-    ),
-    awful.key(
-        {},
-        "XF86AudioMute",
-        function()
-            awful.spawn("amixer -D pulse set Master 1+ toggle", false)
         end,
         {description = "toggle mute", group = "hotkeys"}
     ),

@@ -142,7 +142,7 @@ local function widget()
 
 	local update_uptime = function()
 		awful.spawn.easy_async_with_shell(
-			"uptime -p | sed 's/up//;s/hour/H/;s/minutes/M/;s/,//'",
+			"uptime -p | sed 's/hours/H/;s/up//;s/hour/H/;s/minutes/M/;s/minute/M/;s/,//;'",
 			function(stdout)
 				local uptime = stdout:gsub("%\n", "")
 				uptime_time:set_markup(uptime)

@@ -9,8 +9,8 @@ local dpi = beautiful.xresources.apply_dpi
 
 local icons = require("icons.flaticons")
 
-local lain_cpu = require("widget.lain.cpu")
-local lain_mem = require("widget.lain.mem")
+local cpu = require("panels.dashboard.cpu")
+local mem = require("panels.dashboard.mem")
 
 local helpers = require("client.helpers")
 
@@ -41,8 +41,8 @@ local disk_used_no = helpers.watch(disk_used, 1200)
 local disk_text = wibox.widget.textbox("/")
 local celcius = wibox.widget.textbox("°C")
 celcius.font = beautiful.monospace
-local mem =
-    lain_mem(
+local mymem =
+    mem(
     {
         settings = function()
             widget:set_markup('<span font="' .. beautiful.monospace .. '">' .. mem_now.used .. ' M</span>')
@@ -50,7 +50,7 @@ local mem =
     }
 )
 local mycpu =
-    lain_cpu(
+    cpu(
     {
         settings = function()
             widget:set_markup('<span font="' .. beautiful.monospace .. '">' .. cpu_now.usage .. ' %</span>')
@@ -105,7 +105,7 @@ local user_widget =
         {
             activity_icon,
             helpers.horizontal_pad(dpi(5)),
-            mem,
+            mymem,
             forced_width = dpi(130),
             draw_empty = true,
             widget = wibox.container.margin,
