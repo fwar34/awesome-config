@@ -164,7 +164,7 @@ top_panel.create = function(s)
             wibox.container.margin(TaskList(s), dpi(2), dpi(2), dpi(3), dpi(3)),
             add_button
         },
-        TagList(s),
+        wibox.container.margin(TagList(s), dpi(2), dpi(2), dpi(4), dpi(4)),
         {
             layout = wibox.layout.fixed.horizontal,
             weather_icon,

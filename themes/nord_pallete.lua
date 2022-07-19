@@ -86,11 +86,11 @@ theme.useless_gap = dpi(4)
 theme.gap_single_client = true
 
 -- --------- Fonts -----------
-theme.title_fonts = "Roboto Mono Nerd Fonts Bold 11"
-theme.normal_fonts = "Roboto 11"
-theme.monospace = "Roboto Mono Nerd Fonts 10"
-theme.monospace_bold = "Roboto Mono Nerd Fonts Bold 10"
-theme.icon_fonts = "Material Icons Round 14"
+theme.title_fonts = "Inter Bold 11"
+theme.normal_fonts = "Inter 11"
+theme.monospace = "Jetbrains Mono 10"
+theme.monospace_bold = "Jetbrains Mono Bold 10"
+theme.icon_fonts = "Material Icons Round"
 
 -- -- clickable container ----
 theme.mouse_enter = theme.nord10 .. "50"
@@ -185,6 +185,8 @@ theme.taglist_fg_focus    = theme.nord6
 theme.taglist_fg_occupied = theme.nord9
 theme.taglist_fg_urgent   = theme.nord11
 theme.taglist_fg_empty    = theme.nord1
+theme.taglist_bg_focus = theme.nord9
+theme.taglist_shape = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
 theme.tag_preview_widget_border_radius = dpi(0) -- Border radius of the widget (With AA)

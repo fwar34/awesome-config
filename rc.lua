@@ -48,7 +48,6 @@ apps = {
     lock = gears.filesystem.get_configuration_dir() .. "configs/lock-" .. colors,
     screenshot = "flameshot gui",
     filebrowser = "dolphin",
-    colorpicker = "gpick -p",
     browser = "firefox",
     taskmanager = "gnome-system-monitor",
     fontsandthemes = "lxappearance-gtk3",
@@ -80,7 +79,6 @@ helpers.check_if_running(
 )
 
 local run_on_start_up = {
-    apps.lock, -- startup screen lock
     "nm-applet --indicator", -- network applet
     "blueman-applet", --bluetooth applet
     "xfce4-power-manager", -- Power manager

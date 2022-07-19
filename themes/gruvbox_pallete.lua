@@ -86,10 +86,10 @@ theme.useless_gap = dpi(4)
 theme.gap_single_client = true
 
 -- --------- Fonts -----------
-theme.title_fonts = "Roboto Bold 11"
-theme.normal_fonts = "Roboto 11"
-theme.monospace = "Roboto 10"
-theme.monospace_bold = "Roboto Bold 10"
+theme.title_fonts = "Inter Bold 11"
+theme.normal_fonts = "Inter 11"
+theme.monospace = "Jetbrains Mono 10"
+theme.monospace_bold = "Jetbrains Mono Bold 10"
 theme.icon_fonts = "Material Icons Round"
 
 -- -- clickable container ----
@@ -179,12 +179,14 @@ theme.taglist_bg_empty = theme.bg0_h
 theme.taglist_bg_occupied = theme.bg0_h
 theme.taglist_bg_urgent = theme.bg0_h
 theme.taglist_bg_focus = theme.bg0_h
-theme.taglist_font = theme.icon_fonts .. "12"
+theme.taglist_font = theme.title_fonts
 theme.taglist_spacing = dpi(6)
-theme.taglist_fg_focus = theme.yellow
-theme.taglist_fg_occupied = theme.fg1
+theme.taglist_fg_focus = theme.fg0
+theme.taglist_fg_occupied = theme.blue
 theme.taglist_fg_urgent = theme.red
 theme.taglist_fg_empty = theme.bg3
+theme.taglist_bg_focus = theme.blue
+theme.taglist_shape = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
 theme.tag_preview_widget_border_radius = dpi(0) -- Border radius of the widget (With AA)
@@ -212,7 +214,7 @@ theme.playerctl_ignore = "firefox"
 theme.playerctl_player = {"music", "vlc", "%any"}
 
 -- ------- date/time ---------
-theme.date_time_color = theme.yellow
+theme.date_time_color = theme.blue
 
 -- ------- calender ----------
 theme.cal_header_bg = theme.transparent
