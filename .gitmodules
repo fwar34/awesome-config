@@ -8,3 +8,4 @@
 [submodule "misc/themes/gtk/themes/Gruvbox"]
 	path = misc/themes/gtk/themes/Gruvbox
 	url = https://github.com/sachnr/Gruvbox-GTK-Theme.git
+	branch = lol
