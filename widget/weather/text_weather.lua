@@ -40,12 +40,13 @@ local weather_description = wibox.widget{
     text = "Loading weather...",
     -- align  = 'center',
     valign = 'center',
-    -- font = "sans 14",
+    font = "Roboto 10",
     widget = wibox.widget.textbox
 }
 
 local weather_icon = wibox.widget{
     text = whatever_icon,
+    font = "Icomoon 16",
     -- align  = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
@@ -121,7 +122,7 @@ awesome.connect_signal("evil::weather", function(temperature, description, icon_
     weather_icon.markup = helpers.colorize_text(icon, color)
     weather_description.markup = description
     weather_temperature.markup = temperature
-    -- weather_temperature.markup = helpers.colorize_text(tostring(temperature)..weather_temperature_symbol, color)
+    weather_temperature.markup = helpers.colorize_text(tostring(temperature)..weather_temperature_symbol, color)
 end)
 
 return weather
