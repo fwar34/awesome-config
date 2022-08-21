@@ -5,26 +5,8 @@ local beautiful = require("beautiful")
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.flaticons")
-local helpers = require("client.helpers")
-local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. "configs/cache/"
-
-local icon =
-wibox.widget {
-	image = icons.volume,
-	widget = wibox.widget.imagebox
-}
-
-local action_level =
-wibox.widget {
-	{
-		icon,
-		widget = helpers.ccontainer
-	},
-	bg = beautiful.transparent,
-	shape = gears.shape.circle,
-	widget = wibox.container.background
-}
+local helpers = require("global.helpers")
+local widget_dir = os.getenv("HOME") .. "/.cache/awesome/"
 
 local slider =
 wibox.widget {
@@ -34,8 +16,8 @@ wibox.widget {
 		bar_shape = gears.shape.rounded_rect,
 		bar_height = dpi(2),
 		bar_color = "#ffffff20",
-		bar_active_color = beautiful.accent_normal_c .. "80",
-		handle_color = beautiful.accent_normal_c,
+		bar_active_color = beautiful.accent_normal .. "80",
+		handle_color = beautiful.accent_normal,
 		handle_shape = gears.shape.circle,
 		handle_width = dpi(15),
 		handle_border_color = "#00000012",
@@ -51,6 +33,36 @@ wibox.widget {
 
 local volume_slider = slider.volume_slider
 
+local icon =
+wibox.widget {
+	image = icons.volume,
+	widget = wibox.widget.imagebox
+}
+
+local update_slider = function()
+	awful.spawn.easy_async_with_shell(
+		[[bash -c "pactl get-sink-volume 0"]],
+		function(stdout)
+			local volume = string.match(stdout, "(%d?%d)%%")
+			volume_slider:set_value(tonumber(volume))
+		end
+	)
+end
+
+-- Update on startup
+volume_slider:set_value(tonumber(helpers.first_line(widget_dir .. "sli_value")))
+
+local action_level =
+wibox.widget {
+	{
+		icon,
+		widget = helpers.ccontainer
+	},
+	bg = beautiful.transparent,
+	shape = gears.shape.circle,
+	widget = wibox.container.background
+}
+
 volume_slider:connect_signal(
 	"property::value",
 	function()
@@ -62,7 +74,7 @@ volume_slider:connect_signal(
 		elseif volume_level > 75 then
 			icon.image = icons.volume2
 		end
-		spawn("pactl -- set-sink-volume 0 " .. volume_level .. "%", false)
+		spawn("pactl set-sink-volume 0 " .. volume_level .. "%", false)
 		-- Update volume osd
 		awesome.emit_signal("module::volume_osd", volume_level)
 	end
@@ -96,20 +108,6 @@ volume_slider:buttons(
 		)
 	)
 )
-
-
-local update_slider = function()
-	awful.spawn.easy_async_with_shell(
-		[[bash -c "pactl get-sink-volume 0"]],
-		function(stdout)
-			local volume = string.match(stdout, "(%d?%d?%d)%%")
-			volume_slider:set_value(tonumber(volume))
-		end
-	)
-end
-
--- Update on startup
-update_slider()
 
 local action_jump = function()
 	local sli_value = volume_slider:get_value()

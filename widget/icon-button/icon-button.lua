@@ -1,6 +1,6 @@
 local wibox = require('wibox')
 local gears = require('gears')
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local dpi = require('beautiful').xresources.apply_dpi
 
 function build(imagebox, args)

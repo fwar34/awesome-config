@@ -2,7 +2,7 @@ local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local dpi = beautiful.xresources.apply_dpi
 
 local styles = {}
@@ -85,7 +85,7 @@ local decorate_cell = function(widget, flag, date)
 end
 
 local calendar = wibox.widget {
-    font = beautiful.normal_fonts,
+    font = "Roboto Mono Nerd Fonts Bold 11",
     date = os.date("*t"),
     spacing = dpi(9),
     start_sunday = true,

@@ -1,8 +1,16 @@
 local dir = os.getenv("HOME") .. "/.config/awesome/icons/flaticons"
-local beautiful = require("beautiful")
-local gears = require("gears")
+local dir2 = os.getenv("HOME") .. "/.config/awesome/icons/layout2/"
 
 return {
+  --- layouts
+	floating = dir2 .. "floating.png",
+	max = dir2 .. "max.png",
+	tile = dir2 .. "tile.png",
+	dwindle = dir2 .. "dwindle.png",
+	centered = dir2 .. "centered.png",
+	mstab = dir2 .. "mstab.png",
+	equalarea = dir2 .. "equalarea.png",
+	machi = dir2 .. "machi.png",
   --tags
   browser = dir .. "/firefox.svg",
   code = dir .. "/code-braces.svg",
@@ -67,4 +75,6 @@ return {
   left = dir .. '/left.svg',
   right = dir .. '/right.svg',
   reading = dir .. '/reading.svg',
+  notepad = dir ..  '/notepad.svg',
+  ram = dir ..  '/ram.svg',
 }

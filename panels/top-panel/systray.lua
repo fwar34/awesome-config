@@ -2,7 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
 local dpi = require("beautiful").xresources.apply_dpi
@@ -29,7 +29,7 @@ local widget = wibox.widget{
         gears.shape.rounded_rect(cr, width, height, dpi(12))
     end,
     widget = wibox.container.background,
-    bg = beautiful.accent_normal
+    bg = beautiful.transparent
 }
 helpers.add_hover_cursor(widget, "hand1")
 

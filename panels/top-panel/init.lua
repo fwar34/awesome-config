@@ -27,8 +27,8 @@ local TagList = require("panels.top-panel.tag-list")
 local mat_icon_button = require("widget.icon-button.icon-button")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
-local helpers = require("client.helpers")
-local weather = require("widget.weather.weather_icon")
+local helpers = require("global.helpers")
+local weather = require("widget.weather.text_weather")
 
 -- define module table
 local top_panel = {}
@@ -39,12 +39,15 @@ local top_panel = {}
 
 -- --------- Clock -----------
 local textclock =
-    wibox.widget.textclock(
+wibox.widget.textclock(
     '<span font="' ..
-        beautiful.monospace_bold ..
-            '"color="'..beautiful.date_time_color..'">%a %b %d,</span><span font="' .. beautiful.title_fonts .. '" color="'..beautiful.date_time_color..'"> %H:%M</span>'
+    beautiful.date_time_font ..
+    '"color="' ..
+    beautiful.date_time_color ..
+    '">%a %b %d,</span><span font="' ..
+    beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %H:%M</span>'
 )
-helpers.add_hover_cursor(textclock,"hand1")
+helpers.add_hover_cursor(textclock, "hand1")
 textclock:connect_signal(
     "button::press",
     function(_, _, _, button)
@@ -58,10 +61,12 @@ local cw = wibox.container.margin(textclock, dpi(12), dpi(12), dpi(8), dpi(8))
 -- ------ Plus Button --------
 --Rofi Launcher
 local rofi_command =
-  "env /usr/bin/rofi -dpi " ..
-  get_dpi() ..
+"env /usr/bin/rofi -dpi " ..
+    get_dpi() ..
     " -width " ..
-      dpi(400) .. " -show drun -theme " .. gears.filesystem.get_configuration_dir() .. "/configs/rofi-" .. beautiful.rofi_plus_sign .. ".rasi"
+    dpi(400) ..
+    " -show drun -theme " ..
+    gears.filesystem.get_configuration_dir() .. "/configs/rofi/rofi-" .. beautiful.rofi_plus_sign .. ".rasi"
 local add_button = mat_icon_button(mat_icon(icons.plus, dpi(24)))
 add_button:buttons(
     gears.table.join(
@@ -72,11 +77,11 @@ add_button:buttons(
             function()
                 awful.spawn(
                     rofi_command
-                    -- awful.screen.focused().selected_tag.defaultApp,
-                    -- {
-                    --     tag = _G.mouse.screen.selected_tag,
-                    --     placement = awful.placement.bottom_right
-                    -- }
+                -- awful.screen.focused().selected_tag.defaultApp,
+                -- {
+                --     tag = _G.mouse.screen.selected_tag,
+                --     placement = awful.placement.bottom_right
+                -- }
                 )
             end
         )
@@ -122,10 +127,7 @@ local LayoutBox = function(s)
     return layoutBox
 end
 
---Weather
-local weather_icon = helpers.create_boxed_widget(weather, dpi(240), dpi(30), beautiful.bg_normal)
-
--- Syetray
+-- Systray
 local systray = require("panels.top-panel.systray")
 
 -- =========================================================
@@ -135,7 +137,7 @@ local systray = require("panels.top-panel.systray")
 top_panel.create = function(s)
     -- local height = s.geometry.height
     local panel =
-        wibox(
+    wibox(
         {
             ontop = true,
             screen = s,
@@ -164,10 +166,10 @@ top_panel.create = function(s)
             wibox.container.margin(TaskList(s), dpi(2), dpi(2), dpi(3), dpi(3)),
             add_button
         },
-        wibox.container.margin(TagList(s), dpi(2), dpi(2), dpi(4), dpi(4)),
+        wibox.container.margin(TagList(s), dpi(2), dpi(2), dpi(2), dpi(2)),
         {
             layout = wibox.layout.fixed.horizontal,
-            weather_icon,
+            weather,
             systray,
             cw,
             wibox.container.margin(LayoutBox(s), dpi(4), dpi(4), dpi(7), dpi(7)),

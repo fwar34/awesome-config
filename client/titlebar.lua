@@ -3,7 +3,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 
 -- =========================================================
 -- ============= Function for making buttons ===============
@@ -321,7 +321,7 @@ client.connect_signal(
 					left = dpi(10),
 					widget = wibox.container.margin
 				},
-				bg = beautiful.titlebar_color .. "c0",
+				bg = beautiful.titlebar_color,
 				widget = wibox.container.background
 			}
 		)

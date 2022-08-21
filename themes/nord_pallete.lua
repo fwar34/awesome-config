@@ -11,7 +11,7 @@
 
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local gears = require("gears")
 local gfs = require("gears.filesystem")
 local icons = require("icons.flaticons")
@@ -46,25 +46,51 @@ theme.nord15 = "#b48ead"
 -- =================== THEME VARIABLES =====================
 -- =========================================================
 
+function theme.random_accent_color()
+    local accents = {
+        theme.nord9,
+        theme.nord10,
+        theme.nord11,
+        theme.nord12,
+        theme.nord13,
+        theme.nord14,
+        theme.nord15,
+    }
+
+    local i = math.random(1, #accents)
+    return accents[i]
+end
+
 -- =========================================================
 --  Script to change svg color (run this when changing theme)
 -- =========================================================
 
+local icon_colors = {
+    nord = "#e5e9f0",
+    gruvbox = "#EBDBB2",
+    aestheticnight = "#6791C9"
+}
+local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
+local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
+
 awful.spawn.easy_async_with_shell(
-    [[
-        STR=$HOME"/.config/awesome/icons/places/*"
-        STR2=$HOME"/.config/awesome/icons/flaticons/*"
-        
-        for x in $STR
+    [[        
+        for x in ]] .. icon_location1 .. [[*
         do
-        sed -e "s/#EBDBB2/#e5e9f0/g" $x > temp
-        mv temp $x
+        sed -e "s/]] ..
+    icon_colors.gruvbox ..
+    [[/]] ..
+    icon_colors.nord .. [[/g;s/]] .. icon_colors.aestheticnight .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
+        mv temp "$x"
         done
 
-        for x in $STR2
+        for x in ]] .. icon_location2 .. [[*
         do
-        sed -e "s/#EBDBB2/#e5e9f0/g" $x > temp
-        mv temp $x
+        sed -e "s/]] ..
+    icon_colors.gruvbox ..
+    [[/]] ..
+    icon_colors.nord .. [[/g;s/]] .. icon_colors.aestheticnight .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
+        mv temp "$x"
         done
     ]]
 )
@@ -76,7 +102,7 @@ theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/Nord.png"
 theme.rofi_plus_sign = "nord"
 
 -- ---- profile picture ------
-theme.pfp = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "icons/user/profile.jpg")
+theme.pfp = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "icons/user/profile.png")
 
 -- --------- wibar -----------
 theme.wibar_height = dpi(36)
@@ -86,17 +112,15 @@ theme.useless_gap = dpi(4)
 theme.gap_single_client = true
 
 -- --------- Fonts -----------
-theme.title_fonts = "Inter Bold 11"
-theme.normal_fonts = "Inter 11"
-theme.monospace = "Jetbrains Mono 10"
-theme.monospace_bold = "Jetbrains Mono Bold 10"
+theme.title_fonts = "Roboto Bold 11"
+theme.normal_fonts = "Roboto 11"
+theme.date_time_font = "Roboto Bold 11"
 theme.icon_fonts = "Material Icons Round"
 
 -- -- clickable container ----
-theme.mouse_enter = theme.nord10 .. "50"
-theme.mouse_leave = theme.nord10 .. "00"
-theme.mouse_press = theme.nord10 .. "60"
-theme.mouse_release = theme.nord10 .. "30"
+theme.mouse_enter = theme.nord10
+theme.mouse_press = theme.nord10
+theme.mouse_release = theme.nord10
 
 -- -------- accent -----------
 theme.accent_normal = theme.nord9
@@ -117,6 +141,7 @@ theme.fg_critical = theme.nord6
 
 -- ------ background ---------
 theme.bg_normal = "#242933"
+theme.bg_normal_alt = theme.nord0
 theme.bg_critical = theme.nord11
 theme.transparent = "#22000000"
 
@@ -128,7 +153,8 @@ theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.nord0
 theme.border_width = dpi(1)
 theme.border_accent = theme.nord10
--- theme.corner_radius = dpi(8)
+-- round corners
+theme.corner_radius = dpi(8)
 
 -- -------- widgets ----------
 theme.widget_box_radius = dpi(12)
@@ -175,18 +201,18 @@ theme.tasklist_plain_task_name = true
 theme.tasklist_shape = helpers.rect(dpi(4))
 
 -- -------- Taglist ----------
-theme.taglist_bg_empty = theme.bg_normal
+theme.taglist_bg_empty    = theme.bg_normal
 theme.taglist_bg_occupied = theme.bg_normal
-theme.taglist_bg_urgent = theme.bg_normal
-theme.taglist_bg_focus = theme.bg_normal
-theme.taglist_font = theme.title_fonts
-theme.taglist_spacing = 2
+theme.taglist_bg_urgent   = theme.bg_normal
+theme.taglist_bg_focus    = theme.bg_normal
+theme.taglist_font        = theme.title_fonts
+theme.taglist_spacing     = 2
 theme.taglist_fg_focus    = theme.nord6
 theme.taglist_fg_occupied = theme.nord9
 theme.taglist_fg_urgent   = theme.nord11
 theme.taglist_fg_empty    = theme.nord1
-theme.taglist_bg_focus = theme.nord9
-theme.taglist_shape = helpers.rrect(dpi(6))
+theme.taglist_bg_focus    = theme.nord9
+theme.taglist_shape       = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
 theme.tag_preview_widget_border_radius = dpi(0) -- Border radius of the widget (With AA)
@@ -211,7 +237,7 @@ theme.toggle_button_active = theme.nord10
 -- --------- music -----------
 theme.music = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "wallpapers/music.png")
 theme.playerctl_ignore = "firefox"
-theme.playerctl_player = {"mpv", "vlc", "%any"}
+theme.playerctl_player = { "music", "%any" }
 
 -- ------- date/time ---------
 theme.date_time_color = theme.nord10
@@ -241,16 +267,12 @@ theme.flash_focus_step = 0.01 -- the step of animation
 
 -- --------- Icons -----------
 local themes_path = "/usr/share/awesome/themes/"
-theme.icon_color = theme.fg_normal
+theme.icon_color = icon_colors.nord
 -- layout icons
-theme.layout_tile =
-    gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg", theme.icon_color)
-theme.layout_floating =
-    gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg", theme.icon_color)
+theme.layout_tile = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg", theme.icon_color)
+theme.layout_floating = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg", theme.icon_color)
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
 theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
-
-theme.icon_theme = "Papirus Dark"
 
 -- return theme
 return theme

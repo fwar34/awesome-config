@@ -5,31 +5,7 @@ local beautiful = require("beautiful")
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.flaticons")
-local helpers = require("client.helpers")
-
-local icon =
-	wibox.widget {
-	layout = wibox.layout.align.vertical,
-	expand = "none",
-	nil,
-	{
-		image = icons.sun,
-		resize = true,
-		widget = wibox.widget.imagebox
-	},
-	nil
-}
-
-local action_level =
-	wibox.widget {
-	{
-		icon,
-		widget = helpers.ccontainer
-	},
-	bg = beautiful.transparent,
-	shape = gears.shape.circle,
-	widget = wibox.container.background
-}
+local helpers = require("global.helpers")
 
 local slider =
 	wibox.widget {
@@ -39,8 +15,8 @@ local slider =
 		bar_shape = gears.shape.rounded_rect,
 		bar_height = dpi(2),
 		bar_color = "#ffffff20",
-		bar_active_color = beautiful.accent_normal_c.. "80",
-		handle_color = beautiful.accent_normal_c,
+		bar_active_color = beautiful.accent_normal .. "80",
+		handle_color = beautiful.accent_normal,
 		handle_shape = gears.shape.circle,
 		handle_width = dpi(15),
 		handle_border_color = "#00000012",
@@ -55,6 +31,43 @@ local slider =
 }
 
 local brightness_slider = slider.brightness_slider
+
+local icon =
+	wibox.widget {
+	layout = wibox.layout.align.vertical,
+	expand = "none",
+	nil,
+	{
+		image = icons.sun,
+		resize = true,
+		widget = wibox.widget.imagebox
+	},
+	nil
+}
+
+local update_slider = function()
+	awful.spawn.easy_async_with_shell(
+		"brightnessctl set ",
+		function(stdout)
+			local brightness = string.match(stdout, "(%d+)")
+			brightness_slider:set_value(tonumber(brightness))
+		end
+	)
+end
+
+-- Update on startup
+update_slider()
+
+local action_level =
+	wibox.widget {
+	{
+		icon,
+		widget = helpers.ccontainer
+	},
+	bg = beautiful.transparent,
+	shape = gears.shape.circle,
+	widget = wibox.container.background
+}
 
 brightness_slider:connect_signal(
 	"property::value",
@@ -96,19 +109,6 @@ brightness_slider:buttons(
 		)
 	)
 )
-
-local update_slider = function()
-	awful.spawn.easy_async_with_shell(
-		"brightnessctl set ",
-		function(stdout)
-			local brightness = string.match(stdout, "(%d+)")
-			brightness_slider:set_value(tonumber(brightness))
-		end
-	)
-end
-
--- Update on startup
-update_slider()
 
 local action_jump = function()
 	local sli_value = brightness_slider:get_value()

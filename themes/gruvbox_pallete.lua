@@ -11,7 +11,7 @@
 
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local gears = require("gears")
 local gfs = require("gears.filesystem")
 local icons = require("icons.flaticons")
@@ -51,21 +51,26 @@ theme.blue = "#83A598"
 --  Script to change svg color (run this when changing theme)
 -- =========================================================
 
+local icon_colors = {
+    nord = "#e5e9f0",
+    gruvbox = "#EBDBB2",
+    aestheticnight = "#6791C9"
+}
+local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
+local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
+
 awful.spawn.easy_async_with_shell(
-    [[
-        STR=$HOME"/.config/awesome/icons/places/*"
-        STR2=$HOME"/.config/awesome/icons/flaticons/*"
-        
-        for x in $STR
+    [[        
+        for x in ]] .. icon_location1 .. [[*
         do
-        sed -e "s/#e5e9f0/#EBDBB2/g" $x > temp
-        mv temp $x
+        sed -e "s/]] .. icon_colors.aestheticnight .. [[/]] .. icon_colors.gruvbox .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.gruvbox .. [[/g" $x > temp
+        mv temp "$x"
         done
 
-        for x in $STR2
+        for x in ]] .. icon_location2 .. [[*
         do
-        sed -e "s/#e5e9f0/#EBDBB2/g" $x > temp
-        mv temp $x
+        sed -e "s/]] .. icon_colors.aestheticnight .. [[/]] .. icon_colors.gruvbox .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.gruvbox .. [[/g" $x > temp
+        mv temp "$x"
         done
     ]]
 )
@@ -76,7 +81,7 @@ theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/gruvbox/gruvbox01.p
 theme.rofi_plus_sign = "gruvbox"
 
 -- ---- profile picture ------
-theme.pfp = gears.filesystem.get_configuration_dir() .. "icons/user/profile.jpg"
+theme.pfp = gears.filesystem.get_configuration_dir() .. "icons/user/profile.png"
 
 -- --------- wibar -----------
 theme.wibar_height = dpi(36)
@@ -88,18 +93,16 @@ theme.gap_single_client = true
 -- --------- Fonts -----------
 theme.title_fonts = "Inter Bold 11"
 theme.normal_fonts = "Inter 11"
-theme.monospace = "Jetbrains Mono 10"
-theme.monospace_bold = "Jetbrains Mono Bold 10"
+theme.date_time_font = "Jetbrains Mono Bold 10"
 theme.icon_fonts = "Material Icons Round"
 
 -- -- clickable container ----
 theme.mouse_enter = theme.bg1
-theme.mouse_leave = theme.transparent
 theme.mouse_press = theme.bg1
 theme.mouse_release = theme.bg2
 
 -- -------- accent -----------
-theme.accent_normal = theme.bg1
+theme.accent_normal = theme.blue
 
 -- -------- accent titlebar-----------
 theme.accent_normal_c = theme.red
@@ -117,6 +120,7 @@ theme.fg_critical = theme.fg0
 
 -- ------ background ---------
 theme.bg_normal = theme.bg0_h
+theme.bg_normal_alt = theme.bg0
 theme.bg_critical = theme.red
 theme.transparent = "#22000000"
 
@@ -128,7 +132,8 @@ theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bg0_h
 theme.border_width = dpi(2)
 theme.border_accent = theme.bg1
--- theme.corner_radius = dpi(8)
+-- round corners
+theme.corner_radius = dpi(8)
 
 -- -------- widgets ----------
 theme.widget_box_radius = dpi(12)
@@ -211,7 +216,7 @@ theme.toggle_button_active = theme.blue
 -- --------- music -----------
 theme.music = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "wallpapers/music.png")
 theme.playerctl_ignore = "firefox"
-theme.playerctl_player = {"music", "vlc", "%any"}
+theme.playerctl_player = {"music", "%any"}
 
 -- ------- date/time ---------
 theme.date_time_color = theme.blue
@@ -219,7 +224,7 @@ theme.date_time_color = theme.blue
 -- ------- calender ----------
 theme.cal_header_bg = theme.transparent
 theme.cal_week_bg = theme.transparent
-theme.cal_focus_bg = theme.accent_normal
+theme.cal_focus_bg = theme.bg3
 theme.cal_header_fg = theme.blue
 theme.cal_focus_fg = theme.blue
 theme.cal_week_fg = theme.fg1

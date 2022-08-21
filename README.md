@@ -5,66 +5,66 @@ Awesome wm dotfiles
 |------|------|
 |![](https://i.imgur.com/CjwqHwr.png)|![](https://i.imgur.com/KgH0D21.png)|
 
-## Archlinux
-
-### yay
+### **Aur(yay)**
 ```bash
 $ sudo pacman -S base-devel git
 $ git clone https://aur.archlinux.org/yay.git ~/Downloads/yay
 $ cd ~/Downloads/yay
 $ makepkg -sir
 ```
-### window manager
+### **Window Manager**
 ```bash
-$ yay -S awesome-git --removemake --noconfirm
+$ yay -S awesome-git --noconfirm
 ```
-### picom
+### **Picom Fork**
 ```bash
-$ git clone -b feat-animation-exclude https://github.com/yaocccc/picom.git ~/Downloads/picom
+$ git clone -b feat-animation-extra https://github.com/yaocccc/picom.git ~/Downloads/picom
 $ cd ~/Downloads/picom
-$ git submodule update --init --recursive
 $ meson --buildtype=release . build
 $ ninja -C build
 $ sudo ninja -C build install
 ```
-### Laptop
-```bash
-$ sudo pacman -S acpi acpid acpi_call brightnessctl upower
-```
-### Network
+### **Network**
 ```bash
 $ sudo pacman -S nm-connection-editor networkmanager network-manager-applet bluez-utils bluez blueman
 ```
-### Media
+### **Media**
 ```bash
 $ sudo pacman -S ffmpeg mpv mpd mpc python-mutagen ncmpcpp playerctl
 $ yay -S mpdris2 --noconfirm --removemake
 ```
-### packages
+### **Required**
 ```bash
-$ yay -S i3lock-color caffeine-ng lxappearance-gtk3 --noconfirm --removemake
-$ sudo pacman -S alacritty flameshot papirus-icon-theme redshift rofi nemo jq
-$ sudo pacman -S gnome-system-monitor xfce4-power-manager polkit-gnome gnome-keyring
+$ yay -S i3lock-color lxappearance-gtk3 xidlehook-git --noconfirm
+$ sudo pacman -S alacritty spectacle papirus-icon-theme redshift rofi jq
+$ sudo pacman -S gnome-system-monitor polkit-gnome gnome-keyring qt5ct kvantum
 ```
-### Pipewire
+### **Audio**
 ```bash
 $ sudo pacman -S pipewire pipewire-pulse pipewire-alsa pipewire-jack pipewire-zeroconf
 ```
-### Systemd
+### **Start Services**
 ```bash
 $ sudo systemctl enable mpd
 $ sudo systemctl enable --now bluetooth
 $ sudo systemctl enable --now NetworkManager
 ```
-### install config
+### **Installation**
 ```bash
 $ git clone --recurse-submodules https://github.com/sachnr/dotfiles.git ~/.config/awesome
 $ cd ~/.config/awesome
-$ git submodule update --remote --merge
+$ mkdir -p ~/.config/rofi ~/.local/share
 $ cp -r ~/.config/awesome/misc/fonts/ ~/.local/share/
-$ cp -r ~/.config/awesome/misc/themes/gtk/themes/ ~/.local/share/
-$ cp -r ~/.config/awesome/misc/themes/kde/color-schemes/ ~/.local/share/
+$ cp -r ~/.config/awesome/misc/rofi/ ~/.local/share/
 $ fc-cache -rv
 ```
+### **THEMES**
+|Theme|Gtk|Kvantum|
+|------|------|------|
+|**Nord:**|[link](https://www.gnome-look.org/p/1267246)|[link](https://www.gnome-look.org/p/1326272)|
+|**Gruvbox:**|[link](https://www.gnome-look.org/p/1681313/)|[link](https://store.kde.org/p/1866041)|
+
+
+
 
 

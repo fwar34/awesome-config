@@ -1,5 +1,5 @@
 local gears = require("gears")
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local icon_dir = gears.filesystem.get_configuration_dir() .. "icons/weather/"

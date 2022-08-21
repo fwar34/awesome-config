@@ -6,7 +6,7 @@
 
 --]]
 
-local helpers              = require("client.helpers")
+local helpers              = require("global.helpers")
 local wibox                = require("wibox")
 local gmatch, lines, floor = string.gmatch, io.lines, math.floor
 

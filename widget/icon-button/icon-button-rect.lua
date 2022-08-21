@@ -1,6 +1,6 @@
 local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 
 function build(imagebox, res)
   -- return wibox.container.margin(container, 6, 6, 6, 6)

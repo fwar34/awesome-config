@@ -3,11 +3,10 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
-local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. "configs/cache/"
+local widget_dir = os.getenv("HOME") .. "/.cache/awesome/"
 
 local stringtoboolean = { ["true"] = true, ["false"] = false }
 local headphone_state
@@ -26,6 +25,7 @@ local widget = wibox.widget {
 	bg = beautiful.toggle_button_inactive
 }
 helpers.add_hover_cursor(widget, "hand1")
+
 local update_widget = function()
 	if headphone_state then
 		widget.widget = mat_icon(icons.headphone, dpi(22))
@@ -44,7 +44,7 @@ local power_on_cmd = [[
 	naughty.notification({
 		app_name = 'Sound Manager',
 		title = 'System Notification',
-		message = 'Headphones Turned On',
+		message = 'Audio output set to Headphones',
 		icon = ']] .. icons.headphone .. [['
 	})
 	"
@@ -59,7 +59,7 @@ local power_off_cmd = [[
 	naughty.notification({
 		app_name = 'Sound Manager',
 		title = 'System Notification',
-		message = 'Speakers Turned On',
+		message = 'Audio output set to Speakers',
 		icon = ']] .. icons.volume .. [['
 	})
 	"

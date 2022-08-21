@@ -12,7 +12,7 @@ local icons = require("icons.flaticons")
 local cpu = require("panels.dashboard.cpu")
 local mem = require("panels.dashboard.mem")
 
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 
 -- ~~~~~~~~~~~~~~~~ setup ~~~~~~~~~~~~~~~~~~~
 
@@ -40,12 +40,12 @@ local disk_max_no = helpers.watch(disk_max, 1200)
 local disk_used_no = helpers.watch(disk_used, 1200)
 local disk_text = wibox.widget.textbox("/")
 local celcius = wibox.widget.textbox("°C")
-celcius.font = beautiful.monospace
+celcius.font =  "Roboto Mono Nerd Fonts Bold 9"
 local mymem =
     mem(
     {
         settings = function()
-            widget:set_markup('<span font="' .. beautiful.monospace .. '">' .. mem_now.used .. ' M</span>')
+            widget:set_markup('<span font="' .. "Roboto Mono Nerd Fonts Bold 9" .. '">' .. mem_now.used .. ' M</span>')
         end
     }
 )
@@ -53,7 +53,7 @@ local mycpu =
     cpu(
     {
         settings = function()
-            widget:set_markup('<span font="' .. beautiful.monospace .. '">' .. cpu_now.usage .. ' %</span>')
+            widget:set_markup('<span font="' .. "Roboto Mono Nerd Fonts Bold 9"  .. '">' .. cpu_now.usage .. ' %</span>')
         end
     }
 )

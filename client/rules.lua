@@ -49,7 +49,7 @@ function rules.create(clientkeys, clientbuttons)
                 buttons = clientbuttons,
                 size_hints_honor = false,
                 screen = awful.screen.preferred,
-                placement = awful.placement.no_overlap + awful.placement.no_offscreen + awful.placement.centered
+                placement = awful.placement.no_overlap + awful.placement.no_offscreen
             },
         },
         -- =========================================================
@@ -61,6 +61,7 @@ function rules.create(clientkeys, clientbuttons)
                 class = {
                     "Caffeine",
                     "Veracrypt",
+                    "blueman-manager",
                     "GtkFileChooserDialog",
                 },
                 name = {
@@ -82,7 +83,7 @@ function rules.create(clientkeys, clientbuttons)
                 floating = true,
                 skip_decoration = true,
                 above = true,
-                placement = awful.placement.no_offscreen + awful.placement.centered
+                placement = awful.placement.centered
             }
         },
         -- =========================================================
@@ -155,7 +156,6 @@ function rules.create(clientkeys, clientbuttons)
                 instance = {},
                 class = {
                     "Nautilus",
-                    "code-oss",
                     "Gedit",
                     "Eog"
                 },
@@ -205,7 +205,6 @@ function rules.create(clientkeys, clientbuttons)
                 }
             },
             properties = {
-                tag = "game",
                 screen = 1,
                 ontop = true,
                 placement = awful.placement.no_overlap + awful.placement.no_offscreen + awful.placement.centered
@@ -219,21 +218,18 @@ function rules.create(clientkeys, clientbuttons)
             id = "terminals",
             rule_any = {
                 class = {
-                    "URxvt",
-                    "XTerm",
-                    "UXTerm",
-                    "kitty",
-                    "K3rmit",
-                    "Terminator",
-                    "Alacritty",
-                    "Wezterm"
+                    "Music",
+                    "music",
                 }
             },
-            except_any = {
-                instance = {"QuakeTerminal"}
-            },
             properties = {
+                tag = "6",
+                maximized = false,
+                floating = true,
+                skip_decoration = true,
                 titlebars_enabled = false,
+                skip_taskbar = true,
+                placement = awful.placement.no_offscreen + awful.placement.centered
             }
         },
         -- =========================================================

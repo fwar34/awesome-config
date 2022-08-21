@@ -6,7 +6,7 @@
 
 --]]
 
-local helpers  = require("client.helpers")
+local helpers  = require("global.helpers")
 local wibox    = require("wibox")
 local math     = math
 local string   = string

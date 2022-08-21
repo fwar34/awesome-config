@@ -3,7 +3,7 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
 
@@ -11,7 +11,7 @@ local icons = require("icons.flaticons")
 
 local blue_light_state = false
 local bluelight = wibox.widget{
-    mat_icon(icons.reading, dpi(22)),
+    mat_icon(icons.sun, dpi(22)),
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, dpi(12))
     end,

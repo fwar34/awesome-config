@@ -12,7 +12,7 @@ local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local HOME_DIR = os.getenv("HOME")
 local WIDGET_DIR = HOME_DIR .. '/.config/awesome/widget/net-speed-widget/'
 local ICONS_DIR = WIDGET_DIR .. 'icons/'
@@ -74,7 +74,7 @@ local function worker(user_args)
             {
                 id = 'rx_speed',
                 widget = wibox.widget.textbox,
-                font = beautiful.monospace
+                font =  "Roboto Mono Nerd Fonts Bold 9"
             },
             forced_width = dpi(100),
             draw_empty = true,
@@ -91,7 +91,7 @@ local function worker(user_args)
                 widget = wibox.widget.imagebox
             },
             {
-                font = beautiful.monospace,
+                font =  "Roboto Mono Nerd Fonts Bold 9",
                 id = 'tx_speed',
                 widget = wibox.widget.textbox
             },

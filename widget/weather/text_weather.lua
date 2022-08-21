@@ -2,7 +2,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local weather_temperature_symbol
 if WEATHER.units == "metric" then
     weather_temperature_symbol = " °C"

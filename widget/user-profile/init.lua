@@ -3,7 +3,7 @@ local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local wibox = require("wibox")
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local gears = require("gears")
 local mat_icon_button_rect = require("widget.icon-button.icon-button-rect")
 local mat_icon = require("widget.icon-button.icon")
@@ -52,7 +52,7 @@ local function widget()
 		{
 			{
 				font = beautiful.icon_fonts .." 14",
-				markup = helpers.colorize_text("", beautiful.blue or beautiful.bg_normal),
+				markup = helpers.colorize_text("", beautiful.bg_normal),
 				align = "center",
 				valign = "center",
 				widget = wibox.widget.textbox
@@ -111,7 +111,7 @@ local function widget()
 		{
 			widget = wibox.widget.textbox,
 			markup = "N/A",
-			font = beautiful.monospace_bold,
+			font = beautiful.title_fonts,
 			valign = "center"
 		}
 	)
@@ -135,7 +135,7 @@ local function widget()
 		{
 			widget = wibox.widget.textbox,
 			markup = "0 minutes",
-			font = beautiful.monospace,
+			font =  "Roboto Mono Nerd Fonts Bold 9",
 			valign = "center"
 		}
 	)
@@ -165,10 +165,24 @@ local function widget()
 	local sleep = mat_icon_button_rect(mat_icon(icons.sleep, dpi(24)))
 	local restart = mat_icon_button_rect(mat_icon(icons.restart, dpi(24)))
 	local shut_down = mat_icon_button_rect(mat_icon(icons.power, dpi(24)))
+	local log_out = mat_icon_button_rect(mat_icon(icons.logout, dpi(24)))
 	helpers.bmaker(lock_screen, apps.lock)
 	helpers.bmaker(sleep, "systemctl suspend")
 	helpers.bmaker(restart, "reboot")
 	helpers.bmaker(shut_down, "poweroff")
+	log_out:buttons(
+        gears.table.join(
+            awful.button(
+                {},
+                1,
+                nil,
+                function()
+                    awful.util.spawn_with_shell("echo 'awesome.quit()' | awesome-client")
+                    awesome.emit_signal("dashboard::toggle", awful.screen.focused())
+                end
+            )
+        )
+    )
 	--init widget
 	local profile =
 		wibox.widget(
@@ -200,6 +214,7 @@ local function widget()
 				nil,
 				nil,
 				{
+					log_out,
 					lock_screen,
 					sleep,
 					restart,

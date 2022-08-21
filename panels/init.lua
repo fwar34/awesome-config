@@ -5,6 +5,7 @@
 local awful = require("awful")
 local top_panel = require("panels.top-panel")
 local dashboard = require("panels.dashboard")
+local roundcorners = require("client.round-corners")
 
 -- =========================================================
 -- =================== INITIALIZATION ======================
@@ -35,7 +36,6 @@ function updateBarsVisibility()
   end
 end
 
-
 _G.tag.connect_signal(
   "property::selected",
   function(t)
@@ -60,3 +60,5 @@ _G.client.connect_signal(
     end
   end
 )
+
+

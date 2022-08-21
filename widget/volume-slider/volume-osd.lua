@@ -36,8 +36,8 @@ local slider_osd = wibox.widget {
 		bar_shape = gears.shape.rounded_rect,
 		bar_height = dpi(2),
 		bar_color = '#ffffff20',
-		bar_active_color = beautiful.accent_normal_c .. "80",
-		handle_color = beautiful.accent_normal_c,
+		bar_active_color = beautiful.accent_normal .. "80",
+		handle_color = beautiful.accent_normal,
 		handle_shape = gears.shape.circle,
 		handle_width = dpi(15),
 		handle_border_color = '#00000012',
@@ -64,7 +64,7 @@ vol_osd_slider:connect_signal(
 			icon.image = icons.volume2
 		end
 
-		awful.spawn('pactl -- set-sink-volume 0 ' .. volume_level .. '%', false)
+		awful.spawn('pactl set-sink-volume 0 ' .. volume_level .. '%', false)
 
 		-- Update textbox widget text
 		osd_value.text = volume_level .. '%'

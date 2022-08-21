@@ -16,7 +16,7 @@ local mat_icon_button_rect = require("widget.icon-button.icon-button-rect")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
 
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 
 PANEL_VISIBLE = false
 
@@ -105,22 +105,29 @@ local places_widget =
 
 --importing stuff
 local calender = require("panels.dashboard.calender")
-local playerctl = require("widget.playerctl.music-player")
+local playerctl = require("widget.playerctl")
 local audio = require("panels.dashboard.set-audio-sink")
 local wifi = require ("panels.dashboard.wifi")
-local airplane = require("panels.dashboard.airplane_mode")
 local bluetooth = require("panels.dashboard.bluetooth")
-local microphone = require("panels.dashboard.microphone")
 local night_light = require("panels.dashboard.night_light")
 local user_profile = require("widget.user-profile")
-local search_box = require("panels.dashboard.search-box")
 local sysmon = require("panels.dashboard.system_monitor")
 local volume_bar = require("widget.volume-slider")
+local mic_bar = require("widget.microphone-slider")
 local brightness_bar = require("widget.brightness-slider")
+-- local airplane = require("")
+-- local microphone = require("")
+-- local search_box = require("")
 local settings_widget =
     wibox.widget {
     {
         volume_bar,
+        widget = wibox.container.margin,
+        forced_height = dpi(45),
+        layout = wibox.layout.fixed.horizontal
+    },
+    {
+        mic_bar,
         widget = wibox.container.margin,
         forced_height = dpi(45),
         layout = wibox.layout.fixed.horizontal
@@ -149,15 +156,13 @@ local toggle_buttons =
         widget = wibox.container.margin,
         layout = wibox.layout.fixed.horizontal
     },
-    {
-        helpers.horizontal_pad(dpi(24)),
-        airplane,
-        microphone,
-        widget = wibox.container.margin,
-        spacing = dpi(12),
-        forced_height = dpi(40),
-        layout = wibox.layout.fixed.horizontal
-    },
+    -- {
+    --     helpers.horizontal_pad(dpi(24)),
+    --     widget = wibox.container.margin,
+    --     spacing = dpi(12),
+    --     forced_height = dpi(40),
+    --     layout = wibox.layout.fixed.horizontal
+    -- },
     spacing = dpi(5),
     margins = dpi(12),
     widget = wibox.container.margin,
@@ -167,9 +172,9 @@ local toggle_buttons =
 -- placing them in boxes
 local apps_box = helpers.create_boxed_widget(apps_widget, dpi(270), dpi(40), beautiful.widget_bg_normal)
 local places_widget_box = helpers.create_boxed_widget(places_widget, dpi(270), dpi(120), beautiful.widget_bg_normal)
-local volume_box = helpers.create_boxed_widget(settings_widget, dpi(270), dpi(100), beautiful.widget_bg_normal)
+local volume_box = helpers.create_boxed_widget(settings_widget, dpi(270), dpi(150), beautiful.widget_bg_normal)
 local user_system_monitor = helpers.create_boxed_widget(sysmon, dpi(270), dpi(120), beautiful.widget_bg_normal)
-local toggle_apps = helpers.create_boxed_widget(toggle_buttons, dpi(270), dpi(120), beautiful.widget_bg_normal)
+local toggle_apps = helpers.create_boxed_widget(toggle_buttons, dpi(270), dpi(60), beautiful.widget_bg_normal)
 local calender_box = helpers.create_boxed_widget(calender, dpi(270), dpi(400), beautiful.widget_bg_normal)
 -- =========================================================
 -- ======================== PANEL ==========================

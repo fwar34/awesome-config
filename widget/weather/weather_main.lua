@@ -4,7 +4,7 @@
 --      description (string)
 --      icon_code (string)
 local awful = require("awful")
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 
 -- Configuration
 local key = WEATHER.key

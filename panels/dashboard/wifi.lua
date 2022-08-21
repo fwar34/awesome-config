@@ -3,7 +3,7 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
 

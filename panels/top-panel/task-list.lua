@@ -13,7 +13,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
 local gears = require("gears")
-local helpers = require("client.helpers")
+local helpers = require("global.helpers")
 local clickable_container = helpers.ccontainer
 local icons = require("icons.flaticons")
 
@@ -70,7 +70,7 @@ local function list_update(w, buttons, label, data, objects)
                         resize = true,
                         widget = wibox.widget.imagebox
                     },
-                    margins = dpi(4),
+                    margins = dpi(3),
                     widget = wibox.container.margin
                 },
                 widget = clickable_container
