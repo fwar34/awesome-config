@@ -26,7 +26,7 @@ local helpers = require("global.helpers")
 local color_scheme = {
     "nord", --1
     "gruvbox", --2
-    "aestheticnight", --3
+    "rxyhn", --3
 }
 local colors = color_scheme[3]
 

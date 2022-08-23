@@ -68,7 +68,7 @@ end
 local icon_colors = {
     nord = "#e5e9f0",
     gruvbox = "#EBDBB2",
-    aestheticnight = "#6791C9"
+    rxyhn = "#6791C9"
 }
 local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
@@ -80,7 +80,7 @@ awful.spawn.easy_async_with_shell(
         sed -e "s/]] ..
     icon_colors.gruvbox ..
     [[/]] ..
-    icon_colors.nord .. [[/g;s/]] .. icon_colors.aestheticnight .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
+    icon_colors.nord .. [[/g;s/]] .. icon_colors.rxyhn .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
         mv temp "$x"
         done
 
@@ -89,7 +89,7 @@ awful.spawn.easy_async_with_shell(
         sed -e "s/]] ..
     icon_colors.gruvbox ..
     [[/]] ..
-    icon_colors.nord .. [[/g;s/]] .. icon_colors.aestheticnight .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
+    icon_colors.nord .. [[/g;s/]] .. icon_colors.rxyhn .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
         mv temp "$x"
         done
     ]]
@@ -175,7 +175,6 @@ theme.dashboard_margin_color = theme.nord0
 
 -- ------ System Tray --------
 theme.systray_icon_spacing = dpi(8)
-theme.bg_systray = theme.bg_normal
 
 -- --------- Menu ------------
 theme.menu_font = "Roboto 9"
