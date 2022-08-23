@@ -16,8 +16,8 @@ local systray = wibox.widget.systray()
 systray:set_horizontal(true)
 systray:set_base_size(20)
 systray.forced_height = 20
-systray.opacity = 0
 systray.visible = false
+beautiful.bg_systray = beautiful.widget_bg_normal
 helpers.add_hover_cursor(systray, "hand1")
 
 local arrow_left = mat_icon(icons.left, dpi(18))
@@ -47,15 +47,20 @@ local toggle = function()
     update_widget()
 end
 
-
-
 widget:buttons(gears.table.join(awful.button({}, 1, nil, function()
 	toggle()
 end)))
 
+local tray = wibox.container.background(
+    systray,
+    beautiful.widget_bg_normal,
+    gears.shape.rect
+)
+tray.shape_border_width = dpi(1)
+tray.shape_border_color = beautiful.accent_normal .. "60"
 
 return wibox.widget({
     layout = wibox.layout.fixed.horizontal,
-    wibox.container.margin(widget, dpi(7), dpi(7), dpi(7), dpi(7)),
-    wibox.container.margin(systray, dpi(3), dpi(3), dpi(6), dpi(3)),
+    wibox.container.margin(widget, dpi(6), dpi(6), dpi(6), dpi(6)),
+    wibox.container.margin(tray, dpi(6), dpi(6), dpi(6), dpi(6)),
 })

@@ -137,7 +137,7 @@ local dashboard = wibox.container.background(
         layout = wibox.layout.fixed.horizontal,
     },
     beautiful.widget_bg_normal,
-    helpers.rrect(dpi(4))
+    helpers.rrect(dpi(6))
 )
 dashboard.shape_border_width = dpi(1)
 dashboard.shape_clip = true
@@ -154,7 +154,7 @@ dashboard:connect_signal(
 dashboard:connect_signal(
     "mouse::enter",
     function()
-        dashboard.shape_border_color = beautiful.accent_normal
+        dashboard.shape_border_color = beautiful.accent_normal .. "80"
     end
 )
 dashboard:connect_signal(
