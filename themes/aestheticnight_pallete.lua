@@ -117,7 +117,7 @@ awful.spawn.easy_async_with_shell(
 )
 
 -- ------- Wallpaper ---------
-theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/jellyfish.png"
+theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg"
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "nord"
