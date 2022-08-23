@@ -26,6 +26,7 @@ local TaskList = require("panels.top-panel.task-list")
 local TagList = require("panels.top-panel.tag-list")
 local mat_icon_button = require("widget.icon-button.icon-button")
 local mat_icon = require("widget.icon-button.icon")
+local mat_icon_button_rect = require("widget.icon-button.icon-button-rect")
 local icons = require("icons.flaticons")
 local helpers = require("global.helpers")
 local weather = require("widget.weather.text_weather")
@@ -46,15 +47,6 @@ wibox.widget.textclock(
     beautiful.date_time_color ..
     '">%a %b %d,</span><span font="' ..
     beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %H:%M</span>'
-)
-helpers.add_hover_cursor(textclock, "hand1")
-textclock:connect_signal(
-    "button::press",
-    function(_, _, _, button)
-        if button == 1 then
-            awesome.emit_signal("dashboard::toggle", awful.screen.focused())
-        end
-    end
 )
 local cw = wibox.container.margin(textclock, dpi(12), dpi(12), dpi(8), dpi(8))
 
@@ -130,6 +122,46 @@ end
 -- Systray
 local systray = require("panels.top-panel.systray")
 
+-- dashboard
+local vol_icon = helpers.imaker(icons.volume, dpi(20), dpi(20))
+local act_icon = helpers.imaker(icons.activity, dpi(18), dpi(18))
+local network_icon = helpers.imaker(icons.wifi, dpi(20), dpi(20))
+local dashboard = wibox.container.background(
+    wibox.container.margin {
+        helpers.horizontal_pad(dpi(10)),
+        network_icon,
+        vol_icon,
+        act_icon,
+        helpers.horizontal_pad(dpi(10)),
+        spacing = dpi(8),
+        layout = wibox.layout.fixed.horizontal,
+    },
+    beautiful.widget_bg_normal,
+    helpers.rrect(dpi(8))
+)
+helpers.add_hover_cursor(dashboard, "hand1")
+dashboard:connect_signal(
+    "button::press",
+    function(_, _, _, button)
+        if button == 1 then
+            awesome.emit_signal("dashboard::toggle", awful.screen.focused())
+        end
+    end
+)
+dashboard:connect_signal(
+    "mouse::enter",
+    function()
+        dashboard.bg = beautiful.mouse_enter .. "60"
+    end
+)
+dashboard:connect_signal(
+    "mouse::leave",
+    function()
+        dashboard.bg = beautiful.widget_bg_normal
+    end
+)
+local di = wibox.container.margin(dashboard, dpi(10), dpi(10), dpi(6), dpi(6))
+
 -- =========================================================
 -- ======================= TOP BAR =========================
 -- =========================================================
@@ -169,8 +201,9 @@ top_panel.create = function(s)
         wibox.container.margin(TagList(s), dpi(2), dpi(2), dpi(2), dpi(2)),
         {
             layout = wibox.layout.fixed.horizontal,
-            weather,
+            -- weather,
             systray,
+            di,
             cw,
             wibox.container.margin(LayoutBox(s), dpi(4), dpi(4), dpi(7), dpi(7)),
         }
