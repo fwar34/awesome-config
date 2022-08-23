@@ -124,7 +124,7 @@ local systray = require("panels.top-panel.systray")
 
 -- dashboard
 local vol_icon = helpers.imaker(icons.volume, dpi(20), dpi(20))
-local act_icon = helpers.imaker(icons.activity, dpi(18), dpi(18))
+local act_icon = helpers.imaker(icons.activity, dpi(20), dpi(20))
 local network_icon = helpers.imaker(icons.wifi, dpi(20), dpi(20))
 local dashboard = wibox.container.background(
     wibox.container.margin {
@@ -139,6 +139,9 @@ local dashboard = wibox.container.background(
     beautiful.widget_bg_normal,
     helpers.rrect(dpi(4))
 )
+dashboard.shape_border_width = dpi(1)
+dashboard.shape_clip = true
+dashboard.shape_border_color = beautiful.accent_normal .. "60"
 helpers.add_hover_cursor(dashboard, "hand1")
 dashboard:connect_signal(
     "button::press",
@@ -151,13 +154,13 @@ dashboard:connect_signal(
 dashboard:connect_signal(
     "mouse::enter",
     function()
-        dashboard.bg = beautiful.mouse_enter .. "60"
+        dashboard.shape_border_color = beautiful.accent_normal
     end
 )
 dashboard:connect_signal(
     "mouse::leave",
     function()
-        dashboard.bg = beautiful.widget_bg_normal
+        dashboard.shape_border_color = beautiful.accent_normal .. "60"
     end
 )
 local di = wibox.container.margin(dashboard, dpi(0), dpi(0), dpi(6), dpi(6))
