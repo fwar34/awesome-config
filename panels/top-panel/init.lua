@@ -137,7 +137,7 @@ local dashboard = wibox.container.background(
         layout = wibox.layout.fixed.horizontal,
     },
     beautiful.widget_bg_normal,
-    helpers.rrect(dpi(8))
+    helpers.rrect(dpi(4))
 )
 helpers.add_hover_cursor(dashboard, "hand1")
 dashboard:connect_signal(
@@ -160,7 +160,7 @@ dashboard:connect_signal(
         dashboard.bg = beautiful.widget_bg_normal
     end
 )
-local di = wibox.container.margin(dashboard, dpi(10), dpi(10), dpi(6), dpi(6))
+local di = wibox.container.margin(dashboard, dpi(0), dpi(0), dpi(6), dpi(6))
 
 -- =========================================================
 -- ======================= TOP BAR =========================
