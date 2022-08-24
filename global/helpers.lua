@@ -51,7 +51,7 @@ helpers.ccontainer = function(widget)
     container:connect_signal(
         "button::release",
         function()
-            container.bg = beautiful.mouse_release  .. "60"
+            container.bg = beautiful.transparent
         end
     )
     return container
