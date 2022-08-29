@@ -139,7 +139,7 @@ local dashboard = wibox.container.background(
     beautiful.widget_bg_normal,
     helpers.rrect(dpi(6))
 )
-dashboard.shape_border_width = dpi(1)
+dashboard.shape_border_width = dpi(2)
 dashboard.shape_clip = true
 dashboard.shape_border_color = beautiful.accent_normal .. "60"
 helpers.add_hover_cursor(dashboard, "hand1")
@@ -211,6 +211,13 @@ top_panel.create = function(s)
             wibox.container.margin(LayoutBox(s), dpi(4), dpi(4), dpi(7), dpi(7)),
         }
     }
+
+    awesome.connect_signal("panel::toggle", function(scr)
+        if scr == s then
+            s.panel.visible = not s.panel.visible
+        end
+    end)
+
     return panel
 end
 return top_panel
