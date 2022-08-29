@@ -45,6 +45,9 @@ local update_slider = function()
 		function(stdout)
 			local volume = string.match(stdout, "(%d?%d?%d)%%")
 			mic_slider:set_value(tonumber(volume))
+			if mic_slider == 0 then
+				icon.image = icons.mic_mute
+			end
 		end
 	)
 end

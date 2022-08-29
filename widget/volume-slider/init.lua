@@ -45,12 +45,15 @@ local update_slider = function()
 		function(stdout)
 			local volume = string.match(stdout, "(%d?%d)%%")
 			volume_slider:set_value(tonumber(volume))
+			if volume_slider == 0 then
+				icon.image = icons.volumex
+			end
 		end
 	)
 end
 
 -- Update on startup
-volume_slider:set_value(tonumber(helpers.first_line(widget_dir .. "sli_value")))
+update_slider()
 
 local action_level =
 wibox.widget {
