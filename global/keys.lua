@@ -319,6 +319,15 @@ gears.table.join(
         end,
         { description = "Hotkeys", group = "awesome" }
     ),
+    -- panel toggle
+    awful.key(
+        { modkey },
+        "p",
+        function()
+            awesome.emit_signal("panel::toggle", awful.screen.focused())
+        end,
+        { description = "Toggle wibar", group = "awesome" }
+    ),
     -- task manager
     awful.key(
         { "Control", altkey },
@@ -753,6 +762,7 @@ for i = 1, 9 do
                     local tag = client.focus.screen.tags[i]
                     if tag then
                         client.focus:move_to_tag(tag)
+                        tag:view_only()
                     end
                 end
             end,
@@ -769,7 +779,7 @@ for i = 1, 9 do
                     awful.tag.viewtoggle(tag)
                 end
             end,
-            descr_toggle
+            { description = "view more than one tags #" .. i, group = "tag" }
         )
     )
 end
