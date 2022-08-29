@@ -12,7 +12,7 @@ configuration {
 
 /* Nord Dark */
 * {
-    BG:                             #2e344099;
+    BG:                             #2e344021;
     BGA:                            #4c566a;
     FG:                             #eceff4ff;
     UGT:                            #81a1c1ff;
