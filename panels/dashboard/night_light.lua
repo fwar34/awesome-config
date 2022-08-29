@@ -53,7 +53,7 @@ local toggle_action = function()
 			redshift -x && pkill redshift && killall redshift
 			echo 'OFF'
 		else
-			redshift -l 0:0 -t 4500:4500 -r &>/dev/null &
+			redshift -l 28.38:77.12 -t 5500:4200 -r &>/dev/null &
 			echo 'ON'
 		fi
 		]],
@@ -67,6 +67,11 @@ local toggle_action = function()
         end
     )
 end
+
+local startup = function ()
+    toggle_action()
+end
+startup()
 
 bluelight:buttons(
     gears.table.join(
