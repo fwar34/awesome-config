@@ -96,7 +96,15 @@ awful.spawn.easy_async_with_shell(
 )
 
 -- ------- Wallpaper ---------
-theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/Nord.png"
+local directory = gfs.get_configuration_dir() .. "wallpapers/"
+local wallpapers = {
+    "Nord.png", -- 1
+    "Nord-underwater.png",
+    "jellyfish.png",
+    "nordic-wallpaper.jpg",
+    "nord-arch.png" --5
+}
+theme.wallpaper = directory .. wallpapers[5]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "nord"
@@ -188,7 +196,7 @@ theme.menu_fg_normal = theme.nord6
 theme.menu_bg_normal = theme.nord1
 
 -- ------- TaskList ----------
-theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 9"
+theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 10"
 theme.tasklist_bg_normal = theme.nord1
 theme.tasklist_bg_focus = theme.nord9 .. "4f"
 theme.tasklist_bg_urgent = theme.nord15
@@ -268,8 +276,10 @@ theme.flash_focus_step = 0.01 -- the step of animation
 local themes_path = "/usr/share/awesome/themes/"
 theme.icon_color = icon_colors.nord
 -- layout icons
-theme.layout_tile = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg", theme.icon_color)
-theme.layout_floating = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg", theme.icon_color)
+theme.layout_tile = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg",
+    theme.icon_color)
+theme.layout_floating = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg",
+    theme.icon_color)
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
 theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
 

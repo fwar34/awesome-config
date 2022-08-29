@@ -63,20 +63,35 @@ awful.spawn.easy_async_with_shell(
     [[        
         for x in ]] .. icon_location1 .. [[*
         do
-        sed -e "s/]] .. icon_colors.rxyhn .. [[/]] .. icon_colors.gruvbox .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.gruvbox .. [[/g" $x > temp
+        sed -e "s/]] ..
+    icon_colors.rxyhn ..
+    [[/]] .. icon_colors.gruvbox .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.gruvbox .. [[/g" $x > temp
         mv temp "$x"
         done
 
         for x in ]] .. icon_location2 .. [[*
         do
-        sed -e "s/]] .. icon_colors.rxyhn .. [[/]] .. icon_colors.gruvbox .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.gruvbox .. [[/g" $x > temp
+        sed -e "s/]] ..
+    icon_colors.rxyhn ..
+    [[/]] .. icon_colors.gruvbox .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.gruvbox .. [[/g" $x > temp
         mv temp "$x"
         done
     ]]
 )
 
 -- ------- Wallpaper ---------
-theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/gruvbox/gruvbox01.png"
+local directory = gfs.get_configuration_dir() .. "wallpapers/gruvbox/"
+local wallpapers = {
+    "gruvbox00.png", -- 1
+    "gruvbox01.png",
+    "gruvbox02.png",
+    "gruvbox03.jpg",
+    "gruvbox04.png",
+    "gruvbox05.png",
+    "gruvbox06.png",
+    "stay-aenami.png" -- 8
+}
+theme.wallpaper = directory .. wallpapers[2]
 
 theme.rofi_plus_sign = "gruvbox"
 
@@ -167,7 +182,7 @@ theme.menu_fg_normal = theme.fg1
 theme.menu_bg_normal = theme.bg2
 
 -- ------- TaskList ----------
-theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 9"
+theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 10"
 theme.tasklist_bg_normal = theme.bg0_s .. "4f"
 theme.tasklist_bg_focus = theme.bg0_s
 theme.tasklist_bg_urgent = theme.red
@@ -215,7 +230,7 @@ theme.toggle_button_active = theme.blue
 -- --------- music -----------
 theme.music = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "wallpapers/music.png")
 theme.playerctl_ignore = "firefox"
-theme.playerctl_player = {"music", "%any"}
+theme.playerctl_player = { "music", "%any" }
 
 -- ------- date/time ---------
 theme.date_time_color = theme.blue
@@ -247,9 +262,9 @@ theme.flash_focus_step = 0.01 -- the step of animation
 theme.icon_color = theme.fg1
 -- layout icons
 theme.layout_tile =
-    gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg", theme.icon_color)
+gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg", theme.icon_color)
 theme.layout_floating =
-    gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg", theme.icon_color)
+gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg", theme.icon_color)
 local themes_path = "/usr/share/awesome/themes/"
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
 theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)

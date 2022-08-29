@@ -75,17 +75,17 @@ theme.xcolor15 = "#E5E5E5"
 -- =========================================================
 
 function theme.random_accent_color()
-	local accents = {
-		theme.xcolor9,
-		theme.xcolor10,
-		theme.xcolor11,
-		theme.xcolor12,
-		theme.xcolor13,
-		theme.xcolor14,
-	}
+    local accents = {
+        theme.xcolor9,
+        theme.xcolor10,
+        theme.xcolor11,
+        theme.xcolor12,
+        theme.xcolor13,
+        theme.xcolor14,
+    }
 
-	local i = math.random(1, #accents)
-	return accents[i]
+    local i = math.random(1, #accents)
+    return accents[i]
 end
 
 -- =========================================================
@@ -104,20 +104,31 @@ awful.spawn.easy_async_with_shell(
     [[        
         for x in ]] .. icon_location1 .. [[*
         do
-        sed -e "s/]] .. icon_colors.gruvbox .. [[/]] .. icon_colors.rxyhn .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.rxyhn .. [[/g" $x > temp
+        sed -e "s/]] ..
+    icon_colors.gruvbox ..
+    [[/]] .. icon_colors.rxyhn .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.rxyhn .. [[/g" $x > temp
         mv temp "$x"
         done
 
         for x in ]] .. icon_location2 .. [[*
         do
-        sed -e "s/]] .. icon_colors.gruvbox .. [[/]] .. icon_colors.rxyhn .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.rxyhn .. [[/g" $x > temp
+        sed -e "s/]] ..
+    icon_colors.gruvbox ..
+    [[/]] .. icon_colors.rxyhn .. [[/g;s/]] .. icon_colors.nord .. [[/]] .. icon_colors.rxyhn .. [[/g" $x > temp
         mv temp "$x"
         done
     ]]
 )
 
 -- ------- Wallpaper ---------
-theme.wallpaper = gfs.get_configuration_dir() .. "wallpapers/mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg"
+local directory = gfs.get_configuration_dir() .. "wallpapers/"
+local wallpapers = {
+    "garden-house.png",
+    "wallpaper-dimmed.jpg",
+    "wp8148965-minimalist-landscape-wallpapers.jpg",
+    "mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg"
+}
+theme.wallpaper = directory .. wallpapers[2]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "nord"
@@ -129,7 +140,7 @@ theme.pfp = gears.surface.load_uncached(gears.filesystem.get_configuration_dir()
 theme.wibar_height = dpi(36)
 
 -- --------- gaps ------------
-theme.useless_gap = dpi(4)
+theme.useless_gap = dpi(8)
 theme.gap_single_client = true
 
 -- --------- Fonts -----------
@@ -208,7 +219,7 @@ theme.menu_fg_normal = theme.xcolor15
 theme.menu_bg_normal = theme.xcolor0
 
 -- ------- TaskList ----------
-theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 9"
+theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 10"
 theme.tasklist_bg_normal = theme.xcolor0
 theme.tasklist_bg_focus = theme.xcolor8 .. "4f"
 theme.tasklist_bg_urgent = theme.xcolor0
@@ -220,18 +231,18 @@ theme.tasklist_plain_task_name = true
 theme.tasklist_shape = helpers.rect(dpi(4))
 
 -- -------- Taglist ----------
-theme.taglist_bg_empty = theme.bg_normal
+theme.taglist_bg_empty    = theme.bg_normal
 theme.taglist_bg_occupied = theme.bg_normal
-theme.taglist_bg_urgent = theme.bg_normal
-theme.taglist_bg_focus = theme.bg_normal
-theme.taglist_font = theme.title_fonts
-theme.taglist_spacing = 2
+theme.taglist_bg_urgent   = theme.bg_normal
+theme.taglist_bg_focus    = theme.bg_normal
+theme.taglist_font        = theme.title_fonts
+theme.taglist_spacing     = 2
 theme.taglist_fg_focus    = theme.xcolor15
 theme.taglist_fg_occupied = theme.xcolor4
 theme.taglist_fg_urgent   = theme.xcolor9
 theme.taglist_fg_empty    = theme.xcolor8
-theme.taglist_bg_focus = theme.xcolor8
-theme.taglist_shape = helpers.rrect(dpi(6))
+theme.taglist_bg_focus    = theme.xcolor8
+theme.taglist_shape       = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
 theme.tag_preview_widget_border_radius = dpi(0) -- Border radius of the widget (With AA)
@@ -256,7 +267,7 @@ theme.toggle_button_active = theme.xcolor4 .. "60"
 -- --------- music -----------
 theme.music = gears.surface.load_uncached(gears.filesystem.get_configuration_dir() .. "wallpapers/music.png")
 theme.playerctl_ignore = "firefox"
-theme.playerctl_player = {"music", "%any"}
+theme.playerctl_player = { "music", "%any" }
 
 -- ------- date/time ---------
 theme.date_time_color = theme.xcolor4
