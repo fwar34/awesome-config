@@ -89,7 +89,8 @@ local wallpapers = {
     "gruvbox04.png",
     "gruvbox05.png",
     "gruvbox06.png",
-    "stay-aenami.png" -- 8
+    "sushi.jpg", -- 8
+    "chinese-hills.jpg" -- 9
 }
 theme.wallpaper = directory .. wallpapers[2]
 
