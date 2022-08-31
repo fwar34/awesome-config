@@ -60,7 +60,6 @@ $ sudo systemctl enable --now NetworkManager
 ### **Installation**
 ```bash
 $ git clone --recurse-submodules https://github.com/sachnr/dotfiles.git ~/.config/awesome
-$ cd ~/.config/awesome
 $ mkdir -p ~/.config/rofi ~/.local/share
 $ cp -r ~/.config/awesome/misc/fonts/ ~/.local/share/
 $ cp -r ~/.config/awesome/misc/rofi/ ~/.local/share/
