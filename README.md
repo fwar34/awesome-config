@@ -36,8 +36,16 @@ $ yay -S mpdris2 --noconfirm --removemake
 ### **Required**
 ```bash
 $ yay -S i3lock-color lxappearance-gtk3 xidlehook-git --noconfirm
-$ sudo pacman -S alacritty spectacle papirus-icon-theme redshift rofi jq
+$ sudo pacman -S alacritty flameshot papirus-icon-theme redshift rofi jq
 $ sudo pacman -S gnome-system-monitor polkit-gnome gnome-keyring qt5ct kvantum
+```
+### **File Manager**
+```
+# pacman -S dolphin dolphin-plugins
+```
+packages for generating thumbnails
+```
+# pacman -S kdegraphics-thumbnailers kimageformats qt5-imageformats kdesdk-thumbnailers ffmpegthumbs taglib
 ```
 ### **Audio**
 ```bash
