@@ -140,7 +140,7 @@ theme.pfp = gears.surface.load_uncached(gears.filesystem.get_configuration_dir()
 theme.wibar_height = dpi(36)
 
 -- --------- gaps ------------
-theme.useless_gap = dpi(8)
+theme.useless_gap = dpi(4)
 theme.gap_single_client = true
 
 -- --------- Fonts -----------
@@ -158,14 +158,14 @@ theme.mouse_release = theme.xcolor14
 theme.accent_normal = theme.xcolor4
 
 -- -------- accent titlebar -----------
-theme.accent_normal_c = theme.xcolor9
-theme.accent_normal_max = theme.xcolor8
-theme.accent_normal_min = theme.xcolor8
-theme.accent_normal_float = theme.xcolor8
+theme.accent_normal_c = theme.xcolor1
+theme.accent_normal_max = theme.xcolor3
+theme.accent_normal_min = theme.xcolor2
+theme.accent_normal_float = theme.xcolor5
 theme.close_icon = icons.close
-theme.maximize_icon = icons.maximize
-theme.minimize_icon = icons.minus
-theme.float_icon = icons.plus
+theme.maximize_icon = ""
+theme.minimize_icon = "" 
+theme.float_icon = "" 
 
 -- ------ foreground ---------
 theme.fg_normal = theme.xcolor15
