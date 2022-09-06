@@ -61,6 +61,7 @@ $ sudo systemctl enable --now NetworkManager
 ```bash
 $ git clone --recurse-submodules https://github.com/sachnr/dotfiles.git ~/.config/awesome
 $ mkdir -p ~/.config/rofi ~/.local/share
+$ cp -r ~/.config/awesome/misc/alacritty/ ~/.config/
 $ cp -r ~/.config/awesome/misc/fonts/ ~/.local/share/
 $ cp -r ~/.config/awesome/misc/rofi/ ~/.local/share/
 $ fc-cache -rv
@@ -69,7 +70,7 @@ $ fc-cache -rv
 |Theme|Gtk|Kvantum|
 |------|------|------|
 |**Nord:**|[link](https://www.gnome-look.org/p/1267246)|[link](https://www.gnome-look.org/p/1326272)|
-|**Gruvbox:**|[link](https://www.gnome-look.org/p/1681313/)|[link](https://store.kde.org/p/1866041)|
+|**Gruvbox:**|[link](https://www.gnome-look.org/p/1681313/)|[link](https://github.com/sachnr/Gruvbox-Kvantum)|
 
 
 
