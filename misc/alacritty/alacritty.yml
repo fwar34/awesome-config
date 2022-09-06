@@ -1,0 +1,118 @@
+window:
+  opacity: 1
+scrolling:
+  # How many lines of scrollback to keep,
+  history: 10000
+  # Number of lines the viewport will move for every line
+  # scrolled when scrollback is enabled (history > 0).
+  multiplier: 3
+  # The `faux_multiplier` setting controls the number
+  # of lines the terminal should scroll when the alternate
+  # screen buffer is active. This is used to allow mouse
+  # scrolling for applications like `man`.
+  faux_multiplier: 3
+  auto_scroll: false
+font:
+  size: 11
+
+key_bindings:
+  - { key: PageUp, mods: Control, action: ScrollPageUp }
+  - { key: PageDown, mods: Control, action: ScrollPageDown }
+  - { key: End, mods: Control, action: ScrollToBottom }
+  - { key: Home, mods: Control, action: ScrollToTop }
+
+cursor:
+  style:
+    shape: Block
+    blinking: on
+    blink-interval: 750
+    unfocused_hollow: true
+
+# Colors
+ryxhn: &ryxhn
+# Default colors
+  primary:
+    background: "0x0c0e0f"
+    foreground: "0xedeff0"
+
+  # Normal colors
+  normal:
+    black: "0x232526"
+    red: "0xdf5b61"
+    green: "0x78b892"
+    yellow: "0xde8f78"
+    blue: "0x6791c9"
+    magenta: "0xbc83e3"
+    cyan: "0x67afc1"
+    white: "0xe4e6e7"
+
+  # Bright colors
+  bright:
+    black: "0x2c2e2f"
+    red: "0xe8646a"
+    green: "0x81c19b"
+    yellow: "0xe79881"
+    blue: "0x709ad2"
+    magenta: "0xc58cec"
+    cyan: "0x70b8ca"
+    white: "0xf2f4f5"
+
+# Colors (Gruvbox dark)
+gruvbox: &gruvbox
+# Default colors
+  primary:
+    background: "0x282828"
+    foreground: "0xebdbb2"
+
+  # Normal colors
+  normal:
+    black: "0x282828"
+    red: "0xcc241d"
+    green: "0x98971a"
+    yellow: "0xd79921"
+    blue: "0x458588"
+    magenta: "0xb16286"
+    cyan: "0x689d6a"
+    white: "0xa89984"
+
+  # Bright colors
+  bright:
+    black: "0x928374"
+    red: "0xfb4934"
+    green: "0xb8bb26"
+    yellow: "0xfabd2f"
+    blue: "0x83a598"
+    magenta: "0xd3869b"
+    cyan: "0x8ec07c"
+    white: "0xebdbb2"
+
+# Colors (Nord)
+nord: &nord
+# Default colors
+  primary:
+    background: "0x2E3440"
+    foreground: "0xD8DEE9"
+
+  # Normal colors
+  normal:
+    black: "0x3B4252"
+    red: "0xBF616A"
+    green: "0xA3BE8C"
+    yellow: "0xEBCB8B"
+    blue: "0x81A1C1"
+    magenta: "0xB48EAD"
+    cyan: "0x88C0D0"
+    white: "0xE5E9F0"
+
+  # Bright colors
+  bright:
+    black: "0x4C566A"
+    red: "0xBF616A"
+    green: "0xA3BE8C"
+    yellow: "0xEBCB8B"
+    blue: "0x81A1C1"
+    magenta: "0xB48EAD"
+    cyan: "0x8FBCBB"
+    white: "0xECEFF4"
+
+colors: *ryxhn
