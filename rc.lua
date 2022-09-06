@@ -116,7 +116,7 @@ awful.layout.layouts = {
 -- =========================================================
 
 -- ----- Import theme --------
-beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. colors .. "_pallete.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. colors .. ".lua")
 
 -- ----- modules -------
 require("global.bling")

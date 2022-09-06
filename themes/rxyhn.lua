@@ -240,14 +240,13 @@ theme.tasklist_shape = helpers.rect(dpi(4))
 theme.taglist_bg_empty    = theme.bg_normal
 theme.taglist_bg_occupied = theme.bg_normal
 theme.taglist_bg_urgent   = theme.bg_normal
-theme.taglist_bg_focus    = theme.bg_normal
+theme.taglist_bg_focus    = theme.xcolor4
 theme.taglist_font        = theme.title_fonts
 theme.taglist_spacing     = 2
 theme.taglist_fg_focus    = theme.xcolor15
 theme.taglist_fg_occupied = theme.xcolor4
 theme.taglist_fg_urgent   = theme.xcolor9
 theme.taglist_fg_empty    = theme.xcolor8
-theme.taglist_bg_focus    = theme.xcolor8
 theme.taglist_shape       = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
