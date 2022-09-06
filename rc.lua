@@ -28,7 +28,7 @@ local color_scheme = {
     "gruvbox", --2
     "rxyhn", --3
 }
-local colors = color_scheme[3]
+local colors = color_scheme[1]
 
 --Rofi Launcher
 awful.spawn.easy_async_with_shell([[echo '@theme "rofi-]] ..

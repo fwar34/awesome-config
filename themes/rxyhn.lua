@@ -168,7 +168,7 @@ theme.accent_normal_c = theme.xcolor1
 theme.accent_normal_max = theme.xcolor3
 theme.accent_normal_min = theme.xcolor2
 theme.accent_normal_float = theme.xcolor5
-theme.close_icon = icons.close
+theme.close_icon = ""
 theme.maximize_icon = ""
 theme.minimize_icon = "" 
 theme.float_icon = "" 
@@ -184,11 +184,11 @@ theme.bg_critical = theme.xcolor9
 
 -- -------- client -----------
 theme.titlebars_enabled = true
-theme.titlebar_buttonsize_alt = dpi(18)
-theme.titlebar_buttonsize = dpi(20)
+theme.titlebar_buttonsize_alt = dpi(16)
+theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.xbackground
-theme.border_width = dpi(1)
+theme.border_width = dpi(2)
 theme.border_accent = theme.xcolor4
 -- round corners
 theme.corner_radius = dpi(8)

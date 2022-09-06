@@ -154,7 +154,7 @@ theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bg0_h
 theme.border_width = dpi(2)
-theme.border_accent = theme.bg1
+theme.border_accent = theme.blue
 -- round corners
 theme.corner_radius = dpi(8)
 

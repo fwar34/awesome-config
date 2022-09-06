@@ -166,7 +166,7 @@ theme.titlebar_buttonsize_alt = dpi(18)
 theme.titlebar_buttonsize = dpi(20)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.nord0
-theme.border_width = dpi(1)
+theme.border_width = dpi(2)
 theme.border_accent = theme.nord10
 -- round corners
 theme.corner_radius = dpi(8)
