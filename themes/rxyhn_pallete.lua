@@ -120,6 +120,12 @@ awful.spawn.easy_async_with_shell(
     ]]
 )
 
+-- changing alacritty theme
+local alacrittycfg  = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
+awful.spawn.easy_async_with_shell([[
+    sed -i 's/*nord/*ryxhn/;s/*gruvbox/*ryxhn/' ]] .. alacrittycfg .. [[
+]])
+
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
 local wallpapers = {

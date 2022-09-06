@@ -73,6 +73,7 @@ local icon_colors = {
 local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
 
+-- changing colors of svgs
 awful.spawn.easy_async_with_shell(
     [[        
         for x in ]] .. icon_location1 .. [[*
@@ -94,6 +95,12 @@ awful.spawn.easy_async_with_shell(
         done
     ]]
 )
+
+-- changing alacritty theme
+local alacrittycfg  = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
+awful.spawn.easy_async_with_shell([[
+    sed -i 's/*ryxhn/*nord/;s/*gruvbox/*nord/' ]] .. alacrittycfg .. [[
+]])
 
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"

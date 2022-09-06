@@ -59,6 +59,7 @@ local icon_colors = {
 local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
 
+-- changing colors of svgs
 awful.spawn.easy_async_with_shell(
     [[        
         for x in ]] .. icon_location1 .. [[*
@@ -79,6 +80,12 @@ awful.spawn.easy_async_with_shell(
     ]]
 )
 
+-- changing alacritty theme
+local alacrittycfg  = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
+awful.spawn.easy_async_with_shell([[
+    sed -i 's/*ryxhn/*gruvbox/;s/*nord/*gruvbox/' ]] .. alacrittycfg .. [[
+]])
+
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/gruvbox/"
 local wallpapers = {
@@ -92,7 +99,7 @@ local wallpapers = {
     "sushi.jpg", -- 8
     "chinese-hills.jpg" -- 9
 }
-theme.wallpaper = directory .. wallpapers[2]
+theme.wallpaper = directory .. wallpapers[9]
 
 theme.rofi_plus_sign = "gruvbox"
 
@@ -107,9 +114,9 @@ theme.useless_gap = dpi(4)
 theme.gap_single_client = true
 
 -- --------- Fonts -----------
-theme.title_fonts = "Inter Bold 11"
-theme.normal_fonts = "Inter 11"
-theme.date_time_font = "Jetbrains Mono Bold 10"
+theme.title_fonts = "Roboto Bold 11"
+theme.normal_fonts = "Roboto 11"
+theme.date_time_font = "Roboto Bold 11"
 theme.icon_fonts = "Material Icons Round"
 
 -- -- clickable container ----
