@@ -23,20 +23,16 @@ local helpers = require("global.helpers")
 -- =========================================================
 
 -- color scheme
-local color_scheme = {
-    "nord", --1
-    "gruvbox", --2
-    "rxyhn", --3
-}
-local colors = color_scheme[1]
+
+local colors = "gruvbox"
 
 --Rofi Launcher
-awful.spawn.easy_async_with_shell([[echo '@theme "rofi-]] ..
+awful.spawn.with_shell([[echo '@theme "rofi-]] ..
     colors .. [["' > ]] .. os.getenv("HOME") .. [[/.config/rofi/config.rasi]])
 local rofi_command = "rofi -show drun"
 
 -- Set lock theme
-awful.spawn.easy_async_with_shell([[cat ~/.config/awesome/configs/lock-]] ..
+awful.spawn.with_shell([[cat ~/.config/awesome/configs/lock-]] ..
     colors .. [[ > ]] .. gears.filesystem.get_configuration_dir() .. [[configs/lock]])
 
 -- Default apps global variable
@@ -87,8 +83,9 @@ helpers.run_once_ps(
 helpers.run_once_pgrep("blueman-applet")
 helpers.run_once_pgrep("nm-applet --indicator")
 helpers.run_once_pgrep(gears.filesystem.get_configuration_dir() .. "configs/nvidia-startup")
--- 
-awful.spawn.easy_async_with_shell([[echo "  & sleep 5 && xset dpms force off" >> ]] .. gears.filesystem.get_configuration_dir() .. [[configs/lock]])
+--
+awful.spawn.easy_async_with_shell([[echo "  & sleep 5 && xset dpms force off" >> ]] ..
+    gears.filesystem.get_configuration_dir() .. [[configs/lock]])
 helpers.check_if_running(
     "xidlehook",
     nil,
@@ -136,6 +133,9 @@ require("client.titlebar")
 
 -- - Import notifications ----
 require("global.notification")
+
+-- import menu
+require("global.menu")
 
 -- Import Keybinds
 local keys = require("global.keys")

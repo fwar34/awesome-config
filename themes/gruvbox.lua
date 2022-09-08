@@ -60,7 +60,7 @@ local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
 
 -- changing colors of svgs
-awful.spawn.easy_async_with_shell(
+awful.spawn.with_shell(
     [[        
         for x in ]] .. icon_location1 .. [[*
         do
@@ -82,7 +82,7 @@ awful.spawn.easy_async_with_shell(
 
 -- changing alacritty theme
 local alacrittycfg  = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
-awful.spawn.easy_async_with_shell([[
+awful.spawn.with_shell([[
     sed -i 's/*ryxhn/*gruvbox/;s/*nord/*gruvbox/' ]] .. alacrittycfg .. [[
 ]])
 
@@ -179,12 +179,12 @@ theme.dashboard_margin_color = theme.bg1
 theme.systray_icon_spacing = dpi(8)
 
 -- --------- Menu ------------
-theme.menu_font = "Roboto 9"
+theme.menu_font = "Roboto 10"
 theme.menu_height = dpi(24)
-theme.menu_width = dpi(120)
+theme.menu_width = dpi(160)
 theme.menu_border_color = theme.bg1
 theme.menu_border_width = dpi(2)
-theme.menu_fg_focus = theme.fg0
+theme.menu_fg_focus = theme.accent_normal
 theme.menu_bg_focus = theme.bg0
 theme.menu_fg_normal = theme.fg1
 theme.menu_bg_normal = theme.bg2

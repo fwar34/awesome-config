@@ -112,11 +112,20 @@ gears.table.join(
         {},
         1,
         function()
+            awesome.emit_signal("menu::hide", awful.screen.focused())
             awesome.emit_signal("dashboard::close", awful.screen.focused())
         end
     ),
-    awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize),
+    awful.button(
+        { modkey },
+        1,
+        awful.mouse.client.move
+    ),
+    awful.button(
+        { modkey },
+        3,
+        awful.mouse.client.resize
+    ),
     awful.button(
         { modkey },
         4,
@@ -247,6 +256,7 @@ gears.table.join(
         1,
         function()
             naughty.destroy_all_notifications()
+            awesome.emit_signal("menu::hide", awful.screen.focused())
         end
     ),
     awful.button(
@@ -254,6 +264,13 @@ gears.table.join(
         1,
         function()
             awesome.emit_signal("dashboard::close", awful.screen.focused())
+        end
+    ),
+    awful.button(
+        {},
+        3,
+        function()
+            awesome.emit_signal("menu::toggle", awful.screen.focused())
         end
     )
 )
@@ -315,7 +332,7 @@ gears.table.join(
         { modkey },
         "F1",
         function()
-            hotkeys_popup.show_help()
+            hotkeys_popup.show_help(nil, awful.screen.focused())
         end,
         { description = "Hotkeys", group = "awesome" }
     ),
@@ -339,7 +356,11 @@ gears.table.join(
     ),
     -- ~~~~~~~~~ Reload/exit awesome ~~~~~~~~~~~~
     -- reload awesome
-    awful.key({ modkey, "Shift" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
+    awful.key(
+        { modkey, "Shift" }, "r",
+        awesome.restart,
+        { description = "reload awesome", group = "awesome" }
+    ),
     -- show exit screen
     awful.key(
         { modkey },
