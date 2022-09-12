@@ -134,7 +134,7 @@ local wallpapers = {
     "wp8148965-minimalist-landscape-wallpapers.jpg",
     "mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg"
 }
-theme.wallpaper = directory .. wallpapers[2]
+theme.wallpaper = directory .. wallpapers[3]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "nord"
@@ -302,6 +302,9 @@ theme.flash_focus_step = 0.01 -- the step of animation
 
 -- --------- Icons -----------
 
+local themes_path = "/usr/share/awesome/themes/"
+theme.icon_color = icon_colors.rxyhn
+theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.png", theme.icon_color)
 theme.layout_floating = icons.floating
 theme.layout_max = icons.max
 theme.layout_tile = icons.tile

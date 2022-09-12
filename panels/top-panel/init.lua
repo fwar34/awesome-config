@@ -26,10 +26,9 @@ local TaskList = require("panels.top-panel.task-list")
 local TagList = require("panels.top-panel.tag-list")
 local mat_icon_button = require("widget.icon-button.icon-button")
 local mat_icon = require("widget.icon-button.icon")
-local mat_icon_button_rect = require("widget.icon-button.icon-button-rect")
 local icons = require("icons.flaticons")
 local helpers = require("global.helpers")
-local weather = require("widget.weather.text_weather")
+-- local weather = require("widget.weather.text_weather")
 
 -- define module table
 local top_panel = {}
@@ -59,7 +58,7 @@ local rofi_command =
     dpi(400) ..
     " -show drun -theme " ..
     gears.filesystem.get_configuration_dir() .. "/configs/rofi/rofi-" .. beautiful.rofi_plus_sign .. ".rasi"
-local add_button = mat_icon_button(mat_icon(icons.plus, dpi(24)))
+local add_button = mat_icon_button(mat_icon(icons.plus, dpi(20)))
 add_button:buttons(
     gears.table.join(
         awful.button(
@@ -141,7 +140,7 @@ local dashboard = wibox.container.background(
 )
 dashboard.shape_border_width = dpi(2)
 dashboard.shape_clip = true
-dashboard.shape_border_color = beautiful.accent_normal .. "60"
+dashboard.shape_border_color = beautiful.accent_normal .. "a1"
 helpers.add_hover_cursor(dashboard, "hand1")
 dashboard:connect_signal(
     "button::press",
@@ -154,13 +153,13 @@ dashboard:connect_signal(
 dashboard:connect_signal(
     "mouse::enter",
     function()
-        dashboard.shape_border_color = beautiful.accent_normal .. "80"
+        dashboard.shape_border_color = beautiful.accent_normal .. "bb"
     end
 )
 dashboard:connect_signal(
     "mouse::leave",
     function()
-        dashboard.shape_border_color = beautiful.accent_normal .. "60"
+        dashboard.shape_border_color = beautiful.accent_normal .. "a1"
     end
 )
 local di = wibox.container.margin(dashboard, dpi(0), dpi(0), dpi(6), dpi(6))

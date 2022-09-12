@@ -62,19 +62,32 @@ local theme_menu = {
     },
 }
 
+local run_menu = {
+    {
+        "Terminal",
+        apps.terminal
+    },
+    {
+        "Browser",
+        apps.browser
+    },
+    {
+        "Text Editor",
+        apps.editor
+    },
+    {
+        "File Manager",
+        apps.filebrowser
+    },
+}
+
 local main_menu = awful.menu({
     items = {
         {
-            "Terminal", apps.terminal
+            "Refresh", awesome.restart
         },
         {
-            "Browser", apps.browser
-        },
-        {
-            "Text Editor", apps.editor
-        },
-        {
-            "File Manager", apps.filebrowser
+            "Run", run_menu
         },
         {
             "Theme", theme_menu

@@ -97,7 +97,7 @@ awful.spawn.with_shell(
 )
 
 -- changing alacritty theme
-local alacrittycfg  = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
+local alacrittycfg = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
 awful.spawn.with_shell([[
     sed -i 's/*ryxhn/*nord/;s/*gruvbox/*nord/' ]] .. alacrittycfg .. [[
 ]])
@@ -281,12 +281,14 @@ theme.flash_focus_step = 0.01 -- the step of animation
 
 -- --------- Icons -----------
 local themes_path = "/usr/share/awesome/themes/"
+local layouticons_path = gears.filesystem.get_configuration_dir() .. "icons/layout/"
+
 theme.icon_color = icon_colors.nord
+theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.png", theme.icon_color)
+
 -- layout icons
-theme.layout_tile = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/tile.svg",
-    theme.icon_color)
-theme.layout_floating = gears.color.recolor_image(gears.filesystem.get_configuration_dir() .. "icons/layout/float.svg",
-    theme.icon_color)
+theme.layout_tile = gears.color.recolor_image(layouticons_path .. "tile.svg", theme.icon_color)
+theme.layout_floating = gears.color.recolor_image(layouticons_path .. "float.svg", theme.icon_color)
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
 theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
 
