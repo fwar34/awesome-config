@@ -37,7 +37,7 @@ local theme_menu = {
         "nord",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/gruvbox/nord/g;s/rxyhn/nord/g' ]] .. awesomecfg .. [[;
+                sed -i 's/gruvbox/nord/g;s/rxyhn/nord/g;s/everforest/nord/g' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end
@@ -46,7 +46,7 @@ local theme_menu = {
         "gruvbox",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/nord/gruvbox/g;s/rxyhn/gruvbox/g' ]] .. awesomecfg .. [[;
+                sed -i 's/nord/gruvbox/g;s/rxyhn/gruvbox/g;s/everforest/gruvbox/g' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end
@@ -55,7 +55,16 @@ local theme_menu = {
         "ryxhn",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/gruvbox/rxyhn/g;s/nord/rxyhn/g' ]] .. awesomecfg .. [[;
+                sed -i 's/gruvbox/rxyhn/g;s/nord/rxyhn/g;s/everforest/rxyhn/g' ]] .. awesomecfg .. [[;
+                echo 'awesome.restart()' | awesome-client
+            ]])
+        end
+    },
+    {
+        "everforest",
+        function()
+            awful.spawn.with_shell([[
+                sed -i 's/gruvbox/everforest/g;s/nord/everforest/g;s/rxyhn/everforest/g' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end

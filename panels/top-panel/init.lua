@@ -58,7 +58,7 @@ local rofi_command =
     dpi(400) ..
     " -show drun -theme " ..
     gears.filesystem.get_configuration_dir() .. "/configs/rofi/rofi-" .. beautiful.rofi_plus_sign .. ".rasi"
-local add_button = mat_icon_button(mat_icon(icons.plus, dpi(20)))
+local add_button = mat_icon_button(mat_icon(icons.plus, dpi(18)))
 add_button:buttons(
     gears.table.join(
         awful.button(
@@ -126,21 +126,22 @@ local vol_icon = helpers.imaker(icons.volume, dpi(20), dpi(20))
 local act_icon = helpers.imaker(icons.activity, dpi(20), dpi(20))
 local network_icon = helpers.imaker(icons.wifi, dpi(20), dpi(20))
 local dashboard = wibox.container.background(
-    wibox.container.margin {
-        helpers.horizontal_pad(dpi(10)),
-        network_icon,
-        vol_icon,
-        act_icon,
-        helpers.horizontal_pad(dpi(10)),
-        spacing = dpi(8),
-        layout = wibox.layout.fixed.horizontal,
+    {
+        helpers.vertical_pad(dpi(2)),
+        wibox.container.margin {
+            helpers.horizontal_pad(dpi(10)),
+            network_icon,
+            vol_icon,
+            act_icon,
+            helpers.horizontal_pad(dpi(10)),
+            spacing = dpi(8),
+            layout = wibox.layout.fixed.horizontal,
+        },
+        layout = wibox.layout.fixed.vertical,
     },
     beautiful.widget_bg_normal,
     helpers.rrect(dpi(6))
 )
-dashboard.shape_border_width = dpi(2)
-dashboard.shape_clip = true
-dashboard.shape_border_color = beautiful.accent_normal .. "a1"
 helpers.add_hover_cursor(dashboard, "hand1")
 dashboard:connect_signal(
     "button::press",
@@ -153,16 +154,16 @@ dashboard:connect_signal(
 dashboard:connect_signal(
     "mouse::enter",
     function()
-        dashboard.shape_border_color = beautiful.accent_normal .. "bb"
+        dashboard.bg = beautiful.accent_normal .. "32"
     end
 )
 dashboard:connect_signal(
     "mouse::leave",
     function()
-        dashboard.shape_border_color = beautiful.accent_normal .. "a1"
+        dashboard.bg = beautiful.widget_bg_normal
     end
 )
-local di = wibox.container.margin(dashboard, dpi(0), dpi(0), dpi(6), dpi(6))
+local di = wibox.container.margin(dashboard, dpi(0), dpi(0), dpi(5), dpi(5))
 
 -- =========================================================
 -- ======================= TOP BAR =========================
