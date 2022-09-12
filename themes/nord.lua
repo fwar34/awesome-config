@@ -68,7 +68,8 @@ end
 local icon_colors = {
     nord = "#e5e9f0",
     gruvbox = "#EBDBB2",
-    rxyhn = "#6791C9"
+    rxyhn = "#6791C9",
+    everforest = "#a7c080"
 }
 local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
@@ -81,16 +82,23 @@ awful.spawn.with_shell(
         sed -e "s/]] ..
     icon_colors.gruvbox ..
     [[/]] ..
-    icon_colors.nord .. [[/g;s/]] .. icon_colors.rxyhn .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
+    icon_colors.nord ..
+    [[/g;s/]] ..
+    icon_colors.rxyhn ..
+    [[/]] ..
+    icon_colors.nord .. [[/g;s/]] .. icon_colors.everforest .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
         mv temp "$x"
         done
-
         for x in ]] .. icon_location2 .. [[*
         do
         sed -e "s/]] ..
     icon_colors.gruvbox ..
     [[/]] ..
-    icon_colors.nord .. [[/g;s/]] .. icon_colors.rxyhn .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
+    icon_colors.nord ..
+    [[/g;s/]] ..
+    icon_colors.rxyhn ..
+    [[/]] ..
+    icon_colors.nord .. [[/g;s/]] .. icon_colors.everforest .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
         mv temp "$x"
         done
     ]]
@@ -99,7 +107,7 @@ awful.spawn.with_shell(
 -- changing alacritty theme
 local alacrittycfg = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
 awful.spawn.with_shell([[
-    sed -i 's/*ryxhn/*nord/;s/*gruvbox/*nord/' ]] .. alacrittycfg .. [[
+    sed -i 's/*rxyhn/*nord/;s/*everforest/*nord/;s/*gruvbox/*nord/' ]] .. alacrittycfg .. [[
 ]])
 
 -- ------- Wallpaper ---------

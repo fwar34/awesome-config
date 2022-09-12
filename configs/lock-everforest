@@ -1,12 +1,10 @@
 #!/bin/bash
-
-fg=8aadf4
-wrong=f38ba8
-highlight=24273a
-date=8aadf4
-verify=a6e3a1
-
-i3lock -i ~/.config/awesome/wallpapers/wp8148977-minimalist-landscape-wallpapers.png \
+fg=d3c6aa
+wrong=e67e80
+highlight=9aa79d
+date=859289
+verify=a7c080
+i3lock -i ~/.config/awesome/wallpapers/forest.jpg \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
   --ringver-color=$verify --insidewrong-color=$wrong --ringwrong-color=$wrong \

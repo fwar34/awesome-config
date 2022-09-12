@@ -29,7 +29,7 @@ cursor:
     unfocused_hollow: true
 
 # Colors
-ryxhn: &ryxhn
+rxyhn: &rxyhn
 # Default colors
   primary:
     background: "0x0c0e0f"
@@ -86,6 +86,35 @@ gruvbox: &gruvbox
     cyan: "0x8ec07c"
     white: "0xebdbb2"
 
+# Colors (everforest)
+everforest: &everforest
+# Default colors
+  primary:
+    background: "0x272f35"
+    foreground: "0xD8DEE9"
+
+  # Normal colors
+  normal:
+    black: "0x272f35"
+    red: "0xe67e80"
+    green: "0x83c092"
+    yellow: "0xd1b171"
+    blue: "0x7393b3"
+    magenta: "0xd699b6"
+    cyan: "0x69a59d"
+    white: "0xddd0b4"
+
+  # Bright colors
+  bright:
+    black: "0x2b3339"
+    red: "0xed9494"
+    green: "0xa7c080"
+    yellow: "0xdbbc7f"
+    blue: "0x6689ac"
+    magenta: "0xecafcc"
+    cyan: "0x95d1c9"
+    white: "0xe7dabe"
+
 # Colors (Nord)
 nord: &nord
 # Default colors
@@ -115,4 +144,4 @@ nord: &nord
     cyan: "0x8FBCBB"
     white: "0xECEFF4"
 
-colors: *ryxhn
+colors: *rxyhn
