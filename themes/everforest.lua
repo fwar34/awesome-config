@@ -63,7 +63,7 @@ local icon_colors = {
     nord = "#e5e9f0",
     gruvbox = "#EBDBB2",
     rxyhn = "#6791C9",
-    everforest = "#a7c080"
+    everforest = "#ddd0b4"
 }
 local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
@@ -111,7 +111,7 @@ local wallpapers = {
 }
 theme.wallpaper = directory .. wallpapers[1]
 
-theme.rofi_plus_sign = "gruvbox"
+theme.rofi_plus_sign = "everforest"
 
 -- ---- profile picture ------
 theme.pfp = gears.filesystem.get_configuration_dir() .. "icons/user/profile.png"
