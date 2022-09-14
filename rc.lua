@@ -23,24 +23,24 @@ local helpers = require("global.helpers")
 -- =========================================================
 
 -- color scheme
-
-local colors = "nord"
+-- make sure COLORS is at line 27
+COLORS = "rxyhn"
 
 --Rofi Launcher
 awful.spawn.with_shell([[echo '@theme "rofi-]] ..
-    colors .. [["' > ]] .. os.getenv("HOME") .. [[/.config/rofi/config.rasi]])
+    COLORS .. [["' > ]] .. os.getenv("HOME") .. [[/.config/rofi/config.rasi]])
 local rofi_command = "rofi -show drun"
 
 -- Set lock theme
 awful.spawn.with_shell([[cat ~/.config/awesome/configs/lock-]] ..
-    colors .. [[ > ]] .. gears.filesystem.get_configuration_dir() .. [[configs/lock]])
+    COLORS .. [[ > ]] .. gears.filesystem.get_configuration_dir() .. [[configs/lock]])
 
 -- Default apps global variable
 apps = {
     editor = "code",
     terminal = "alacritty",
     launcher = rofi_command,
-    lock = gears.filesystem.get_configuration_dir() .. "configs/lock-" .. colors,
+    lock = gears.filesystem.get_configuration_dir() .. "configs/lock-" .. COLORS,
     screenshot = "flameshot gui",
     filebrowser = "dolphin",
     browser = "firefox",
@@ -94,6 +94,84 @@ helpers.check_if_running(
     end
 )
 
+-- Scripts
+local cache_dir = os.getenv("HOME") .. "/.cache/awesome/"
+
+local icon_colors = {
+    nord = "#e5e9f0",
+    gruvbox = "#EBDBB2",
+    rxyhn = "#6791C9",
+    everforest = "#ddd0b4"
+}
+
+-- check if prev cache exists if not create one
+awful.spawn.easy_async_with_shell(
+    [[
+        test -f ]] .. cache_dir .. [[prev_theme && echo "yes"
+    ]],
+    function(stdout)
+        if stdout:match("yes") then
+            awful.spawn.with_shell('echo "xax"')
+        else
+            awful.spawn.with_shell('echo "rxyhn" > ' .. cache_dir .. 'prev_theme')
+        end
+    end
+)
+
+-- Changin color of Svg icons
+local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
+local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
+local prev_theme = helpers.first_line(cache_dir .. "prev_theme")
+
+local function changeColor(prev, new)
+    awful.spawn.easy_async_with_shell([[
+                    for x in ]] .. icon_location1 .. [[*
+                    do
+                    sed -i "s/]] .. prev .. [[/]] .. new .. [[/g" $x
+                    done
+                ]])
+    awful.spawn.easy_async_with_shell([[
+                    for x in ]] .. icon_location2 .. [[*
+                    do
+                    sed -i "s/]] .. prev .. [[/]] .. new .. [[/g" $x
+                    done
+                ]])
+end
+
+changeColor(icon_colors[prev_theme], icon_colors[COLORS])
+
+--  changing alacritty theme --
+local alacrittycfg = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
+awful.spawn.with_shell([[
+    sed -i 's/*]] .. prev_theme .. [[/*]] .. COLORS .. [[/' ]] .. alacrittycfg .. [[
+]])
+
+-- -- changing gtk theme -----
+-- make sure theme names are correct
+local theme_names = {
+    nord = "Nordic",
+    gruvbox = "Gruvbox",
+    rxyhn = "Aesthetic-Night",
+    everforest = "Everforest-Dark-BL"
+}
+local gtk_cfg = os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini"
+awful.spawn.with_shell([[
+    sed -i 's/]] .. theme_names[prev_theme] .. [[/]] .. theme_names[COLORS] .. [[/' ]] .. gtk_cfg .. [[
+]])
+
+--  changing kvantum theme ---
+local kv_theme_names = {
+    nord = "Nordic",
+    gruvbox = "gruvbox-kvantum",
+    rxyhn = "Aesthetic-Night",
+    everforest = "gruvbox-kvantum"
+}
+local kvantumcfg = os.getenv("HOME") .. "/.config/Kvantum/kvantum.kvconfig"
+awful.spawn.with_shell([[
+    echo "[General]
+    theme=]] .. kv_theme_names[COLORS] .. [[" > ]] .. kvantumcfg .. [[
+]])
+
 -- =========================================================
 -- =================== DEFINE LAYOUTS ======================
 -- =========================================================
@@ -113,7 +191,7 @@ awful.layout.layouts = {
 -- =========================================================
 
 -- ----- Import theme --------
-beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. colors .. ".lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. COLORS .. ".lua")
 
 -- ----- modules -------
 require("global.bling")

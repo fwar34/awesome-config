@@ -46,83 +46,6 @@ theme.nord15 = "#b48ead"
 -- =================== THEME VARIABLES =====================
 -- =========================================================
 
-function theme.random_accent_color()
-    local accents = {
-        theme.nord9,
-        theme.nord10,
-        theme.nord11,
-        theme.nord12,
-        theme.nord13,
-        theme.nord14,
-        theme.nord15,
-    }
-
-    local i = math.random(1, #accents)
-    return accents[i]
-end
-
--- =========================================================
---  Script to change svg color (run this when changing theme)
--- =========================================================
-
-local icon_colors = {
-    nord = "#e5e9f0",
-    gruvbox = "#EBDBB2",
-    rxyhn = "#6791C9",
-    everforest = "#ddd0b4"
-}
-local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
-local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
-
--- changing colors of svgs
-awful.spawn.with_shell(
-    [[        
-        for x in ]] .. icon_location1 .. [[*
-        do
-        sed -e "s/]] ..
-    icon_colors.gruvbox ..
-    [[/]] ..
-    icon_colors.nord ..
-    [[/g;s/]] ..
-    icon_colors.rxyhn ..
-    [[/]] ..
-    icon_colors.nord .. [[/g;s/]] .. icon_colors.everforest .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
-        mv temp "$x"
-        done
-        for x in ]] .. icon_location2 .. [[*
-        do
-        sed -e "s/]] ..
-    icon_colors.gruvbox ..
-    [[/]] ..
-    icon_colors.nord ..
-    [[/g;s/]] ..
-    icon_colors.rxyhn ..
-    [[/]] ..
-    icon_colors.nord .. [[/g;s/]] .. icon_colors.everforest .. [[/]] .. icon_colors.nord .. [[/g" $x > temp
-        mv temp "$x"
-        done
-    ]]
-)
-
--- changing alacritty theme
-local alacrittycfg = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
-awful.spawn.with_shell([[
-    sed -i 's/*rxyhn/*nord/;s/*everforest/*nord/;s/*gruvbox/*nord/' ]] .. alacrittycfg .. [[
-]])
-
--- changing kvantum theme
-local kvantumcfg = os.getenv("HOME") .. "/.config/Kvantum/kvantum.kvconfig"
-awful.spawn.with_shell([[
-    echo "[General]
-    theme=Nordic" > ]] .. kvantumcfg .. [[
-]])
-
--- changing gtk theme
-local alacrittycfg = os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini"
-awful.spawn.with_shell([[
-    sed -i 's/Everforest-Dark-BL/Gruvbox/;s/Aesthetic-Night/Nordic/;s/Gruvbox/Nordic/' ]] .. alacrittycfg .. [[
-]])
-
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
 local wallpapers = {
@@ -304,7 +227,7 @@ theme.flash_focus_step = 0.01 -- the step of animation
 local themes_path = "/usr/share/awesome/themes/"
 local layouticons_path = gears.filesystem.get_configuration_dir() .. "icons/layout/"
 
-theme.icon_color = icon_colors.nord
+theme.icon_color = theme.nord5
 theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.png", theme.icon_color)
 
 -- layout icons

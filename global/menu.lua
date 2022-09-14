@@ -1,6 +1,7 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful = require("beautiful")
+local cache_dir = os.getenv("HOME") .. "/.cache/awesome/"
 
 -- --------- menu ------------
 
@@ -37,7 +38,8 @@ local theme_menu = {
         "nord",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/gruvbox/nord/g;s/rxyhn/nord/g;s/everforest/nord/g' ]] .. awesomecfg .. [[;
+                echo "]] .. COLORS .. [[" > ]] .. cache_dir .. [['prev_theme'
+                sed -i '27s/.*/COLORS = "nord"/' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end
@@ -46,16 +48,18 @@ local theme_menu = {
         "gruvbox",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/nord/gruvbox/g;s/rxyhn/gruvbox/g;s/everforest/gruvbox/g' ]] .. awesomecfg .. [[;
+                echo "]] .. COLORS .. [[" > ]] .. cache_dir .. [['prev_theme'
+                sed -i '27s/.*/COLORS = "gruvbox"/' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end
     },
     {
-        "ryxhn",
+        "rxyhn",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/gruvbox/rxyhn/g;s/nord/rxyhn/g;s/everforest/rxyhn/g' ]] .. awesomecfg .. [[;
+                echo "]] .. COLORS .. [[" > ]] .. cache_dir .. [['prev_theme'
+                sed -i '27s/.*/COLORS = "rxyhn"/' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end
@@ -64,12 +68,14 @@ local theme_menu = {
         "everforest",
         function()
             awful.spawn.with_shell([[
-                sed -i 's/gruvbox/everforest/g;s/nord/everforest/g;s/rxyhn/everforest/g' ]] .. awesomecfg .. [[;
+                echo "]] .. COLORS .. [[" > ]] .. cache_dir .. [['prev_theme'
+                sed -i '27s/.*/COLORS = "everforest"/' ]] .. awesomecfg .. [[;
                 echo 'awesome.restart()' | awesome-client
             ]])
         end
     },
-}
+}-- change value of prev theme to current value
+awful.spawn.with_shell('sleep 1; echo "' .. COLORS .. '" > ' .. cache_dir .. 'prev_theme')
 
 local run_menu = {
     {
