@@ -24,7 +24,7 @@ local helpers = require("global.helpers")
 
 -- color scheme
 
-local colors = "gruvbox"
+local colors = "nord"
 
 --Rofi Launcher
 awful.spawn.with_shell([[echo '@theme "rofi-]] ..
@@ -83,8 +83,8 @@ helpers.run_once_ps(
 helpers.run_once_pgrep("blueman-applet")
 helpers.run_once_pgrep("nm-applet --indicator")
 helpers.run_once_pgrep(gears.filesystem.get_configuration_dir() .. "configs/nvidia-startup")
---
-awful.spawn.easy_async_with_shell([[echo "  & sleep 5 && xset dpms force off" >> ]] ..
+-- this will turn screen off when i3lock starts with xidlehook
+awful.spawn.with_shell([[echo "& sleep 5 && xset dpms force off" >> ]] ..
     gears.filesystem.get_configuration_dir() .. [[configs/lock]])
 helpers.check_if_running(
     "xidlehook",

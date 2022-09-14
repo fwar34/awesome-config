@@ -96,7 +96,7 @@ local icon_colors = {
     nord = "#e5e9f0",
     gruvbox = "#EBDBB2",
     rxyhn = "#6791C9",
-    everforest = "#a7c080"
+    everforest = "#ddd0b4"
 }
 local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
 local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
@@ -135,6 +135,19 @@ awful.spawn.with_shell(
 local alacrittycfg = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
 awful.spawn.with_shell([[
     sed -i 's/*everforest/*rxyhn/;s/*nord/*rxyhn/;s/*gruvbox/*rxyhn/' ]] .. alacrittycfg .. [[
+]])
+
+-- changing kvantum theme
+local kvantumcfg = os.getenv("HOME") .. "/.config/Kvantum/kvantum.kvconfig"
+awful.spawn.with_shell([[
+    echo "[General]
+    theme=Aesthetic-Night" > ]] .. kvantumcfg .. [[
+]])
+
+-- changing gtk theme
+local alacrittycfg = os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini"
+awful.spawn.with_shell([[
+    sed -i 's/Everforest-Dark-BL/Aesthetic-Night/;s/Nordic/Aesthetic-Night/;s/Gruvbox/Aesthetic-Night/' ]] .. alacrittycfg .. [[
 ]])
 
 -- ------- Wallpaper ---------

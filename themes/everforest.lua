@@ -104,6 +104,20 @@ awful.spawn.with_shell([[
     sed -i 's/*rxyhn/*everforest/;s/*nord/*everforest/;s/*gruvbox/*everforest/' ]] .. alacrittycfg .. [[
 ]])
 
+-- changing kvantum theme
+local kvantumcfg = os.getenv("HOME") .. "/.config/Kvantum/kvantum.kvconfig"
+awful.spawn.with_shell([[
+    echo "[General]
+    theme=gruvbox-kvantum" > ]] .. kvantumcfg .. [[
+]])
+
+-- changing gtk theme
+local alacrittycfg = os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini"
+awful.spawn.with_shell([[
+    sed -i 's/Aesthetic-Night/Everforest-Dark-BL/;s/Nordic/Everforest-Dark-BL/;s/Gruvbox/Everforest-Dark-BL/' ]] ..
+    alacrittycfg .. [[
+]])
+
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
 local wallpapers = {
@@ -162,8 +176,8 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bar
-theme.border_width = dpi(1)
-theme.border_accent = theme.base0D
+theme.border_width = dpi(2)
+theme.border_accent = theme.grey
 theme.corner_radius = dpi(8)
 
 -- -------- widgets ----------
@@ -220,7 +234,7 @@ theme.taglist_fg_focus = theme.base07
 theme.taglist_fg_occupied = theme.base06
 theme.taglist_fg_urgent = theme.base0E
 theme.taglist_fg_empty = theme.grey
-theme.taglist_bg_focus = theme.base0D .. "90"
+theme.taglist_bg_focus = theme.base0D .. "aa"
 theme.taglist_shape = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
@@ -249,8 +263,7 @@ theme.playerctl_ignore = "firefox"
 theme.playerctl_player = { "music", "%any" }
 
 -- ------- date/time ---------
-theme.date_time_color = theme.base0D .. "60"
-
+theme.date_time_color = theme.base0D
 -- ------- calender ----------
 theme.cal_header_bg = theme.transparent
 theme.cal_week_bg = theme.transparent
