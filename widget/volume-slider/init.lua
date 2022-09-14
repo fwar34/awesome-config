@@ -52,9 +52,6 @@ local update_slider = function()
 	)
 end
 
--- Update on startup
-update_slider()
-
 local action_level =
 wibox.widget {
 	{
@@ -177,5 +174,8 @@ wibox.widget {
 	forced_height = dpi(48),
 	widget = wibox.container.margin
 }
+
+-- Update on startup
+update_slider()
 
 return volume_setting
