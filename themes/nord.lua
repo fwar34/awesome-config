@@ -67,8 +67,8 @@ theme.pfp = gears.surface.load_uncached(gears.filesystem.get_configuration_dir()
 theme.wibar_height = dpi(36)
 
 -- --------- gaps ------------
-theme.useless_gap = dpi(4)
-theme.gap_single_client = true
+theme.useless_gap = dpi(12)
+theme.gap_single_client = false
 
 -- --------- Fonts -----------
 theme.title_fonts = "Roboto Bold 11"
@@ -110,7 +110,7 @@ theme.titlebar_buttonsize_alt = dpi(18)
 theme.titlebar_buttonsize = dpi(20)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.nord0
-theme.border_width = dpi(2)
+theme.border_width = dpi(0)
 theme.border_accent = theme.nord10
 -- round corners
 theme.corner_radius = dpi(8)
@@ -163,7 +163,7 @@ theme.taglist_bg_empty    = theme.bg_normal
 theme.taglist_bg_occupied = theme.bg_normal
 theme.taglist_bg_urgent   = theme.bg_normal
 theme.taglist_bg_focus    = theme.bg_normal
-theme.taglist_font        = theme.title_fonts
+theme.taglist_font        = theme.icon_fonts .. " 16"
 theme.taglist_spacing     = 2
 theme.taglist_fg_focus    = theme.nord6
 theme.taglist_fg_occupied = theme.nord9

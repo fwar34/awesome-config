@@ -70,8 +70,8 @@ theme.pfp = gears.filesystem.get_configuration_dir() .. "icons/user/profile.png"
 theme.wibar_height = dpi(36)
 
 -- --------- gaps ------------
-theme.useless_gap = dpi(4)
-theme.gap_single_client = true
+theme.useless_gap = dpi(12)
+theme.gap_single_client = false
 
 -- --------- Fonts -----------
 theme.title_fonts = "Roboto Bold 11"
@@ -113,7 +113,7 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bg0_h
-theme.border_width = dpi(2)
+theme.border_width = dpi(0)
 theme.border_accent = theme.blue
 -- round corners
 theme.corner_radius = dpi(8)
@@ -162,18 +162,18 @@ theme.tasklist_plain_task_name = true
 theme.tasklist_shape = helpers.rect(dpi(4))
 
 -- -------- Taglist ----------
-theme.taglist_bg_empty = theme.bg0_h
+theme.taglist_bg_empty    = theme.bg0_h
 theme.taglist_bg_occupied = theme.bg0_h
-theme.taglist_bg_urgent = theme.bg0_h
-theme.taglist_bg_focus = theme.bg0_h
-theme.taglist_font = theme.title_fonts
-theme.taglist_spacing = dpi(6)
-theme.taglist_fg_focus = theme.fg0
+theme.taglist_bg_urgent   = theme.bg0_h
+theme.taglist_bg_focus    = theme.bg0_h
+theme.taglist_font        = theme.icon_fonts .. " 16"
+theme.taglist_spacing     = dpi(6)
+theme.taglist_fg_focus    = theme.fg0
 theme.taglist_fg_occupied = theme.blue
-theme.taglist_fg_urgent = theme.red
-theme.taglist_fg_empty = theme.bg3
-theme.taglist_bg_focus = theme.blue
-theme.taglist_shape = helpers.rrect(dpi(6))
+theme.taglist_fg_urgent   = theme.red
+theme.taglist_fg_empty    = theme.bg3
+theme.taglist_bg_focus    = theme.blue
+theme.taglist_shape       = helpers.rrect(dpi(6))
 
 -- --- tag preview bling -----
 theme.tag_preview_widget_border_radius = dpi(0) -- Border radius of the widget (With AA)

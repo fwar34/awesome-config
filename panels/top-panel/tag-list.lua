@@ -86,7 +86,7 @@ local TagList = function(s)
             markup = "DD",
             valign = "center"
           },
-          margins = dpi(8),
+          margins = dpi(10),
           widget = wibox.container.margin
         },
         widget = wibox.container.background
