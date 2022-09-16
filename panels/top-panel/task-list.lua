@@ -13,9 +13,9 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
 local gears = require("gears")
+local beautiful = require("beautiful")
 local helpers = require("global.helpers")
 local clickable_container = helpers.ccontainer
-local icons = require("icons.flaticons")
 
 -- =========================================================
 -- ======================== Setup ==========================
@@ -30,7 +30,7 @@ local function create_buttons(buttons, object)
             -- button object the user provided, but with the object as
             -- argument.
             local btn =
-                awful.button {
+            awful.button {
                 modifiers = b.modifiers,
                 button = b.button,
                 on_press = function()
@@ -62,22 +62,29 @@ local function list_update(w, buttons, label, data, objects)
         else
             ib = wibox.widget.imagebox()
             tb = wibox.widget.textbox()
-            cb =
-                wibox.widget {
-                {
-                    {
-                        image = icons.closew,
-                        resize = true,
-                        widget = wibox.widget.imagebox
-                    },
-                    margins = dpi(3),
-                    widget = wibox.container.margin
-                },
-                widget = clickable_container
+            cb = wibox.widget {
+                font = beautiful.icon_fonts .. " 12",
+                markup = helpers.colorize_text("", beautiful.accent_normal),
+                align = "center",
+                valign = "center",
+                widget = wibox.widget.textbox
             }
+            helpers.add_hover_cursor(cb, "hand1")
+            cb:connect_signal(
+                "mouse::enter",
+                function()
+                    cb.markup = helpers.colorize_text("", beautiful.accent_normal_c)
+                end
+            )
+            cb:connect_signal(
+                "mouse::leave",
+                function()
+                    cb.markup = helpers.colorize_text("", beautiful.accent_normal)
+                end
+            )
             cb.shape = gears.shape.circle
             cbm =
-                wibox.widget {
+            wibox.widget {
                 -- 4, 8 ,12 ,12 -- close button
                 cb,
                 left = dpi(4),
@@ -101,14 +108,14 @@ local function list_update(w, buttons, label, data, objects)
             bg_clickable = clickable_container()
             bgb = wibox.container.background()
             tbm =
-                wibox.widget {
+            wibox.widget {
                 tb,
                 left = dpi(4),
                 right = dpi(4),
                 widget = wibox.container.margin
             }
             ibm =
-                wibox.widget {
+            wibox.widget {
                 -- 12 top bottom
                 ib,
                 left = dpi(6),
@@ -135,9 +142,9 @@ local function list_update(w, buttons, label, data, objects)
 
             -- Tooltip to display whole title, if it was truncated
             tt =
-                awful.tooltip(
+            awful.tooltip(
                 {
-                    objects = {tb},
+                    objects = { tb },
                     mode = "outside",
                     align = "bottom",
                     delay_show = 1
@@ -195,7 +202,7 @@ local function list_update(w, buttons, label, data, objects)
 end
 
 local tasklist_buttons =
-    awful.util.table.join(
+awful.util.table.join(
     awful.button(
         {},
         1,
