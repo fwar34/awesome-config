@@ -177,8 +177,7 @@ local function widget()
                 1,
                 nil,
                 function()
-                    awful.util.spawn_with_shell("echo 'awesome.quit()' | awesome-client")
-                    awesome.emit_signal("dashboard::toggle", awful.screen.focused())
+                    awful.spawn.with_shell([[echo 'awesome.quit()' | awesome-client]])
                 end
             )
         )
