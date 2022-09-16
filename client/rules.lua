@@ -157,7 +157,10 @@ function rules.create(clientkeys, clientbuttons)
                 class = {
                     "Nautilus",
                     "Gedit",
-                    "Eog"
+                    "Eog",
+                    "firefox",
+                    "code",
+                    "alacritty"
                 },
                 name = {}
             },
