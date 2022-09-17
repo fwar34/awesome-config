@@ -3,19 +3,23 @@ local gears = require('gears')
 local wibox = require('wibox')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('icons.flaticons')
+local helpers = require("global.helpers")
 
-local icon = wibox.widget {
-	image = icons.volume,
-	resize = true,
-	widget = wibox.widget.imagebox,
-	forced_height = dpi(45),
-	forced_width = dpi(35)
-}
+local icon = wibox.container.background(
+	wibox.widget {
+		font = beautiful.icon_fonts .. "Bold 40",
+		markup = helpers.colorize_text("墳", beautiful.accent_normal),
+		align = "center",
+		valign = "center",
+		widget = wibox.widget.textbox
+	},
+	beautiful.transparent,
+	gears.shape.circle
+)
 
 local osd_header = wibox.widget {
 	text = 'Volume',
-	font = 'Inter Bold 12',
+	font = 'Roboto Bold 12',
 	align = 'left',
 	valign = 'center',
 	widget = wibox.widget.textbox
@@ -23,7 +27,7 @@ local osd_header = wibox.widget {
 
 local osd_value = wibox.widget {
 	text = '0%',
-	font = 'Inter Bold 12',
+	font = 'Roboto Bold 12',
 	align = 'center',
 	valign = 'center',
 	widget = wibox.widget.textbox
@@ -52,17 +56,31 @@ local slider_osd = wibox.widget {
 
 local vol_osd_slider = slider_osd.vol_osd_slider
 
+
+
+local update_icon = function(volume_level)
+	awful.spawn.easy_async_with_shell(
+		[[pactl get-sink-mute 0]], function(stdout)
+		if stdout:match("no") then
+			if volume_level <= 50 and volume_level > 0 then
+				icon.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+			elseif volume_level <= 100 and volume_level > 50 then
+				icon.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+			elseif volume_level <= 150 and volume_level > 100 then
+				icon.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+			end
+		elseif stdout:match("yes") then
+			icon.widget.markup = helpers.colorize_text("ﱝ", beautiful.accent_normal)
+		end
+	end
+	)
+	icon:emit_signal("widget::redraw_needed")
+end
+
 vol_osd_slider:connect_signal(
 	'property::value',
 	function()
 		local volume_level = vol_osd_slider:get_value()
-		if volume_level == 0 then
-			icon.image = icons.volumex
-		elseif volume_level < 75 and volume_level > 0 then
-			icon.image = icons.volume1
-		elseif volume_level > 75 then
-			icon.image = icons.volume2
-		end
 
 		awful.spawn('pactl set-sink-volume 0 ' .. volume_level .. '%', false)
 
@@ -75,6 +93,8 @@ vol_osd_slider:connect_signal(
 		if awful.screen.focused().show_vol_osd then
 			awesome.emit_signal('module::volume_osd:show', true)
 		end
+
+		update_icon(volume_level)
 	end
 )
 
@@ -97,10 +117,9 @@ awesome.connect_signal(
 	'module::volume_osd',
 	function(volume)
 		vol_osd_slider:set_value(volume)
+		update_icon(volume)
 	end
 )
-
-
 
 local volume_slider_osd = wibox.widget {
 	icon,

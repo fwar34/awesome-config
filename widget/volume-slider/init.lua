@@ -4,9 +4,7 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
-local icons = require("icons.flaticons")
 local helpers = require("global.helpers")
-local widget_dir = os.getenv("HOME") .. "/.cache/awesome/"
 
 local slider =
 wibox.widget {
@@ -33,47 +31,23 @@ wibox.widget {
 
 local volume_slider = slider.volume_slider
 
-local icon =
-wibox.widget {
-	image = icons.volume,
-	widget = wibox.widget.imagebox
-}
-
+-- Update on startup
 local update_slider = function()
 	awful.spawn.easy_async_with_shell(
-		[[bash -c "pactl get-sink-volume 0"]],
+		[[pactl get-sink-volume 0]],
 		function(stdout)
 			local volume = string.match(stdout, "(%d?%d)%%")
 			volume_slider:set_value(tonumber(volume))
-			if volume_slider == 0 then
-				icon.image = icons.volumex
-			end
 		end
 	)
 end
+update_slider()
 
-local action_level =
-wibox.widget {
-	{
-		icon,
-		widget = helpers.ccontainer
-	},
-	bg = beautiful.transparent,
-	shape = gears.shape.circle,
-	widget = wibox.container.background
-}
-
+-- set volume using slider value
 volume_slider:connect_signal(
 	"property::value",
 	function()
 		local volume_level = volume_slider:get_value()
-		if volume_level == 0 then
-			icon.image = icons.volumex
-		elseif volume_level < 75 and volume_level > 0 then
-			icon.image = icons.volume1
-		elseif volume_level > 75 then
-			icon.image = icons.volume2
-		end
 		spawn("pactl set-sink-volume 0 " .. volume_level .. "%", false)
 		-- Update volume osd
 		awesome.emit_signal("module::volume_osd", volume_level)
@@ -109,24 +83,56 @@ volume_slider:buttons(
 	)
 )
 
-local action_jump = function()
-	local sli_value = volume_slider:get_value()
-	if sli_value > 0 then
-		awful.util.spawn_with_shell('echo "' .. sli_value .. '" > ' .. widget_dir .. 'sli_value')
-		volume_slider:set_value(0)
-	else
-		volume_slider:set_value(tonumber(helpers.first_line(widget_dir .. "sli_value")))
+local mute_toggle = wibox.container.background(
+	wibox.widget {
+		font = beautiful.icon_fonts .. "Bold 26",
+		markup = helpers.colorize_text("墳", beautiful.accent_normal),
+		align = "center",
+		valign = "center",
+		widget = wibox.widget.textbox
+	},
+	beautiful.widget_bg_normal,
+	gears.shape.circle
+)
+
+local update_icon = function(volume_level)
+	awful.spawn.easy_async_with_shell(
+		[[pactl get-sink-mute 0]], function(stdout)
+		if stdout:match("no") then
+			if volume_level <= 50 and volume_level > 0 then
+				mute_toggle.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+			elseif volume_level <= 100 and volume_level > 50 then
+				mute_toggle.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+			elseif volume_level <= 150 and volume_level > 100 then
+				mute_toggle.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+			end
+		elseif stdout:match("yes") then
+			mute_toggle.widget.markup = helpers.colorize_text("ﱝ", beautiful.accent_normal)
+		end
 	end
+	)
+	mute_toggle:emit_signal("widget::redraw_needed")
 end
 
-action_level:buttons(
-	awful.util.table.join(
+awesome.connect_signal(
+	'module::volume_osd',
+	function(volume)
+		update_icon(volume)
+	end
+)
+
+helpers.add_hover_cursor(mute_toggle, "hand1")
+
+mute_toggle:buttons(
+	gears.table.join(
 		awful.button(
 			{},
 			1,
 			nil,
 			function()
-				action_jump()
+				awful.spawn.easy_async_with_shell([[bash -c "pactl set-sink-mute 0 toggle"]], function()
+					awesome.emit_signal("module::volume_osd", volume_slider:get_value())
+				end)
 			end
 		),
 		awful.button(
@@ -138,6 +144,18 @@ action_level:buttons(
 			end
 		)
 	)
+)
+mute_toggle:connect_signal(
+	"mouse::enter",
+	function()
+		mute_toggle.bg = beautiful.accent_normal .. "32"
+	end
+)
+mute_toggle:connect_signal(
+	"mouse::leave",
+	function()
+		mute_toggle.bg = beautiful.widget_bg_normal
+	end
 )
 
 -- The emit will come from the global keybind
@@ -156,11 +174,11 @@ awesome.connect_signal(
 	end
 )
 
-local volume_setting =
+local volume_widget =
 wibox.widget {
 	{
 		{
-			action_level,
+			mute_toggle,
 			top = dpi(12),
 			bottom = dpi(12),
 			widget = wibox.container.margin
@@ -175,7 +193,4 @@ wibox.widget {
 	widget = wibox.container.margin
 }
 
--- Update on startup
-update_slider()
-
-return volume_setting
+return volume_widget
