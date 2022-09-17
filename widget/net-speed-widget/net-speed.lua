@@ -64,12 +64,11 @@ local function worker(user_args)
     net_speed_widget = wibox.widget {
         {
             {
-                image = ICONS_DIR .. 'down.svg',
-                widget = wibox.widget.imagebox,
-                forced_width = dpi(30),
-                forced_height = dpi(30),
-                halign  = "left",
-                valign = "center",          
+                font = beautiful.icon_fonts .. " 20",
+                markup = helpers.colorize_text("", beautiful.accent_normal),
+                align = "center",
+                valign = "center",
+                widget = wibox.widget.textbox
             },
             {
                 id = 'rx_speed',
@@ -83,12 +82,11 @@ local function worker(user_args)
         },
         {
             {
-                image =  ICONS_DIR .. 'up.svg',
-                forced_width = dpi(30),
-                forced_height = dpi(30),
-                halign  = "left",
+                font = beautiful.icon_fonts .. " 20",
+                markup = helpers.colorize_text("", beautiful.accent_normal),
+                align = "center",
                 valign = "center",
-                widget = wibox.widget.imagebox
+                widget = wibox.widget.textbox
             },
             {
                 font =  "Roboto Mono Nerd Fonts Bold 9",
