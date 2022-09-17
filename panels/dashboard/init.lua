@@ -14,7 +14,6 @@ local dpi = beautiful.xresources.apply_dpi
 
 local mat_icon_button_rect = require("widget.icon-button.icon-button-rect")
 local mat_icon = require("widget.icon-button.icon")
-local icons = require("icons.flaticons")
 
 local helpers = require("global.helpers")
 
@@ -37,42 +36,16 @@ local Music = mat_icon_button_rect(mat_icon(places_icon_dir .. "music.svg", dpi(
 local Videos = mat_icon_button_rect(mat_icon(places_icon_dir .. "videos.svg", dpi(22)))
 local Root = mat_icon_button_rect(mat_icon(places_icon_dir .. "root.svg", dpi(22)))
 local Trash = mat_icon_button_rect(mat_icon(places_icon_dir .. "trash.svg", dpi(22)))
-local terminal = mat_icon_button_rect(mat_icon(icons.terminal, dpi(18)))
-local browser = mat_icon_button_rect(mat_icon(icons.browser, dpi(18)))
-local editor = mat_icon_button_rect(mat_icon(icons.code, dpi(18)))
-local hotkeys = mat_icon_button_rect(mat_icon(icons.key, dpi(18)))
-helpers.bmaker(home, apps.filebrowser .. " " .. "")
-helpers.bmaker(Documents, apps.filebrowser .. " " .. "Documents")
-helpers.bmaker(Downloads, apps.filebrowser .. " " .. "Downloads")
-helpers.bmaker(Pictures, apps.filebrowser .. " " .. "Pictures")
-helpers.bmaker(Music, apps.filebrowser .. " " .. "Music")
-helpers.bmaker(Videos, apps.filebrowser .. " " .. "Videos")
-helpers.bmaker(Root, apps.filebrowser .. " " .. "/")
-helpers.bmaker(Trash, apps.filebrowser .. " " .. "/home/" .. os.getenv("USER") .. "/.local/share/Trash/files/")
-helpers.bmaker(terminal, apps.terminal)
-helpers.bmaker(browser, apps.browser)
-helpers.bmaker(editor, apps.editor)
-helpers.bmaker(hotkeys, "feh " .. gears.filesystem.get_configuration_dir() .. "configs/hotkeys.png")
+helpers.bmaker(home, "xdg-open $(xdg-user-dir)")
+helpers.bmaker(Documents, "xdg-open $(xdg-user-dir DOCUMENTS)")
+helpers.bmaker(Downloads, "xdg-open $(xdg-user-dir DOWNLOADS)")
+helpers.bmaker(Pictures, "xdg-open $(xdg-user-dir PICTURES)")
+helpers.bmaker(Music, "xdg-open $(xdg-user-dir MUSIC)")
+helpers.bmaker(Videos, "xdg-open $(xdg-user-dir VIDEOS)")
+helpers.bmaker(Root, "gio open /")
+helpers.bmaker(Trash, "gio open trash:///")
 
 --  Placing Buttons into Containers
-
---apps
-local apps_widget =
-    wibox.widget {
-    {
-        terminal,
-        browser,
-        editor,
-        hotkeys,
-        widget = wibox.container.margin,
-        layout = wibox.layout.fixed.horizontal
-    },
-    forced_height = dpi(50),
-    forced_width = dpi(230),
-    margins = dpi(12),
-    widget = wibox.container.margin,
-    layout = wibox.layout.fixed.vertical
-}
 --places
 local places_widget =
     wibox.widget {
@@ -170,7 +143,6 @@ local toggle_buttons =
 }
 
 -- placing them in boxes
-local apps_box = helpers.create_boxed_widget(apps_widget, dpi(270), dpi(40), beautiful.widget_bg_normal)
 local places_widget_box = helpers.create_boxed_widget(places_widget, dpi(270), dpi(120), beautiful.widget_bg_normal)
 local volume_box = helpers.create_boxed_widget(settings_widget, dpi(270), dpi(150), beautiful.widget_bg_normal)
 local user_system_monitor = helpers.create_boxed_widget(sysmon, dpi(270), dpi(120), beautiful.widget_bg_normal)
@@ -213,7 +185,6 @@ dashboard.create = function(s)
                                     user_profile,
                                     user_system_monitor,
                                     calender_box,
-                                    -- apps_box,
                                     spacing = dpi(15),
                                     layout = wibox.layout.fixed.vertical
                                 },

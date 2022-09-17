@@ -78,7 +78,7 @@ theme.gap_single_client = false
 theme.title_fonts = "Roboto Bold 11"
 theme.normal_fonts = "Roboto 11"
 theme.date_time_font = "Roboto Bold 11"
-theme.icon_fonts = "Material Icons Round"
+theme.icon_fonts = "Iosevka Nerd Font"
 
 -- -- clickable container ----
 theme.mouse_enter = theme.grey

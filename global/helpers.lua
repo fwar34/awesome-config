@@ -79,7 +79,7 @@ helpers.bmaker = function(widget, location)
                 1,
                 nil,
                 function()
-                    awful.spawn(location)
+                    awful.spawn.with_shell(location)
                     awesome.emit_signal("dashboard::toggle", awful.screen.focused())
                 end
             )

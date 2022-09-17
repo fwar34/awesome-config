@@ -35,7 +35,6 @@ local disk_used = [[sh -c "df -h | grep /dev/ | awk 'NR==1{print $3}'"]]
 local net_speed_widget = require("widget.net-speed-widget.net-speed")
 local cpu_temp = helpers.watch(cpu_temp_script)
 local gpu_temp = helpers.watch(gpu_temp_script)
-local gpu_percent = helpers.watch(gpu_mem_used, 2)
 local disk_max_no = helpers.watch(disk_max, 1200)
 local disk_used_no = helpers.watch(disk_used, 1200)
 local disk_text = wibox.widget.textbox("/")
@@ -86,8 +85,6 @@ local user_widget =
         },
         {
             gpu_icon,
-            helpers.horizontal_pad(dpi(5)),
-            gpu_percent,
             helpers.horizontal_pad(dpi(5)),
             gpu_temp,
             celcius,
