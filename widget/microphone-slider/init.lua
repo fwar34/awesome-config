@@ -6,7 +6,6 @@ local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("icons.flaticons")
 local helpers = require("global.helpers")
-local widget_dir = os.getenv("HOME") .. "/.cache/awesome/"
 
 local slider =
 wibox.widget {
@@ -33,48 +32,17 @@ wibox.widget {
 
 local mic_slider = slider.mic_slider
 
-local icon =
-wibox.widget {
-	image = icons.mic,
-	widget = wibox.widget.imagebox
-}
-
+-- Update on startup
 local update_slider = function()
 	awful.spawn.easy_async_with_shell(
 		"pactl get-source-volume 0",
 		function(stdout)
 			local volume = string.match(stdout, "(%d?%d?%d)%%")
 			mic_slider:set_value(tonumber(volume))
-			if mic_slider == 0 then
-				icon.image = icons.mic_mute
-			end
 		end
 	)
 end
-
-local action_level =
-wibox.widget {
-	{
-		icon,
-		widget = helpers.ccontainer
-	},
-	bg = beautiful.transparent,
-	shape = gears.shape.circle,
-	widget = wibox.container.background
-}
-
-mic_slider:connect_signal(
-	"property::value",
-	function()
-		local mic_level = mic_slider:get_value()
-		if mic_level == 0 then
-			icon.image = icons.mic_mute
-		else
-			icon.image = icons.mic
-		end
-		spawn('pactl set-source-volume 0 ' .. mic_level .. '%', false)
-	end
-)
+update_slider()
 
 mic_slider:buttons(
 	gears.table.join(
@@ -105,24 +73,61 @@ mic_slider:buttons(
 	)
 )
 
-local action_jump = function()
-	local sli_value = mic_slider:get_value()
-	if sli_value > 0 then
-		awful.spawn.easy_async_with_shell('echo "' .. sli_value .. '" > ' .. widget_dir .. 'sli_mic_value')
-		mic_slider:set_value(0)
-	else
-		mic_slider:set_value(tonumber(helpers.first_line(widget_dir .. "sli_mic_value")))
+local mic_toggle = wibox.container.background(
+	helpers.imaker(icons.mic),
+	beautiful.widget_bg_normal,
+	gears.shape.circle
+)
+helpers.add_hover_cursor(mic_toggle,"hand1")
+
+mic_toggle:connect_signal(
+	"mouse::enter",
+	function()
+		mic_toggle.bg = beautiful.accent_normal .. "32"
 	end
+)
+mic_toggle:connect_signal(
+	"mouse::leave",
+	function()
+		mic_toggle.bg = beautiful.widget_bg_normal
+	end
+)
+
+mic_slider:connect_signal(
+	"property::value",
+	function()
+		local mic_level = mic_slider:get_value()
+		spawn('pactl set-source-volume 0 ' .. mic_level .. '%', false)
+	end
+)
+
+local update_icon = function()
+	awful.spawn.easy_async_with_shell([[pactl get-source-mute 0]], function(stdout)
+		if stdout:match("no") then
+			mic_toggle.widget = helpers.imaker(icons.mic_mute)
+		elseif stdout:match("yes") then
+			mic_toggle.widget = helpers.imaker(icons.mic)
+		end
+	end)
+	mic_toggle:emit_signal("widget::redraw_needed")
+end
+-- update on startup
+update_icon()
+
+local mic_button = function()
+	awful.spawn.easy_async_with_shell([[bash -c "pactl set-source-mute 0 toggle"]], function()
+		update_icon()
+	end)
 end
 
-action_level:buttons(
+mic_toggle:buttons(
 	awful.util.table.join(
 		awful.button(
 			{},
 			1,
 			nil,
 			function()
-				action_jump()
+				mic_button()
 			end
 		),
 		awful.button(
@@ -140,7 +145,7 @@ local volume_setting =
 wibox.widget {
 	{
 		{
-			action_level,
+			mic_toggle,
 			top = dpi(12),
 			bottom = dpi(12),
 			widget = wibox.container.margin
@@ -154,8 +159,5 @@ wibox.widget {
 	forced_height = dpi(48),
 	widget = wibox.container.margin
 }
-
--- Update on startup
-update_slider()
 
 return volume_setting
