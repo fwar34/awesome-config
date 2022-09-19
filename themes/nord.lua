@@ -74,7 +74,7 @@ theme.gap_single_client = false
 theme.title_fonts = "Roboto Bold 11"
 theme.normal_fonts = "Roboto 11"
 theme.date_time_font = "Roboto Bold 11"
-theme.icon_fonts = "Iosevka Nerd Font"
+theme.icon_fonts = "JetBrainsMono Nerd Font"
 
 -- -- clickable container ----
 theme.mouse_enter = theme.nord10
@@ -159,12 +159,11 @@ theme.tasklist_plain_task_name = true
 theme.tasklist_shape = helpers.rect(dpi(4))
 
 -- -------- Taglist ----------
-theme.taglist_bg_empty    = theme.bg_normal
-theme.taglist_bg_occupied = theme.bg_normal
-theme.taglist_bg_urgent   = theme.bg_normal
+theme.taglist_bg_empty    = theme.transparent
+theme.taglist_bg_occupied = theme.transparent
+theme.taglist_bg_urgent   = theme.transparent
 theme.taglist_bg_focus    = theme.bg_normal
-theme.taglist_font        = theme.icon_fonts .. " 16"
-theme.taglist_spacing     = 2
+theme.taglist_font        = theme.title_fonts
 theme.taglist_fg_focus    = theme.nord6
 theme.taglist_fg_occupied = theme.nord9
 theme.taglist_fg_urgent   = theme.nord11
@@ -215,7 +214,7 @@ theme.hotkeys_font = "JetBrainsMono Nerd Font 11"
 theme.hotkeys_group_margin = dpi(10)
 theme.hotkeys_label_bg = theme.bg_normal
 theme.hotkeys_label_fg = theme.bg_normal
-theme.hotkeys_description_font = "JetBrains Mono Nerd Font 8"
+theme.hotkeys_description_font = "JetBrainsMono Nerd Font 8"
 theme.hotkeys_modifiers_fg = theme.fg_normal
 theme.hotkeys_bg = theme.bg_normal
 
