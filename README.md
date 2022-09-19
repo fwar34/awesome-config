@@ -66,6 +66,7 @@ $ cp -r ~/.config/awesome/misc/fonts/ ~/.local/share/
 $ cp -r ~/.config/awesome/misc/rofi/ ~/.local/share/
 $ fc-cache -rv
 ```
+install any [nerdfonts](https://www.nerdfonts.com/) for some icons to appear
 ### **THEMES**
 |Theme|Gtk|Kvantum|
 |------|------|------|
