@@ -7,14 +7,14 @@ local helpers = require("global.helpers")
 
 local icon = wibox.container.background(
 	wibox.widget {
-		font = beautiful.icon_fonts .. "Bold 40",
+		font = beautiful.icon_fonts .. " 22",
 		markup = helpers.colorize_text("墳", beautiful.accent_normal),
 		align = "center",
 		valign = "center",
 		widget = wibox.widget.textbox
 	},
 	beautiful.transparent,
-	gears.shape.circle
+	gears.shape.rectangle
 )
 
 local osd_header = wibox.widget {

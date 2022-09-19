@@ -37,18 +37,6 @@ local top_panel = {}
 -- ======================== SETUP ==========================
 -- =========================================================
 
--- --------- Clock -----------
-local textclock =
-wibox.widget.textclock(
-    '<span font="' ..
-    beautiful.date_time_font ..
-    '"color="' ..
-    beautiful.date_time_color ..
-    '">%a %b %d,</span><span font="' ..
-    beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %H:%M</span>'
-)
-local cw = wibox.container.margin(textclock, dpi(12), dpi(12), dpi(8), dpi(8))
-
 -- ------ Plus Button --------
 --Rofi Launcher
 local rofi_command =
@@ -81,7 +69,8 @@ add_button:buttons(
 
 -- -- layoutBox Keybinds -----
 local LayoutBox = function(s)
-    local layoutBox = helpers.ccontainer(awful.widget.layoutbox(s))
+    local layoutBox = awful.widget.layoutbox(s)
+    helpers.add_hover_cursor(layoutBox, "hand1")
     layoutBox.forced_width = beautiful.layoutbox_width
     layoutBox:buttons(
         gears.table.join(
@@ -121,29 +110,32 @@ end
 -- Systray
 local systray = require("panels.top-panel.systray")
 
--- dashboard
-local vol_icon = helpers.imaker(icons.volume, dpi(20), dpi(20))
-local act_icon = helpers.imaker(icons.activity, dpi(20), dpi(20))
-local network_icon = helpers.imaker(icons.wifi, dpi(20), dpi(20))
-local dashboard = wibox.container.background(
-    {
-        helpers.vertical_pad(dpi(2)),
-        wibox.container.margin {
-            helpers.horizontal_pad(dpi(10)),
-            network_icon,
-            vol_icon,
-            act_icon,
-            helpers.horizontal_pad(dpi(10)),
-            spacing = dpi(8),
-            layout = wibox.layout.fixed.horizontal,
-        },
-        layout = wibox.layout.fixed.vertical,
-    },
-    beautiful.widget_bg_normal,
-    helpers.rrect(dpi(6))
+-- --------- Date ------------
+local date =
+wibox.widget.textclock(
+    '<span font="' ..
+    beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %a, %b %d   </span>'
 )
-helpers.add_hover_cursor(dashboard, "hand1")
-dashboard:connect_signal(
+
+local date_container = wibox.widget {
+    {
+        wibox.widget {
+            font = beautiful.icon_fonts .. " 14",
+            markup = helpers.colorize_text("  ", beautiful.date_time_color),
+            align = "center",
+            valign = "center",
+            widget = wibox.widget.textbox
+        },
+        date,
+        layout = wibox.layout.fixed.horizontal,
+    },
+    shape = helpers.rrect(dpi(6)),
+    bg = beautiful.widget_bg_normal,
+    widget = wibox.container.background,
+}
+
+helpers.add_hover_cursor(date_container, "hand1")
+date_container:connect_signal(
     "button::press",
     function(_, _, _, button)
         if button == 1 then
@@ -151,26 +143,56 @@ dashboard:connect_signal(
         end
     end
 )
-dashboard:connect_signal(
+date_container:connect_signal(
     "mouse::enter",
     function()
-        dashboard.bg = beautiful.accent_normal .. "32"
+        date_container.bg = beautiful.accent_normal .. "32"
     end
 )
-dashboard:connect_signal(
+date_container:connect_signal(
     "mouse::leave",
     function()
-        dashboard.bg = beautiful.widget_bg_normal
+        date_container.bg = beautiful.widget_bg_normal
     end
 )
-local di = wibox.container.margin(dashboard, dpi(0), dpi(0), dpi(5), dpi(5))
+local dc = wibox.container.margin(date_container, dpi(0), dpi(0), dpi(5), dpi(5))
+
+-- --------- Clock -----------
+local clock = function(s)
+    local textclock =
+    wibox.widget.textclock(
+        '<span font="' ..
+        beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %I:%M %p   </span>'
+    )
+
+    local textclock_container = wibox.widget {
+        {
+            wibox.widget {
+                font = beautiful.icon_fonts .. " 14",
+                markup = helpers.colorize_text("  ", beautiful.date_time_color),
+                align = "center",
+                valign = "center",
+                widget = wibox.widget.textbox
+            },
+            textclock,
+            wibox.container.margin(LayoutBox(s), dpi(3), dpi(3), dpi(3), dpi(3)),
+            helpers.horizontal_pad(dpi(6)),
+            layout = wibox.layout.fixed.horizontal,
+        },
+        shape = helpers.rrect(dpi(6)),
+        bg = beautiful.widget_bg_normal,
+        widget = wibox.container.background,
+    }
+    local cc = wibox.container.margin(textclock_container, dpi(0), dpi(0), dpi(5), dpi(5))
+    return cc
+end
+
 
 -- =========================================================
 -- ======================= TOP BAR =========================
 -- =========================================================
 
 top_panel.create = function(s)
-    -- local height = s.geometry.height
     local panel =
     wibox(
         {
@@ -206,9 +228,11 @@ top_panel.create = function(s)
             layout = wibox.layout.fixed.horizontal,
             -- weather,
             systray,
-            di,
-            cw,
-            wibox.container.margin(LayoutBox(s), dpi(4), dpi(4), dpi(7), dpi(7)),
+            helpers.horizontal_pad(dpi(6)),
+            dc,
+            helpers.horizontal_pad(dpi(6)),
+            clock(s),
+
         }
     }
 

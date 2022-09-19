@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
 local helpers = require("global.helpers")
+local icons = require("icons.flaticons")
 
 local slider =
 wibox.widget {
@@ -83,14 +84,10 @@ volume_slider:buttons(
 	)
 )
 
+local icon = helpers.imaker(icons.volume2)
+
 local mute_toggle = wibox.container.background(
-	wibox.widget {
-		font = beautiful.icon_fonts .. "Bold 26",
-		markup = helpers.colorize_text("墳", beautiful.accent_normal),
-		align = "center",
-		valign = "center",
-		widget = wibox.widget.textbox
-	},
+	icon,
 	beautiful.widget_bg_normal,
 	gears.shape.circle
 )
@@ -100,14 +97,14 @@ local update_icon = function(volume_level)
 		[[pactl get-sink-mute 0]], function(stdout)
 		if stdout:match("no") then
 			if volume_level <= 50 and volume_level > 0 then
-				mute_toggle.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+				mute_toggle.widget = helpers.imaker(icons.volume0)
 			elseif volume_level <= 100 and volume_level > 50 then
-				mute_toggle.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+				mute_toggle.widget = helpers.imaker(icons.volume1)
 			elseif volume_level <= 150 and volume_level > 100 then
-				mute_toggle.widget.markup = helpers.colorize_text("", beautiful.accent_normal)
+				mute_toggle.widget = helpers.imaker(icons.volume2)
 			end
 		elseif stdout:match("yes") then
-			mute_toggle.widget.markup = helpers.colorize_text("ﱝ", beautiful.accent_normal)
+			mute_toggle.widget = helpers.imaker(icons.volumex)
 		end
 	end
 	)

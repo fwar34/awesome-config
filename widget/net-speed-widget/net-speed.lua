@@ -64,7 +64,7 @@ local function worker(user_args)
     net_speed_widget = wibox.widget {
         {
             {
-                font = beautiful.icon_fonts .. " 20",
+                font = beautiful.icon_fonts .. " 16",
                 markup = helpers.colorize_text("", beautiful.accent_normal),
                 align = "center",
                 valign = "center",
@@ -82,7 +82,7 @@ local function worker(user_args)
         },
         {
             {
-                font = beautiful.icon_fonts .. " 20",
+                font = beautiful.icon_fonts .. " 16",
                 markup = helpers.colorize_text("", beautiful.accent_normal),
                 align = "center",
                 valign = "center",

@@ -23,11 +23,9 @@ helpers.add_hover_cursor(systray, "hand1")
 local arrow_left = mat_icon(icons.left, dpi(18))
 local arrow_right = mat_icon(icons.right, dpi(18))
 
-local widget = wibox.widget{
+local widget = wibox.widget {
     arrow_left,
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, dpi(12))
-    end,
+    shape = gears.shape.circle,
     widget = wibox.container.background,
     bg = beautiful.transparent
 }
@@ -40,27 +38,31 @@ local update_widget = function()
         widget.widget = arrow_left
     end
 end
-    
+
 local toggle = function()
-    systray:set_screen (awful.screen.focused())
+    systray:set_screen(awful.screen.focused())
     systray.visible = not systray.visible
     update_widget()
 end
 
 widget:buttons(gears.table.join(awful.button({}, 1, nil, function()
-	toggle()
+    toggle()
 end)))
 
 local tray = wibox.container.background(
-    systray,
+    {
+        helpers.horizontal_pad(dpi(10)),
+        widget,
+        helpers.horizontal_pad(dpi(20)),
+        systray,
+        helpers.horizontal_pad(dpi(10)),
+        layout = wibox.layout.fixed.horizontal,
+    },
     beautiful.widget_bg_normal,
-    gears.shape.rect
+    gears.shape.rounded_rect
 )
-tray.shape_border_width = dpi(1)
-tray.shape_border_color = beautiful.accent_normal .. "60"
 
 return wibox.widget({
     layout = wibox.layout.fixed.horizontal,
-    wibox.container.margin(widget, dpi(6), dpi(6), dpi(6), dpi(6)),
-    wibox.container.margin(tray, dpi(6), dpi(6), dpi(6), dpi(6)),
+    wibox.container.margin(tray, dpi(0), dpi(0), dpi(5), dpi(5)),
 })

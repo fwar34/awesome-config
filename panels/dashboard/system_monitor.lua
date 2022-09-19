@@ -24,8 +24,6 @@ local gpu_icon = helpers.imaker(icons.gpu, dpi(20), dpi(30))
 local disk_icon = helpers.imaker(icons.harddisk, dpi(20), dpi(30))
 
 -- ----- Widget Setup --------
-local gpu_mem_used = [[sh -c "nvidia-smi | awk 'NR==10{print $9}' | sed 's/MiB/M/g'"]]
---local gpu_mem_max = [[sh -c "nvidia-smi | awk 'NR==10{print}' | awk '{print $11}' | sed 's/MiB//g'"]]
 local gpu_temp_script = [[sh -c "nvidia-smi | awk 'NR==10{print}' | cut -c 8-10"]]
 local cpu_temp_script = [[sh -c "sensors | grep Package | awk '{print $4}' | cut -c 2-3"]]
 local disk_max = [[sh -c "df -h | grep /dev/ | awk 'NR==1{print $2}'"]]
