@@ -244,7 +244,8 @@ client.connect_signal(
 				{
 					layout = wibox.layout.align.horizontal,
 					--- Left
-					floating(c),
+					-- floating(c),
+					nil,
 					{
 						--- Middle
 						{
