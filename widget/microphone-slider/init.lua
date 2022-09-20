@@ -32,17 +32,13 @@ wibox.widget {
 
 local mic_slider = slider.mic_slider
 
--- Update on startup
-local update_slider = function()
-	awful.spawn.easy_async_with_shell(
-		"pactl get-source-volume 0",
-		function(stdout)
-			local volume = string.match(stdout, "(%d?%d?%d)%%")
-			mic_slider:set_value(tonumber(volume))
-		end
-	)
-end
-update_slider()
+mic_slider:connect_signal(
+	"property::value",
+	function()
+		local mic_level = mic_slider:get_value()
+		spawn('pactl set-source-volume 0 ' .. mic_level .. '%', false)
+	end
+)
 
 mic_slider:buttons(
 	gears.table.join(
@@ -73,12 +69,22 @@ mic_slider:buttons(
 	)
 )
 
+local update_slider = function()
+	awful.spawn.easy_async_with_shell(
+		"pactl get-source-volume 0",
+		function(stdout)
+			local volume = string.match(stdout, "(%d?%d?%d)%%")
+			mic_slider:set_value(tonumber(volume))
+		end
+	)
+end
+
 local mic_toggle = wibox.container.background(
 	helpers.imaker(icons.mic),
 	beautiful.widget_bg_normal,
 	gears.shape.circle
 )
-helpers.add_hover_cursor(mic_toggle,"hand1")
+helpers.add_hover_cursor(mic_toggle, "hand1")
 
 mic_toggle:connect_signal(
 	"mouse::enter",
@@ -93,14 +99,6 @@ mic_toggle:connect_signal(
 	end
 )
 
-mic_slider:connect_signal(
-	"property::value",
-	function()
-		local mic_level = mic_slider:get_value()
-		spawn('pactl set-source-volume 0 ' .. mic_level .. '%', false)
-	end
-)
-
 local update_icon = function()
 	awful.spawn.easy_async_with_shell([[pactl get-source-mute 0]], function(stdout)
 		if stdout:match("no") then
@@ -108,14 +106,24 @@ local update_icon = function()
 		elseif stdout:match("yes") then
 			mic_toggle.widget = helpers.imaker(icons.mic)
 		end
+		mic_toggle:emit_signal("widget::redraw_needed")
 	end)
-	mic_toggle:emit_signal("widget::redraw_needed")
 end
--- update on startup
-update_icon()
+
+-- Update on startup with delay
+gears.timer {
+	timeout     = 5,
+	call_now    = true,
+	autostart   = true,
+	single_shot = true,
+	callback    = function()
+		update_slider()
+		update_icon()
+	end
+}
 
 local mic_button = function()
-	awful.spawn.easy_async_with_shell([[bash -c "pactl set-source-mute 0 toggle"]], function()
+	awful.spawn.easy_async_with_shell([[pactl set-source-mute 0 toggle]], function()
 		update_icon()
 	end)
 end

@@ -32,18 +32,6 @@ wibox.widget {
 
 local volume_slider = slider.volume_slider
 
--- Update on startup
-local update_slider = function()
-	awful.spawn.easy_async_with_shell(
-		[[pactl get-sink-volume 0]],
-		function(stdout)
-			local volume = string.match(stdout, "(%d?%d)%%")
-			volume_slider:set_value(tonumber(volume))
-		end
-	)
-end
-update_slider()
-
 -- set volume using slider value
 volume_slider:connect_signal(
 	"property::value",
@@ -52,6 +40,8 @@ volume_slider:connect_signal(
 		spawn("pactl set-sink-volume 0 " .. volume_level .. "%", false)
 		-- Update volume osd
 		awesome.emit_signal("module::volume_osd", volume_level)
+		-- Update icon
+		awesome.emit_signal("module::volume_icon", volume_level)
 	end
 )
 
@@ -84,10 +74,30 @@ volume_slider:buttons(
 	)
 )
 
-local icon = helpers.imaker(icons.volume2)
+local update_slider = function()
+	awful.spawn.easy_async_with_shell(
+		[[pactl get-sink-volume 0]],
+		function(stdout)
+			local volume = string.match(stdout, "(%d?%d?%d)%%")
+			volume_slider:set_value(tonumber(volume))
+			awesome.emit_signal("module::volume_icon", tonumber(volume))
+		end
+	)
+end
+
+-- Update on startup with delay
+gears.timer {
+	timeout     = 5,
+	call_now    = true,
+	autostart   = true,
+	single_shot = true,
+	callback    = function()
+		update_slider()
+	end
+}
 
 local mute_toggle = wibox.container.background(
-	icon,
+	helpers.imaker(icons.volume2),
 	beautiful.widget_bg_normal,
 	gears.shape.circle
 )
@@ -95,7 +105,7 @@ local mute_toggle = wibox.container.background(
 local update_icon = function(volume_level)
 	awful.spawn.easy_async_with_shell(
 		[[pactl get-sink-mute 0]], function(stdout)
-		if stdout:match("no") then
+		if string.match(stdout, "no") then
 			if volume_level <= 50 and volume_level > 0 then
 				mute_toggle.widget = helpers.imaker(icons.volume0)
 			elseif volume_level <= 100 and volume_level > 50 then
@@ -103,16 +113,17 @@ local update_icon = function(volume_level)
 			elseif volume_level <= 150 and volume_level > 100 then
 				mute_toggle.widget = helpers.imaker(icons.volume2)
 			end
-		elseif stdout:match("yes") then
+		else
 			mute_toggle.widget = helpers.imaker(icons.volumex)
 		end
+		mute_toggle:emit_signal("widget::redraw_needed")
 	end
 	)
-	mute_toggle:emit_signal("widget::redraw_needed")
 end
 
+-- signal from slider to update icon on vol change
 awesome.connect_signal(
-	'module::volume_osd',
+	"module::volume_icon",
 	function(volume)
 		update_icon(volume)
 	end
@@ -128,7 +139,7 @@ mute_toggle:buttons(
 			nil,
 			function()
 				awful.spawn.easy_async_with_shell([[bash -c "pactl set-sink-mute 0 toggle"]], function()
-					awesome.emit_signal("module::volume_osd", volume_slider:get_value())
+					awesome.emit_signal("module::volume_icon", volume_slider:get_value())
 				end)
 			end
 		),
@@ -168,11 +179,11 @@ awesome.connect_signal(
 	"widget::volume:update",
 	function(value)
 		volume_slider:set_value(tonumber(value))
+		update_icon(tonumber(value))
 	end
 )
 
-local volume_widget =
-wibox.widget {
+local volume_widget = wibox.widget {
 	{
 		{
 			mute_toggle,
