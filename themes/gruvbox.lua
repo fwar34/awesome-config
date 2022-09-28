@@ -48,18 +48,18 @@ theme.blue = "#83A598"
 
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/gruvbox/"
-local wallpapers = {
-    "gruvbox00.png", -- 1
-    "gruvbox01.png",
-    "gruvbox02.png",
-    "gruvbox03.jpg",
-    "gruvbox04.png",
-    "gruvbox05.png",
-    "gruvbox06.png",
-    "sushi.jpg", -- 8
-    "chinese-hills.jpg" -- 9
+theme.wallpapers = {
+    directory .. "gruvbox00.png", -- 1
+    directory .. "gruvbox01.png",
+    directory .. "gruvbox02.png",
+    directory .. "gruvbox03.jpg",
+    directory .. "gruvbox04.png",
+    directory .. "gruvbox05.png",
+    directory .. "gruvbox06.png",
+    directory .. "sushi.jpg", -- 8
+    directory .. "chinese-hills.jpg" -- 9
 }
-theme.wallpaper = directory .. wallpapers[9]
+theme.wallpaper = theme.wallpapers[1]
 
 theme.rofi_plus_sign = "gruvbox"
 
@@ -113,7 +113,7 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bg0_h
-theme.border_width = dpi(0)
+theme.border_width = dpi(1)
 theme.border_accent = theme.blue
 -- round corners
 theme.corner_radius = dpi(8)
@@ -237,7 +237,8 @@ theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.
 theme.layout_tile = gears.color.recolor_image(layouticons_path .. "tile.svg", theme.icon_color)
 theme.layout_floating = gears.color.recolor_image(layouticons_path .. "float.svg", theme.icon_color)
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
-theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
+-- theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
+theme.layout_tilebottom = gears.color.recolor_image(themes_path .. "default/layouts/tilebottom.png", theme.icon_color)
 
 -- --------- extra -----------
 -- theme.layout_fullscreen = themes_path.."default/layouts/fullscreenw.png"

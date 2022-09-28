@@ -160,7 +160,8 @@ function rules.create(clientkeys, clientbuttons)
                     "Eog",
                     "firefox",
                     "code",
-                    "alacritty"
+                    "Alacritty",
+                    "St"
                 },
                 name = {}
             },

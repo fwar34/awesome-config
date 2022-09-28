@@ -53,8 +53,8 @@ bling.widget.tag_preview.enable {
 -- ------ scratchpad ---------
 
 SCRATCHPAD = bling.module.scratchpad {
-  command                 = "wezterm start --class music nvim ~/Documents/TextFile.txt", -- How to spawn the scratchpad
-  rule                    = { instance = "music" }, -- The rule that the scratchpad will be searched by
+  command                 = "wezterm start --class text nvim ~/Documents/TextFile.txt", -- How to spawn the scratchpad
+  rule                    = { instance = "text" }, -- The rule that the scratchpad will be searched by
   sticky                  = true, -- Whether the scratchpad should be sticky
   autoclose               = false, -- Whether it should hide itself when losing focus
   floating                = true, -- Whether it should be floating (MUST BE TRUE FOR ANIMATIONS)

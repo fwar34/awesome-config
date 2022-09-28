@@ -18,4 +18,4 @@ i3lock -i ~/.config/awesome/wallpapers/wp8148977-minimalist-landscape-wallpapers
   --date-font="RobotoMono Nerd Font" --verif-font="Roboto Mono Nerd Font" --greeter-font="Roboto Mono Nerd Font" \
   --wrong-font="Roboto Mono Nerd Font" --verif-size=23 --greeter-size=23 --wrong-size=23 \
   --pointer=default --refresh-rate=0 --pass-media-keys --pass-volume-keys \
-  --greeter-pos="960:780" --time-pos="960:370" --date-pos="960:430" --ind-pos="960:560" 
+  --greeter-pos="960:780" --time-pos="960:370" --date-pos="960:430" --ind-pos="960:560" \

@@ -5,7 +5,6 @@
 local awful = require("awful")
 local top_panel = require("panels.top-panel")
 local dashboard = require("panels.dashboard")
-local roundcorners = require("client.round-corners")
 
 -- =========================================================
 -- =================== INITIALIZATION ======================

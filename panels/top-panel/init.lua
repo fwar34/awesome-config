@@ -204,7 +204,7 @@ top_panel.create = function(s)
             x = s.geometry.x,
             y = s.geometry.y,
             stretch = false,
-            bg = beautiful.bg_wibar,
+            bg = beautiful.bg_normal,
             fg = beautiful.fg_normal
         }
     )

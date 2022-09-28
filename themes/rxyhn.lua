@@ -76,13 +76,13 @@ theme.xcolor15 = "#E5E5E5"
 
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
-local wallpapers = {
-    "garden-house.png",
-    "wallpaper-dimmed.jpg",
-    "wp8148965-minimalist-landscape-wallpapers.jpg",
-    "mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg"
+theme.wallpapers = {
+    directory .. "mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg",
+    directory .. "garden-house.png",
+    directory .. "wallpaper-dimmed.jpg",
+    directory .. "wp8148965-minimalist-landscape-wallpapers.jpg",
 }
-theme.wallpaper = directory .. wallpapers[3]
+theme.wallpaper = theme.wallpapers[1]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "ryxhn"
@@ -126,7 +126,7 @@ theme.fg_normal = theme.xcolor15
 theme.fg_critical = theme.xcolor9
 
 -- ------ background ---------
-theme.bg_normal = "#0B161A"
+theme.bg_normal = theme.darker_xbackground
 theme.bg_normal_alt = theme.lighter_xbackground
 theme.bg_critical = theme.xcolor9
 
@@ -136,7 +136,7 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.xbackground
-theme.border_width = dpi(0)
+theme.border_width = dpi(1)
 theme.border_accent = theme.xcolor4
 -- round corners
 theme.corner_radius = dpi(8)
@@ -255,6 +255,7 @@ theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.
 theme.layout_floating = icons.floating
 theme.layout_max = icons.max
 theme.layout_tile = icons.tile
+theme.layout_tilebottom = icons.machi
 theme.layout_dwindle = icons.dwindle
 theme.layout_centered = icons.centered
 theme.layout_mstab = icons.mstab

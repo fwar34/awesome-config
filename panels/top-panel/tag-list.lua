@@ -89,8 +89,8 @@ local TagList = function(s)
           {
             id = "text_role",
             widget = wibox.widget.textbox,
-            align = "center",
             markup = "DD",
+            align = "center",
             valign = "center"
           },
           margins = dpi(6),

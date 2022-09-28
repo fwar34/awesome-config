@@ -16,17 +16,17 @@ local awful = require("awful")
 -- Theme handling library
 local beautiful = require("beautiful")
 
-local helpers = require("global.helpers")
-
 -- =========================================================
 -- ================= USER CONFIGURATION ====================
 -- =========================================================
 
 -- color scheme
--- make sure COLORS is at line 27
+-- make sure
+-- COLORS is at
+-- line 27
 COLORS = "rxyhn"
 
---Rofi Launcher
+COLORS = "rxyhn"
 awful.spawn.with_shell([[echo '@theme "rofi-]] ..
     COLORS .. [["' > ]] .. os.getenv("HOME") .. [[/.config/rofi/config.rasi]])
 local rofi_command = "rofi -show drun"
@@ -62,128 +62,46 @@ WEATHER = {
     units = "metric"
 }
 
--- Startup apps
---- picom
-helpers.check_if_running(
-    "picom",
-    nil,
-    function()
-        awful.spawn("picom --experimental-backends --config " ..
-            gears.filesystem.get_configuration_dir() .. "configs/picom.conf", false)
-    end
-)
-helpers.run_once_pgrep("mpd")
-helpers.run_once_pgrep("mpDris2")
---- Polkit Agent
-helpers.run_once_ps(
-    "polkit-gnome-authentication-agent-1",
-    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-)
---- Other stuff
-helpers.run_once_pgrep("blueman-applet")
-helpers.run_once_pgrep("nm-applet --indicator")
-helpers.run_once_pgrep(gears.filesystem.get_configuration_dir() .. "configs/nvidia-startup")
--- this will turn screen off when i3lock starts with xidlehook
-awful.spawn.with_shell([[echo "& sleep 5 && xset dpms force off" >> ]] ..
-    gears.filesystem.get_configuration_dir() .. [[configs/lock]])
-helpers.check_if_running(
-    "xidlehook",
-    nil,
-    function()
-        helpers.run_once_pgrep(gears.filesystem.get_configuration_dir() .. "configs/xidlehook")
-    end
-)
+-- autostart startup apps
+require("global.autostart")
 
--- Scripts
-local cache_dir = os.getenv("HOME") .. "/.cache/awesome/"
-
-local icon_colors = {
+-- svg icon color for each theme
+ICON_COLORS = {
     nord = "#e5e9f0",
     gruvbox = "#EBDBB2",
     rxyhn = "#6791C9",
     everforest = "#ddd0b4"
 }
 
--- check if prev cache exists if not create one
-awful.spawn.easy_async_with_shell(
-    [[
-        test -f ]] .. cache_dir .. [[prev_theme && echo "yes"
-    ]],
-    function(stdout)
-        if stdout:match("yes") then
-            awful.spawn.with_shell('echo "xax"')
-        else
-            awful.spawn.with_shell('echo "rxyhn" > ' .. cache_dir .. 'prev_theme')
-        end
-    end
-)
-
--- Changin color of Svg icons
-local icon_location1 = os.getenv("HOME") .. "/.config/awesome/icons/flaticons/"
-local icon_location2 = os.getenv("HOME") .. "/.config/awesome/icons/places/"
-local prev_theme = helpers.first_line(cache_dir .. "prev_theme")
-
-local function changeColor(prev, new)
-    awful.spawn.easy_async_with_shell([[
-                    for x in ]] .. icon_location1 .. [[*
-                    do
-                    sed -i "s/]] .. prev .. [[/]] .. new .. [[/g" $x
-                    done
-                ]])
-    awful.spawn.easy_async_with_shell([[
-                    for x in ]] .. icon_location2 .. [[*
-                    do
-                    sed -i "s/]] .. prev .. [[/]] .. new .. [[/g" $x
-                    done
-                ]])
-end
-
-changeColor(icon_colors[prev_theme], icon_colors[COLORS])
-
---  changing alacritty theme --
-local alacrittycfg = os.getenv("HOME") .. "/.config/alacritty/alacritty.yml"
-awful.spawn.with_shell([[
-    sed -i 's/*]] .. prev_theme .. [[/*]] .. COLORS .. [[/' ]] .. alacrittycfg .. [[
-]])
-
 -- -- changing gtk theme -----
 -- make sure theme names are correct
-local theme_names = {
+THEME_NAMES = {
     nord = "Nordic",
     gruvbox = "Gruvbox",
     rxyhn = "Aesthetic-Night",
     everforest = "Everforest-Dark-BL"
 }
-local gtk_cfg = os.getenv("HOME") .. "/.config/gtk-3.0/settings.ini"
-awful.spawn.with_shell([[
-    sed -i 's/]] .. theme_names[prev_theme] .. [[/]] .. theme_names[COLORS] .. [[/' ]] .. gtk_cfg .. [[
-]])
+
 
 --  changing kvantum theme ---
-local kv_theme_names = {
+-- make sure theme names are correct
+KV_THEME_NAMES = {
     nord = "Nordic",
     gruvbox = "gruvbox-kvantum",
     rxyhn = "Aesthetic-Night",
     everforest = "gruvbox-kvantum"
 }
-local kvantumcfg = os.getenv("HOME") .. "/.config/Kvantum/kvantum.kvconfig"
-awful.spawn.with_shell([[
-    echo "[General]
-    theme=]] .. kv_theme_names[COLORS] .. [[" > ]] .. kvantumcfg .. [[
-]])
 
--- =========================================================
--- =================== DEFINE LAYOUTS ======================
--- =========================================================
+require("global.svg-color-changer")
 
+-- -------- Layouts ----------
 -- https://awesomewm.org/doc/api/libraries/awful.layout.html#Client_layouts
--- set icons in the theme file
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
     awful.layout.suit.max,
-    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.tile.bottom,
 }
 
 -- =========================================================

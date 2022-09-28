@@ -1,9 +1,11 @@
 #!/bin/bash
+
 fg=d3c6aa
 wrong=e67e80
 highlight=9aa79d
 date=859289
 verify=a7c080
+
 i3lock -i ~/.config/awesome/wallpapers/forest.jpg \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
@@ -16,4 +18,4 @@ i3lock -i ~/.config/awesome/wallpapers/forest.jpg \
   --date-font="RobotoMono Nerd Font" --verif-font="Roboto Mono Nerd Font" --greeter-font="Roboto Mono Nerd Font" \
   --wrong-font="Roboto Mono Nerd Font" --verif-size=23 --greeter-size=23 --wrong-size=23 \
   --pointer=default --refresh-rate=0 --pass-media-keys --pass-volume-keys \
-  --greeter-pos="960:780" --time-pos="960:370" --date-pos="960:430" --ind-pos="960:560" 
+  --greeter-pos="960:780" --time-pos="960:370" --date-pos="960:430" --ind-pos="960:560" \

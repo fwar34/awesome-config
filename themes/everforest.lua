@@ -57,10 +57,15 @@ theme.transparent = "#22000000"
 
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
-local wallpapers = {
-    "forest.jpg", -- 1
+theme.wallpapers = {
+    directory .. "forest.jpg", -- 1
+    directory .. "forest1.jpg",
+    directory .. "forest2.jpg",
+    directory .. "forest3.jpg",
+    directory .. "forest4jpg",
+    directory .. "forest5.jpg",
 }
-theme.wallpaper = directory .. wallpapers[1]
+theme.wallpaper = theme.wallpapers[2]
 
 theme.rofi_plus_sign = "everforest"
 
@@ -113,7 +118,7 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bar
-theme.border_width = dpi(0)
+theme.border_width = dpi(1)
 theme.border_accent = theme.grey
 theme.corner_radius = dpi(8)
 
@@ -235,7 +240,8 @@ theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.
 theme.layout_tile = gears.color.recolor_image(layouticons_path .. "tile.svg", theme.icon_color)
 theme.layout_floating = gears.color.recolor_image(layouticons_path .. "float.svg", theme.icon_color)
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
-theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
+-- theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
+theme.layout_tilebottom = gears.color.recolor_image(themes_path .. "default/layouts/tilebottom.png", theme.icon_color)
 
 -- --------- extra -----------
 -- theme.layout_fullscreen = themes_path.."default/layouts/fullscreenw.png"

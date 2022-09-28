@@ -77,6 +77,11 @@ local get_dpi = beautiful.xresources.get_dpi
 
 awful.screen.connect_for_each_screen(
   function(s)
-    awful.tag({" ", "﬏ ", " ", " ", " ", " "}, s, awful.layout.layouts[1])
+    if s.index == 1 then
+      awful.tag({ " ", "﬏ ", " ", " ", " ", " " }, s, awful.layout.layouts[4])
+    elseif s.index == 2 then
+      awful.tag({ " ", "﬏ ", " ", " ", " ", " " }, s, awful.layout.layouts[1])
+    end
+
   end
 )

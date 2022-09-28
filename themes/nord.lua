@@ -48,14 +48,14 @@ theme.nord15 = "#b48ead"
 
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
-local wallpapers = {
-    "Nord.png", -- 1
-    "Nord-underwater.png",
-    "jellyfish.png",
-    "nordic-wallpaper.jpg",
-    "nord-arch.png" --5
+theme.wallpapers = {
+    directory .. "nordic-wallpaper.jpg",
+    directory .. "Nord.png", -- 1
+    directory .. "Nord-underwater.png",
+    directory .. "jellyfish.png",
+    directory .. "nord-arch.png" --5
 }
-theme.wallpaper = directory .. wallpapers[5]
+theme.wallpaper = theme.wallpapers[1]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "nord"
@@ -110,7 +110,7 @@ theme.titlebar_buttonsize_alt = dpi(18)
 theme.titlebar_buttonsize = dpi(20)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.nord0
-theme.border_width = dpi(0)
+theme.border_width = dpi(1)
 theme.border_accent = theme.nord10
 -- round corners
 theme.corner_radius = dpi(8)
@@ -233,7 +233,8 @@ theme.awesome_icon = gears.color.recolor_image(themes_path .. "sky/awesome-icon.
 theme.layout_tile = gears.color.recolor_image(layouticons_path .. "tile.svg", theme.icon_color)
 theme.layout_floating = gears.color.recolor_image(layouticons_path .. "float.svg", theme.icon_color)
 theme.layout_max = gears.color.recolor_image(themes_path .. "default/layouts/fullscreenw.png", theme.icon_color)
-theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
+theme.layout_tilebottom = gears.color.recolor_image(themes_path .. "default/layouts/tilebottom.png", theme.icon_color)
+-- theme.layout_dwindle = gears.color.recolor_image(themes_path .. "default/layouts/dwindlew.png", theme.icon_color)
 
 -- return theme
 return theme
