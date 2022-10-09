@@ -8,6 +8,7 @@ local mat_icon = require("widget.icon-button.icon")
 local icons = require("icons.flaticons")
 local widget_dir = os.getenv("HOME") .. "/.cache/awesome/"
 
+-- TODO: check headphone_state on startup
 local stringtoboolean = { ["true"] = true, ["false"] = false }
 local headphone_state
 

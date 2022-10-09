@@ -77,12 +77,9 @@ theme.xcolor15 = "#E5E5E5"
 -- ------- Wallpaper ---------
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
 theme.wallpapers = {
-    directory .. "mountains-landscape-sunrise-minimalist-minimalism-y7214.jpg",
-    directory .. "garden-house.png",
-    directory .. "wallpaper-dimmed.jpg",
-    directory .. "wp8148965-minimalist-landscape-wallpapers.jpg",
+    directory .. "forest5.jpg",
 }
-theme.wallpaper = theme.wallpapers[1]
+theme.wallpaper = theme.wallpapers[5]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "ryxhn"

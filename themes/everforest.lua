@@ -62,10 +62,8 @@ theme.wallpapers = {
     directory .. "forest1.jpg",
     directory .. "forest2.jpg",
     directory .. "forest3.jpg",
-    directory .. "forest4jpg",
-    directory .. "forest5.jpg",
 }
-theme.wallpaper = theme.wallpapers[2]
+theme.wallpaper = theme.wallpapers[1]
 
 theme.rofi_plus_sign = "everforest"
 

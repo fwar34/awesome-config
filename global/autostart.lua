@@ -8,7 +8,7 @@ helpers.check_if_running(
     "picom",
     nil,
     function()
-        awful.spawn("picom --experimental-backends --config " ..
+        awful.spawn("picom --config " ..
             gears.filesystem.get_configuration_dir() .. "configs/picom.conf", false)
     end
 )
@@ -34,3 +34,4 @@ helpers.check_if_running(
         helpers.run_once_pgrep(gears.filesystem.get_configuration_dir() .. "configs/xidlehook")
     end
 )
+helpers.run_once_pgrep("eval '$(ssh-agent -s)'")

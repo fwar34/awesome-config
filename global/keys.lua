@@ -392,7 +392,7 @@ gears.table.join(
     -- ~~~~~~~~ cycle through screens ~~~~~~~~~~~
     awful.key(
         { modkey },
-        "F2",
+        "s",
         function()
             awful.screen.focus_relative(1)
         end

@@ -47,19 +47,13 @@ theme.blue = "#83A598"
 -- =========================================================
 
 -- ------- Wallpaper ---------
-local directory = gfs.get_configuration_dir() .. "wallpapers/gruvbox/"
+local directory = gfs.get_configuration_dir() .. "wallpapers/"
 theme.wallpapers = {
-    directory .. "gruvbox00.png", -- 1
-    directory .. "gruvbox01.png",
-    directory .. "gruvbox02.png",
-    directory .. "gruvbox03.jpg",
-    directory .. "gruvbox04.png",
-    directory .. "gruvbox05.png",
-    directory .. "gruvbox06.png",
-    directory .. "sushi.jpg", -- 8
-    directory .. "chinese-hills.jpg" -- 9
+    directory .. "gruvbox.jpg", -- 1
+    directory .. "gruvbox1.jpg", -- 1
+    directory .. "Shibata_Zeshin.jpg", -- 1
 }
-theme.wallpaper = theme.wallpapers[1]
+theme.wallpaper = theme.wallpapers[2]
 
 theme.rofi_plus_sign = "gruvbox"
 

@@ -1,1 +1,3 @@
 rc.lua
+global/bling.lua
+configs/lock-gruvbox

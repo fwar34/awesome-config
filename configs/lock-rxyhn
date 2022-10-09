@@ -6,7 +6,7 @@ highlight=24273a
 date=8aadf4
 verify=a6e3a1
 
-i3lock -i ~/.config/awesome/wallpapers/wp8148977-minimalist-landscape-wallpapers.png \
+i3lock -i ~/.config/awesome/wallpapers/landscape.png \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
   --ringver-color=$verify --insidewrong-color=$wrong --ringwrong-color=$wrong \

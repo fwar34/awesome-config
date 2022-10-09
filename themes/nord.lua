@@ -50,9 +50,8 @@ theme.nord15 = "#b48ead"
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
 theme.wallpapers = {
     directory .. "nordic-wallpaper.jpg",
-    directory .. "Nord.png", -- 1
     directory .. "Nord-underwater.png",
-    directory .. "jellyfish.png",
+    directory .. "jellyfish-nord.png",
     directory .. "nord-arch.png" --5
 }
 theme.wallpaper = theme.wallpapers[1]

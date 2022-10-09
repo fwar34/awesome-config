@@ -24,9 +24,8 @@ local beautiful = require("beautiful")
 -- make sure
 -- COLORS is at
 -- line 27
-COLORS = "rxyhn"
+COLORS = "gruvbox"
 
-COLORS = "rxyhn"
 awful.spawn.with_shell([[echo '@theme "rofi-]] ..
     COLORS .. [["' > ]] .. os.getenv("HOME") .. [[/.config/rofi/config.rasi]])
 local rofi_command = "rofi -show drun"
@@ -38,7 +37,7 @@ awful.spawn.with_shell([[cat ~/.config/awesome/configs/lock-]] ..
 -- Default apps global variable
 apps = {
     editor = "code",
-    terminal = "alacritty",
+    terminal = "st",
     launcher = rofi_command,
     lock = gears.filesystem.get_configuration_dir() .. "configs/lock-" .. COLORS,
     screenshot = "flameshot gui",

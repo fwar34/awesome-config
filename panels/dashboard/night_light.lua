@@ -53,7 +53,7 @@ local toggle_action = function()
 			redshift -x && pkill redshift && killall redshift
 			echo 'OFF'
 		else
-			redshift -l 28.38:77.12 -t 5500:4200 -r &>/dev/null &
+			redshift -l 0.0:0.0 -t 5500:4200 -r &>/dev/null &
 			echo 'ON'
 		fi
 		]],
@@ -71,7 +71,16 @@ end
 local startup = function ()
     toggle_action()
 end
-startup()
+-- Adding startup delay so it loads correctly
+gears.timer {
+	timeout     = 2,
+	call_now    = true,
+	autostart   = true,
+	single_shot = true,
+	callback    = function()
+    startup()
+	end
+}
 
 bluelight:buttons(
     gears.table.join(
