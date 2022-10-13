@@ -6,7 +6,7 @@ highlight=81a1c1
 date=5e81ac
 verify=a3be8c
 
-i3lock -i ~/.config/awesome/wallpapers/Nord.png \
+i3lock -i ~/.config/awesome/wallpapers/nordic-wallpaper.jpg \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
   --ringver-color=$verify --insidewrong-color=$wrong --ringwrong-color=$wrong \

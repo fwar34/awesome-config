@@ -130,10 +130,14 @@ theme.widget_bg_normal = theme.base00
 theme.layoutbox_width = dpi(24)
 
 -- ------- dashboard ---------
-theme.dashboard_min_height = dpi(600)
-theme.dashboard_max_height = dpi(600)
+theme.dashboard_min_height = dpi(460)
+theme.dashboard_max_height = dpi(460)
 theme.dashboard_max_width = dpi(600)
 theme.dashboard_min_width = dpi(600)
+theme.date_dashboard_min_height = dpi(440)
+theme.date_dashboard_max_height = dpi(440)
+theme.date_dashboard_max_width = dpi(350)
+theme.date_dashboard_min_width = dpi(350)
 theme.dashboard_margin = dpi(2)
 theme.dashboard_margin_color = theme.base01
 

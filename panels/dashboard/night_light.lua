@@ -68,20 +68,6 @@ local toggle_action = function()
     )
 end
 
-local startup = function ()
-    toggle_action()
-end
--- Adding startup delay so it loads correctly
-gears.timer {
-	timeout     = 2,
-	call_now    = true,
-	autostart   = true,
-	single_shot = true,
-	callback    = function()
-    startup()
-	end
-}
-
 bluelight:buttons(
     gears.table.join(
         awful.button(

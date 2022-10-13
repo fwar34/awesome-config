@@ -4,7 +4,7 @@ wrong=FB4934
 highlight=FABD2F
 date=83A598
 verify=B8BB26
-i3lock -i ~/.config/awesome/wallpapers/gruvbox/gruvbox01.png \
+i3lock -i ~/.config/awesome/wallpapers/gruvbox1.jpg \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
   --ringver-color=$verify --insidewrong-color=$wrong --ringwrong-color=$wrong \

@@ -17,8 +17,6 @@ local mat_icon = require("widget.icon-button.icon")
 
 local helpers = require("global.helpers")
 
-PANEL_VISIBLE = false
-
 -- define module table
 local dashboard = {}
 
@@ -77,7 +75,7 @@ local places_widget =
 }
 
 --importing stuff
-local calender = require("panels.dashboard.calender")
+-- local calender = require("panels.dashboard.calender")
 local playerctl = require("widget.playerctl")
 local audio = require("panels.dashboard.set-audio-sink")
 local wifi = require ("panels.dashboard.wifi")
@@ -147,7 +145,7 @@ local places_widget_box = helpers.create_boxed_widget(places_widget, dpi(270), d
 local volume_box = helpers.create_boxed_widget(settings_widget, dpi(270), dpi(150), beautiful.widget_bg_normal)
 local user_system_monitor = helpers.create_boxed_widget(sysmon, dpi(270), dpi(120), beautiful.widget_bg_normal)
 local toggle_apps = helpers.create_boxed_widget(toggle_buttons, dpi(270), dpi(60), beautiful.widget_bg_normal)
-local calender_box = helpers.create_boxed_widget(calender, dpi(270), dpi(400), beautiful.widget_bg_normal)
+-- local calender_box = helpers.create_boxed_widget(calender, dpi(270), dpi(400), beautiful.widget_bg_normal)
 -- =========================================================
 -- ======================== PANEL ==========================
 -- =========================================================
@@ -184,7 +182,8 @@ dashboard.create = function(s)
                                 {
                                     user_profile,
                                     user_system_monitor,
-                                    calender_box,
+                                    -- calender_box,
+                                    places_widget_box,
                                     spacing = dpi(15),
                                     layout = wibox.layout.fixed.vertical
                                 },
@@ -197,7 +196,6 @@ dashboard.create = function(s)
                                     volume_box,
                                     toggle_apps,
                                     playerctl,
-                                    places_widget_box,
                                     spacing = dpi(15),
                                     layout = wibox.layout.fixed.vertical
                                 },
@@ -236,6 +234,7 @@ dashboard.create = function(s)
     awesome.connect_signal("dashboard::toggle", function(scr)
 		if scr == s then
 			s.dashboard.visible = not s.dashboard.visible
+            awesome.emit_signal("date_dashboard::close", awful.screen.focused())
 		end
 	end)
     awesome.connect_signal("dashboard::close", function(scr)

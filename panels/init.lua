@@ -5,6 +5,7 @@
 local awful = require("awful")
 local top_panel = require("panels.top-panel")
 local dashboard = require("panels.dashboard")
+local date_dashboard = require("panels.date_dashboard")
 
 -- =========================================================
 -- =================== INITIALIZATION ======================
@@ -16,6 +17,7 @@ awful.screen.connect_for_each_screen(
     -- Create the Top bar
     s.top_panel = top_panel.create(s)
     s.dashboard = dashboard.create(s)
+    s.date_dashboard = date_dashboard.create(s)
   end
 )
 
@@ -29,6 +31,11 @@ function updateBarsVisibility()
       if s.dashboard then
         if fullscreen and s.dashboard.visible then
           s.dashboard.visible = false
+        end
+      end
+      if s.date_dashboard then
+        if fullscreen and s.date_dashboard then
+          s.date_dashboard.visible = false
         end
       end
     end

@@ -114,6 +114,7 @@ gears.table.join(
         function()
             awesome.emit_signal("menu::hide", awful.screen.focused())
             awesome.emit_signal("dashboard::close", awful.screen.focused())
+            awesome.emit_signal("date_dashboard::close", awful.screen.focused())
         end
     ),
     awful.button(
@@ -264,6 +265,7 @@ gears.table.join(
         1,
         function()
             awesome.emit_signal("dashboard::close", awful.screen.focused())
+            awesome.emit_signal("date_dashboard::close", awful.screen.focused())
         end
     ),
     awful.button(
