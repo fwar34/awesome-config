@@ -94,7 +94,7 @@ local date_container = wibox.widget {
 	{
 		wibox.widget {
 			font = beautiful.icon_fonts .. " 14",
-			markup = helpers.colorize_text("  ", beautiful.date_time_color),
+			markup = helpers.colorize_text("  ", beautiful.icon_color),
 			align = "center",
 			valign = "center",
 			widget = wibox.widget.textbox,
@@ -132,7 +132,7 @@ local clock = function(s)
 		{
 			wibox.widget {
 				font = beautiful.icon_fonts .. " 14",
-				markup = helpers.colorize_text("  ", beautiful.date_time_color),
+				markup = helpers.colorize_text("  ", beautiful.icon_color),
 				align = "center",
 				valign = "center",
 				widget = wibox.widget.textbox,
@@ -157,7 +157,7 @@ local wifi_name = [[sh -c "nmcli dev | grep wifi | sed 's/ \{2,\}/|/g' | cut -d 
 
 local state_text_icon = wibox.widget {
 	font = beautiful.icon_fonts .. " 14",
-	markup = helpers.colorize_text(" 睊 ", beautiful.date_time_color),
+	markup = helpers.colorize_text(" 睊 ", beautiful.icon_color),
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox,
@@ -174,11 +174,11 @@ local wifi_name_text = wibox.widget {
 local update_text_icon = function()
 	awful.spawn.easy_async_with_shell(conn_state, function(stdout)
 		if string.match(stdout, "connected") then
-			state_text_icon.markup = helpers.colorize_text(" 直 ", beautiful.date_time_color)
+			state_text_icon.markup = helpers.colorize_text(" 直 ", beautiful.icon_color)
 		elseif string.match(stdout, "disconnected") then
-			state_text_icon.markup = helpers.colorize_text(" 睊 ", beautiful.date_time_color)
+			state_text_icon.markup = helpers.colorize_text(" 睊 ", beautiful.icon_color)
 		else
-			state_text_icon.markup = helpers.colorize_text(" 直? ", beautiful.date_time_color)
+			state_text_icon.markup = helpers.colorize_text(" 直? ", beautiful.icon_color)
 		end
 	end)
 end

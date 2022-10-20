@@ -224,7 +224,7 @@ theme.playerctl_ignore = "firefox"
 theme.playerctl_player = { "music", "%any" }
 
 -- ------- date/time ---------
-theme.date_time_color = theme.xcolor4
+theme.date_time_color = theme.xcolor15
 
 -- ------- calender ----------
 theme.cal_header_bg = theme.transparent
