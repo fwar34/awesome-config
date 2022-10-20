@@ -1,9 +1,17 @@
 # Dotfiles
 Awesome wm dotfiles
 
-|Gruvbox|Nord|
+|Gruvbox|
+|------|
+|![](misc/.images/gruvbox.png)|
+
+|Nord|Rxyhn|
 |------|------|
-|![](https://i.imgur.com/CjwqHwr.png)|![](https://i.imgur.com/KgH0D21.png)|
+|![](misc/.images/nord.png)|![](misc/.images/rxyhn.png)|
+
+|Everforest|Tokyonight|
+|------|------|
+|![](misc/.images/everforest.png)|![](misc/.images/tokyonight.png)|
 
 ### **Aur(yay)**
 ```bash
