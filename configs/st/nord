@@ -11,7 +11,7 @@ st.font: JetBrainsMono Nerd Font:style:medium:pixelsize=14
 st.borderpx: 10
 
 !- 0.1 to 0.9 = transparency
-st.alpha: 0.9
+st.alpha: 1
 
 #define nord0 #2E3440
 #define nord1 #3B4252

@@ -78,8 +78,9 @@ theme.xcolor15 = "#E5E5E5"
 local directory = gfs.get_configuration_dir() .. "wallpapers/"
 theme.wallpapers = {
     directory .. "forest3.jpg",
+    directory .. "totoro-tree.png",
 }
-theme.wallpaper = theme.wallpapers[1]
+theme.wallpaper = theme.wallpapers[2]
 
 -- --------- rofi ------------
 theme.rofi_plus_sign = "ryxhn"
@@ -97,13 +98,13 @@ theme.gap_single_client = false
 -- --------- Fonts -----------
 theme.title_fonts = "Roboto Bold 11"
 theme.normal_fonts = "Roboto 11"
-theme.date_time_font = "Roboto Bold 11"
+theme.date_time_font = "Roboto Bold 10"
 theme.icon_fonts = "JetBrainsMono Nerd Font"
 
 -- -- clickable container ----
-theme.mouse_enter = theme.xcolor14
-theme.mouse_press = theme.xcolor6
-theme.mouse_release = theme.xcolor14
+theme.mouse_enter = theme.xcolor4
+theme.mouse_press = theme.xcolor12
+theme.mouse_release = theme.xcolor0
 
 -- -------- accent -----------
 theme.accent_normal = theme.xcolor4
@@ -133,7 +134,7 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.xbackground
-theme.border_width = dpi(1)
+theme.border_width = dpi(2)
 theme.border_accent = theme.xcolor4
 -- round corners
 theme.corner_radius = dpi(8)
@@ -176,7 +177,7 @@ theme.menu_bg_normal = theme.xcolor0
 -- ------- TaskList ----------
 theme.tasklist_font = "Roboto Mono Nerd Fonts Bold 10"
 theme.tasklist_bg_normal = theme.xcolor0
-theme.tasklist_bg_focus = theme.xcolor8 .. "4f"
+theme.tasklist_bg_focus = theme.accent_normal .. "4f"
 theme.tasklist_bg_urgent = theme.xcolor0
 theme.tasklist_fg_focus = theme.xcolor15
 theme.tasklist_fg_urgent = theme.xcolor9

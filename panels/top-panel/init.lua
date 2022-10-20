@@ -87,7 +87,7 @@ local systray = require "panels.top-panel.systray"
 
 -- --------- Date ------------
 local date = wibox.widget.textclock(
-	'<span font="' .. beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %a, %b %d   </span>'
+	'<span font="' .. beautiful.date_time_font .. '" color="' .. beautiful.date_time_color .. '"> %a, %b %d   </span>'
 )
 
 local date_container = wibox.widget {
@@ -114,7 +114,7 @@ date_container:connect_signal("button::press", function(_, _, _, button)
 	end
 end)
 date_container:connect_signal("mouse::enter", function()
-	date_container.bg = beautiful.accent_normal .. "32"
+	date_container.bg = beautiful.accent_normal .. "4f"
 end)
 date_container:connect_signal("mouse::leave", function()
 	date_container.bg = beautiful.widget_bg_normal
@@ -125,7 +125,7 @@ local dc = wibox.container.margin(date_container, dpi(0), dpi(0), dpi(5), dpi(5)
 -- --------- Clock -----------
 local clock = function(s)
 	local textclock = wibox.widget.textclock(
-		'<span font="' .. beautiful.title_fonts .. '" color="' .. beautiful.date_time_color .. '"> %I:%M %p   </span>'
+		'<span font="' .. beautiful.date_time_font .. '" color="' .. beautiful.date_time_color .. '"> %I:%M %p   </span>'
 	)
 
 	local textclock_container = wibox.widget {
@@ -164,7 +164,7 @@ local state_text_icon = wibox.widget {
 }
 
 local wifi_name_text = wibox.widget {
-	font = beautiful.title_fonts,
+	font = beautiful.date_time_font,
 	markup = helpers.colorize_text("Disconnected", beautiful.date_time_color),
 	align = "center",
 	valign = "center",
@@ -218,7 +218,7 @@ wifi_container:connect_signal("button::press", function(_, _, _, button)
 	end
 end)
 wifi_container:connect_signal("mouse::enter", function()
-	wifi_container.bg = beautiful.accent_normal .. "32"
+	wifi_container.bg = beautiful.accent_normal .. "4f"
 end)
 wifi_container:connect_signal("mouse::leave", function()
 	wifi_container.bg = beautiful.widget_bg_normal

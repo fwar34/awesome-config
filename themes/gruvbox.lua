@@ -70,7 +70,7 @@ theme.gap_single_client = false
 -- --------- Fonts -----------
 theme.title_fonts = "Roboto Bold 11"
 theme.normal_fonts = "Roboto 11"
-theme.date_time_font = "Roboto Bold 11"
+theme.date_time_font = "Roboto Bold 10"
 theme.icon_fonts = "JetBrainsMono Nerd Font"
 
 -- -- clickable container ----
@@ -107,7 +107,7 @@ theme.titlebar_buttonsize_alt = dpi(16)
 theme.titlebar_buttonsize = dpi(16)
 theme.titlebar_size = dpi(25)
 theme.titlebar_color = theme.bg0_h
-theme.border_width = dpi(1)
+theme.border_width = dpi(2)
 theme.border_accent = theme.blue
 -- round corners
 theme.corner_radius = dpi(8)
