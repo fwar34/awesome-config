@@ -2,12 +2,12 @@
 -- ======================= IMPORTS =========================
 -- =========================================================
 
-local awful = require("awful")
-local gears = require("gears")
-local icons = require("icons.flaticons")
+local awful = require "awful"
+local gears = require "gears"
+local icons = require "icons.flaticons"
 
 -- dpi fix
-local beautiful = require("beautiful")
+local beautiful = require "beautiful"
 local with_dpi = beautiful.xresources.apply_dpi
 local get_dpi = beautiful.xresources.get_dpi
 
@@ -76,9 +76,5 @@ local get_dpi = beautiful.xresources.get_dpi
 -- - add tag to all wibars ---
 
 awful.screen.connect_for_each_screen(function(s)
-	if s.index == 1 then
-		awful.tag({ " ", " ", " ", " ", " ", " " }, s, awful.layout.layouts[1])
-	elseif s.index == 2 then
-		awful.tag({ " ", " ", " ", " ", " ", " " }, s, awful.layout.layouts[4])
-	end
+	awful.tag({ " ", " ", " ", " ", " ", " " }, s, awful.layout.layouts[1])
 end)

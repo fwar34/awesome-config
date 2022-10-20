@@ -1,17 +1,17 @@
 #!/bin/bash
 
-fg=d3c6aa
-wrong=e67e80
-highlight=9aa79d
-date=859289
-verify=a7c080
+fg=#c0caf5
+wrong=#f7768e
+highlight=#9d7cd8
+date=#c0caf5
+verify=#9ece6a
 
 i3lock -i ~/.config/awesome/wallpapers/tokyonight.png \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
   --ringver-color=$verify --insidewrong-color=$wrong --ringwrong-color=$wrong \
   --line-uses-inside --keyhl-color=$verify --separator-color=$verify --bshl-color=$verify \
-  --date-color=$date --time-color=$date --greeter-color=$date --wrong-color=$highlight --verif-color=$highlight \
+  --date-color=$date --time-color=$date --greeter-color=$date --wrong-color=$wrong --verif-color=$highlight \
   --time-str="%H:%M" --time-size=140 --date-str="%a, %d %b" --date-size=45 \
   --verif-text="Verifying ..." --wrong-text="Wrong Password!" --noinput-text="" \
   --greeter-text="Type the password to Unlock" --time-font="RobotoMono Nerd Font:style=Bold" \
