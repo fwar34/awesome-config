@@ -43,12 +43,12 @@ awful.spawn.with_shell(
 -- Default apps global variable
 apps = {
 	editor = "code",
-	terminal = "st",
+	terminal = "kitty",
 	launcher = rofi_command,
 	lock = gears.filesystem.get_configuration_dir() .. "configs/lock-" .. COLORS,
 	screenshot = "flameshot gui",
 	filebrowser = "dolphin",
-	browser = "firefox",
+	browser = "microsoft-edge-stable",
 	taskmanager = "gnome-system-monitor",
 	soundctrlpanel = "pavucontrol",
 }
@@ -76,7 +76,7 @@ ICON_COLORS = {
 	gruvbox = "#EBDBB2",
 	rxyhn = "#6791C9",
 	everforest = "#ddd0b4",
-  tokyonight = "#c0caf5"
+	tokyonight = "#c0caf5"
 }
 
 -- -- changing gtk theme -----
@@ -132,7 +132,7 @@ require "panels"
 require "panels.tags"
 
 -- Titlebars on clients
-require "client.titlebar"
+-- require "client.titlebar"
 
 -- - Import notifications ----
 require "global.notification"

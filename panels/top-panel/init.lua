@@ -33,6 +33,8 @@ local helpers = require "global.helpers"
 -- define module table
 local top_panel = {}
 
+local icon_size = "16"
+
 -- =========================================================
 -- ======================== SETUP ==========================
 -- =========================================================
@@ -93,7 +95,7 @@ local date = wibox.widget.textclock(
 local date_container = wibox.widget {
 	{
 		wibox.widget {
-			font = beautiful.icon_fonts .. " 14",
+			font = beautiful.icon_fonts .. " " .. icon_size,
 			markup = helpers.colorize_text("  ", beautiful.icon_color),
 			align = "center",
 			valign = "center",
@@ -131,7 +133,7 @@ local clock = function(s)
 	local textclock_container = wibox.widget {
 		{
 			wibox.widget {
-				font = beautiful.icon_fonts .. " 14",
+				font = beautiful.icon_fonts .. " " .. icon_size,
 				markup = helpers.colorize_text("  ", beautiful.icon_color),
 				align = "center",
 				valign = "center",
@@ -156,7 +158,7 @@ local conn_state = [[sh -c "nmcli dev | grep wifi | sed 's/ \{2,\}/|/g' | cut -d
 local wifi_name = [[sh -c "nmcli dev | grep wifi | sed 's/ \{2,\}/|/g' | cut -d '|' -f4 | head -1"]]
 
 local state_text_icon = wibox.widget {
-	font = beautiful.icon_fonts .. " 14",
+	font = beautiful.icon_fonts .. " " .. icon_size,
 	markup = helpers.colorize_text(" 睊 ", beautiful.icon_color),
 	align = "center",
 	valign = "center",
@@ -242,6 +244,8 @@ top_panel.create = function(s)
 		stretch = false,
 		bg = beautiful.bg_normal,
 		fg = beautiful.fg_normal,
+		-- bg = "#00000000",
+		-- border_color = "#00000000",
 	}
 
 	panel:struts {

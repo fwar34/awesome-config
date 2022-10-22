@@ -4,7 +4,7 @@ wrong=FB4934
 highlight=FABD2F
 date=83A598
 verify=B8BB26
-i3lock -i ~/.config/awesome/wallpapers/gruvbox/gruvbox01.png \
+i3lock -i ~/.config/awesome/wallpapers/gruvbox1.jpg \
   -ntfe --force-clock --indicator --radius=40 --ring-width=80 \
   --inside-color=$fg --ring-color=$date --insidever-color=$verify \
   --ringver-color=$verify --insidewrong-color=$wrong --ringwrong-color=$wrong \
@@ -16,5 +16,5 @@ i3lock -i ~/.config/awesome/wallpapers/gruvbox/gruvbox01.png \
   --date-font="RobotoMono Nerd Font" --verif-font="Roboto Mono Nerd Font" --greeter-font="Roboto Mono Nerd Font" \
   --wrong-font="Roboto Mono Nerd Font" --verif-size=23 --greeter-size=23 --wrong-size=23 \
   --pointer=default --refresh-rate=0 --pass-media-keys --pass-volume-keys \
-  --greeter-pos="960:1620" --time-pos="960:860" --date-pos="960:910" --ind-pos="960:1180" \
+  --greeter-pos="960:780" --time-pos="960:370" --date-pos="960:430" --ind-pos="960:560" \
 & sleep 5 && xset dpms force off
